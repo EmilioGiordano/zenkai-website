@@ -36,15 +36,31 @@ import '../styles/v4.css';
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41" /></svg>
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
             <span class="label-light">Cerulean</span>
-            <span class="label-dark">Abyss</span>
+            <span class="label-dark">Starlight</span>
           </button>
           <a class="btn btn-primary btn-sm" href="#download">Download</a>
         </div>
       </nav>
     </header>
-    <main id="main-content"><Hero /><VirtualGridSection /><ProvidersSection /><DownloadSection /></main>
-    <Footer />
+
+    <main id="main-content">
+      <Hero />
+      <VirtualGridSection />
+      <ProvidersSection />
+
+      <!-- Unified single-artwork backdrop spanning seamlessly across Download + Footer -->
+      <div class="v15-closing-band">
+        <div class="v15-closing-art" aria-hidden="true">
+          <div class="v15-closing-layer v15-closing-light"></div>
+          <div class="v15-closing-layer v15-closing-dark"></div>
+          <div class="v15-closing-scrim"></div>
+        </div>
+        <DownloadSection />
+        <Footer />
+      </div>
+    </main>
   </div>
+
   <script is:inline>
     (function () {
       var btn = document.getElementById('v15-theme-toggle');
@@ -61,33 +77,120 @@ import '../styles/v4.css';
 
 <style is:global>
   .v15-override {
-    --bg: #F2F6F7; --bg-subtle: #E3ECEE; --surface: #FFFFFF;
-    --ink-primary: #08181C; --ink-secondary: #2F4B52; --ink-muted: #56737A;
-    --accent-primary: #03667A; --accent-primary-hover: #025161;
+    --bg: #F2F6F7;
+    --bg-subtle: #E3ECEE;
+    --surface: #FFFFFF;
+    --ink-primary: #08181C;
+    --ink-secondary: #2F4B52;
+    --ink-muted: #56737A;
+    --accent-primary: #03667A;
+    --accent-primary-hover: #025161;
     --accent-primary-soft: rgba(3, 102, 122, 0.12);
     --accent-secondary: #03667A;
-    --btn-bg: #08181C; --btn-fg: #FFFFFF; --btn-bg-hover: #14333B;
-    --hero-text: #FFFFFF; --hero-text-muted: rgba(255, 255, 255, 0.90);
-    --hero-scrim-top: rgba(3, 82, 98, 0.50);
-    --hero-scrim-mid: rgba(3, 102, 122, 0.18);
+    --btn-bg: #08181C;
+    --btn-fg: #FFFFFF;
+    --btn-bg-hover: #14333B;
+
+    --hero-text: #FFFFFF;
+    --hero-text-muted: #F0F9FB;
+    --hero-scrim-top: rgba(3, 50, 62, 0.58);
+    --hero-scrim-mid: rgba(3, 76, 92, 0.22);
     --hero-scrim-bottom: #F2F6F7;
-    --footer-scrim-top: #F2F6F7;
-    --footer-scrim-mid: rgba(3, 102, 122, 0.34);
-    --footer-scrim-bottom: rgba(4, 34, 42, 0.86);
-    --radius-sm: 2px; --radius-md: 2px; --radius-lg: 3px;
+
+    --radius-sm: 2px;
+    --radius-md: 2px;
+    --radius-lg: 3px;
   }
+
   [data-theme='dark'] .v15-override {
-    --bg: #060E12; --bg-subtle: #0C1A20; --surface: #11242C;
-    --accent-primary: #22D3EE; --accent-primary-hover: #4BE3FA;
+    --bg: #060E12;
+    --bg-subtle: #0C1A20;
+    --surface: #11242C;
+    --ink-primary: #F2F8FA;
+    --ink-secondary: #B8CFD6;
+    --ink-muted: #7F9EA8;
+    --accent-primary: #22D3EE;
+    --accent-primary-hover: #4BE3FA;
     --accent-primary-soft: rgba(34, 211, 238, 0.16);
-    --btn-bg: #22D3EE; --btn-fg: #041418;
-    --hero-scrim-top: rgba(6, 14, 18, 0.56);
-    --hero-scrim-bottom: #060E12; --footer-scrim-top: #060E12;
+    --btn-bg: #22D3EE;
+    --btn-fg: #041418;
+    --hero-scrim-top: rgba(6, 14, 18, 0.62);
+    --hero-scrim-mid: rgba(6, 14, 18, 0.22);
+    --hero-scrim-bottom: #060E12;
   }
-  .v15-override .v4-nav-bar { border-radius: 2px; }
-  .v15-override .hero { padding-top: 8.2rem; background: #03667A; }
-  [data-theme='dark'] .v15-override .hero { background: #060E12; }
-  .v15-override .hero-title em { color: #B4F4FF !important; }
+
+  .v15-override .v4-nav-bar {
+    border-radius: 2px;
+  }
+
+  .v15-override .hero {
+    padding-top: 8.2rem;
+    background: #03667A;
+  }
+
+  [data-theme='dark'] .v15-override .hero {
+    background: #060E12;
+  }
+
+  /* High-contrast Hero Typography (Light & Dark) */
+  .v15-override .hero-kicker {
+    background: rgba(4, 30, 38, 0.46) !important;
+    border-color: rgba(255, 255, 255, 0.34) !important;
+    color: #FFFFFF !important;
+    backdrop-filter: blur(10px);
+  }
+
+  .v15-override .hero-kicker-dot {
+    background: #FFE08A !important;
+    box-shadow: 0 0 0 3px rgba(255, 224, 138, 0.28) !important;
+  }
+
+  .v15-override .hero-title {
+    color: #FFFFFF !important;
+    text-shadow: 0 2px 26px rgba(3, 30, 38, 0.52) !important;
+  }
+
+  /* Warm sunlit gold "too large" pops cleanly against #03667A cerulean sky */
+  .v15-override .hero-title em {
+    color: #FFE08A !important;
+    text-shadow: 0 2px 22px rgba(3, 28, 36, 0.62) !important;
+  }
+
+  .v15-override .hero-sub {
+    color: #F3FAFC !important;
+    text-shadow: 0 1px 16px rgba(3, 30, 38, 0.58) !important;
+  }
+
+  .v15-override .hero-sub code {
+    background: rgba(4, 30, 38, 0.44) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #FFFFFF !important;
+    padding: 1px 6px;
+    border-radius: 2px;
+  }
+
+  .v15-override .hero .btn-ghost {
+    background: rgba(4, 30, 38, 0.38) !important;
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.50) !important;
+  }
+
+  .v15-override .hero .btn-ghost:hover {
+    background: rgba(4, 30, 38, 0.56) !important;
+    border-color: #FFFFFF !important;
+  }
+
+  [data-theme='dark'] .v15-override .hero-kicker-dot {
+    background: #22D3EE !important;
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.28) !important;
+  }
+
+  [data-theme='dark'] .v15-override .hero-title em {
+    color: #5CE6FF !important;
+    text-shadow: 0 2px 24px rgba(4, 14, 20, 0.78) !important;
+  }
+
+  /* Hero Light: Cerulean-Teal Duotone Alpine Peaks */
   .v15-override .backdrop-light {
     background-color: #03667A !important;
     background-image: url('/art/concepts/05-mist-dawn-peaks.jpg') !important;
@@ -95,29 +198,132 @@ import '../styles/v4.css';
     background-blend-mode: luminosity !important;
     filter: contrast(1.24) brightness(1.04) !important;
   }
+
+  /* Hero Dark: v3 Julian Alps Starlight Milky Way (user favorite!) */
   .v15-override .backdrop-dark {
-    background-color: #07222A !important;
-    background-image: url('/art/v9-pack/celestial-atlas.jpg') !important;
-    background-position: center 46% !important;
-    background-size: 120% auto !important;
-    filter: grayscale(1) invert(1) contrast(1.24) brightness(0.38) sepia(1) hue-rotate(155deg) saturate(4.2) !important;
+    background-color: #060E12 !important;
+    background-image: url('/art/v3/hero-night.jpg') !important;
+    background-position: center 36% !important;
+    background-size: cover !important;
+    filter: saturate(1.16) contrast(1.08) !important;
   }
+
   .v15-override .hero-backdrop::after {
-    content: ''; position: absolute; inset: 0;
-    background-image: radial-gradient(rgba(255,255,255,0.14) 1px, transparent 1px);
-    background-size: 4px 4px; pointer-events: none;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
   }
-  .v15-override .download-art-layer::before, .v15-override .footer-light {
-    background-color: #03667A !important;
-    background-image: url('/art/v9-pack/celestial-atlas.jpg') !important;
-    background-size: 118% auto !important;
-    background-blend-mode: multiply !important;
-    filter: grayscale(1) contrast(1.36) brightness(1.08) !important;
+
+  /* ==========================================================================
+     Unified Download + Footer Closing Band (ONE single continuous artwork!)
+     ========================================================================== */
+  .v15-closing-band {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--hairline);
   }
-  .v15-override .download-art-layer::after, .v15-override .footer-dark {
-    background-color: #07222A !important;
-    background-image: url('/art/concepts/05-mist-dawn-peaks.jpg') !important;
-    background-position: center 48% !important;
-    filter: grayscale(1) contrast(1.22) brightness(0.42) sepia(1) hue-rotate(155deg) saturate(3.2) !important;
+
+  .v15-closing-art {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .v15-closing-layer {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 54%;
+    transition: opacity var(--t-bg);
+  }
+
+  .v15-closing-light {
+    background-color: #03667A;
+    background-image: url('/art/concepts/05-mist-dawn-peaks.jpg');
+    background-blend-mode: luminosity;
+    filter: contrast(1.2) brightness(1.02);
+    opacity: 1;
+  }
+
+  .v15-closing-dark {
+    background-color: #060E12;
+    background-image: url('/art/v3/horizon-night.jpg');
+    background-position: center 46%;
+    filter: saturate(1.15) contrast(1.06) brightness(0.86);
+    opacity: 0;
+  }
+
+  [data-theme='dark'] .v15-closing-light {
+    opacity: 0;
+  }
+
+  [data-theme='dark'] .v15-closing-dark {
+    opacity: 1;
+  }
+
+  /* Seamless top fade from --bg into the continuous artwork, darkening cleanly at the footer */
+  .v15-closing-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 82%, transparent) 16%,
+      color-mix(in srgb, var(--bg) 34%, transparent) 42%,
+      rgba(4, 34, 42, 0.62) 72%,
+      rgba(3, 24, 30, 0.88) 100%
+    );
+  }
+
+  [data-theme='dark'] .v15-closing-scrim {
+    background: linear-gradient(
+      180deg,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 78%, transparent) 16%,
+      rgba(6, 14, 18, 0.36) 44%,
+      rgba(6, 14, 18, 0.72) 74%,
+      rgba(4, 10, 14, 0.92) 100%
+    );
+  }
+
+  /* Hide inner duplicated art layers inside Download & Footer */
+  .v15-closing-band .download-section {
+    border-top: none;
+    background: transparent;
+    padding-bottom: 3.5rem;
+  }
+
+  .v15-closing-band .download-art-layer,
+  .v15-closing-band .footer-backdrop {
+    display: none !important;
+  }
+
+  .v15-closing-band .site-footer {
+    background: transparent;
+    padding-top: 3.5rem;
+  }
+
+  /* Crisp, high-contrast light ink for the Footer over the unified alpine horizon */
+  .v15-closing-band .site-footer .brand,
+  .v15-closing-band .site-footer .footer-quote,
+  .v15-closing-band .site-footer .footer-col a {
+    color: #FFFFFF;
+  }
+
+  .v15-closing-band .site-footer .footer-col h4 {
+    color: #9EEAF9;
+  }
+
+  .v15-closing-band .site-footer .footer-col span {
+    color: rgba(240, 250, 252, 0.82);
+  }
+
+  .v15-closing-band .site-footer .footer-bottom {
+    color: rgba(240, 250, 252, 0.84);
+    border-top-color: rgba(255, 255, 255, 0.22);
   }
 </style>
