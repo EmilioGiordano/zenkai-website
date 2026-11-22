@@ -1,24 +1,27 @@
-# Zenkai — Visual Versions Showcase (`v1 – v16`)
+# Zenkai Web
 
-Standalone Astro + Preact repository containing the **Versions Hub (`/`)** and all **16 visual directions (`/v1` – `/v16`)** for the [Zenkai](https://github.com/EmilioGiordano/Zenkai) desktop spreadsheet landing page.
+Official landing page for **[Zenkai](https://github.com/EmilioGiordano/Zenkai)** — a fast, native, open-source desktop spreadsheet written in **Rust + GPUI** with **IronCalc**.
 
-## Run Locally
+Built with **Astro + Preact + TypeScript**, featuring:
+- Interactive 3-pane Zenkai desktop window (editable cells with live `=SUM(...)` and `Balanced` recalculation, Spaces sidebar, and optional Agent Panel approval flow)
+- Interactive 60 fps virtualized `1,048,576 × 16,384` grid scrubber
+- Bring-your-own AI providers (`Claude Code`, `Codex`, `OpenCode`, `Grok`)
+- Dual **Cerulean (Light)** and **Starlight (Dark)** themes with zero-FOUC persistence
+
+## Development
 
 ```powershell
 npm.cmd install
 npm.cmd run dev
 ```
 
-Open **http://localhost:4322/** to browse all 16 versions side by side.
-
-## Routes
-
-- `/` (and `/versions`) — Visual Versions Hub (`v1 – v16`)
-- `/v1` – `/v16` — Individual visual directions (Light & Dark themes)
-
-## Build & Check
+## Verification & Production Build
 
 ```powershell
 npm.cmd run check
 npm.cmd run build
 ```
+
+## License
+
+Apache-2.0 — see artwork attributions in [CREDITS.md](./CREDITS.md).

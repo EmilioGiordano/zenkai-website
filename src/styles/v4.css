@@ -289,13 +289,13 @@
 }
 
 .v4-page .backdrop-light {
-  background-image: url('/art/v4/hero-day.jpg');
+  background-image: url('/art/hero-day.jpg');
   background-position: center bottom;
   filter: saturate(1.06) contrast(1.03);
 }
 
 .v4-page .backdrop-dark {
-  background-image: url('/art/v4/hero-night.jpg');
+  background-image: url('/art/hero-night.jpg');
   background-position: center 34%;
   filter: saturate(1.14) contrast(1.06);
 }
@@ -392,13 +392,13 @@
 }
 
 .v4-page .download-art-layer::before {
-  background-image: url('/art/v4/horizon-day.jpg');
+  background-image: url('/art/hero-day.jpg');
   opacity: 0.46;
   filter: saturate(1.16) contrast(1.04);
 }
 
 .v4-page .download-art-layer::after {
-  background-image: url('/art/v4/horizon-night.jpg');
+  background-image: url('/art/horizon-night.jpg');
   background-position: center 46%;
   opacity: 0;
   filter: saturate(1.18) contrast(1.05) brightness(0.90);
@@ -414,13 +414,13 @@
 
 /* ---------- Footer Sunlit Valley & Blue-Hour Backdrops ---------- */
 .v4-page .footer-light {
-  background-image: url('/art/v4/horizon-day.jpg');
+  background-image: url('/art/hero-day.jpg');
   background-position: center 46%;
   filter: saturate(1.16) contrast(1.04);
 }
 
 .v4-page .footer-dark {
-  background-image: url('/art/v4/horizon-night.jpg');
+  background-image: url('/art/horizon-night.jpg');
   background-position: center 48%;
   filter: saturate(1.18) contrast(1.05);
 }
