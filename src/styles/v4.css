@@ -1,0 +1,443 @@
+/* ==========================================================================
+   Zenkai v4 — Fresh Meadow & Clear Cerulean Sky
+   Scoped under .v4-page so "/", "/v2", and "/v3" stay 100% untouched.
+   Palette derived directly from Seiser Alm (Alpe di Siusi), Hohe Tauern
+   (Mallnitz Tauerntal), Tre Cime Starlight, and Kleinarl Blue Hour photography.
+   ========================================================================== */
+
+.v4-page {
+  /* Warm sunlit cream-white canvas & crisp botanical hairlines */
+  --bg: #FAFBF7;
+  --bg-subtle: #EFF4EC;
+  --surface: #FFFFFF;
+  --surface-elevated: rgba(255, 255, 255, 0.92);
+  --surface-glass: rgba(255, 255, 255, 0.80);
+  --hairline: rgba(16, 26, 20, 0.11);
+  --hairline-strong: rgba(16, 26, 20, 0.21);
+
+  --ink-primary: #101A14;
+  --ink-secondary: #2F4236;
+  --ink-muted: #53685B;
+  --ink-faint: #7A8F82;
+
+  /* Lush sunlit meadow green + radiant cerulean sky + warm pasture gold */
+  --accent-primary: #1B8A3C;
+  --accent-primary-hover: #146E2F;
+  --accent-primary-soft: rgba(27, 138, 60, 0.12);
+  --accent-secondary: #1D70D6;
+  --accent-secondary-soft: rgba(29, 112, 214, 0.12);
+  --accent-amber: #D97E12;
+  --accent-amber-soft: rgba(217, 126, 18, 0.13);
+
+  --btn-bg: #1B8A3C;
+  --btn-fg: #FFFFFF;
+  --btn-bg-hover: #146E2F;
+  --btn-ghost-hover: rgba(29, 112, 214, 0.09);
+
+  /* Pure conceptual Qredible/Pluto hero: crisp white typography directly over vivid cobalt sky */
+  --hero-text: #FFFFFF;
+  --hero-text-muted: rgba(255, 255, 255, 0.90);
+  --hero-scrim-top: rgba(16, 46, 148, 0.14);
+  --hero-scrim-mid: rgba(0, 0, 0, 0);
+  --hero-scrim-bottom: #FAFBF7;
+
+  --footer-scrim-top: #FAFBF7;
+  --footer-scrim-mid: rgba(250, 251, 247, 0.22);
+  --footer-scrim-bottom: rgba(10, 28, 16, 0.56);
+  --footer-bottom-ink: #FFFFFF;
+
+  --win-bg: #FFFFFF;
+  --win-chrome: #F3F7F1;
+  --win-sidebar: #F6FAF4;
+  --win-toolbar: #FAFDF9;
+  --win-grid-header: #EEF3EC;
+  --win-grid-line: #DAE4D7;
+  --win-tbl-head-bg: #1B5EB8;
+  --win-tbl-head-ink: #FFFFFF;
+  --win-row-hover: #F2FAF3;
+  --win-cell-selected-bg: rgba(29, 112, 214, 0.11);
+  --win-cell-selected-border: #1D70D6;
+  --win-proposal-bg: rgba(27, 138, 60, 0.13);
+  --win-proposal-border: #1B8A3C;
+  --win-panel-bg: #F8FBF6;
+  --win-status-bg: #EDF3EB;
+  --win-shadow: 0 38px 94px -22px rgba(14, 34, 22, 0.28), 0 0 0 1px rgba(27, 138, 60, 0.14);
+  --shadow-card: 0 14px 32px -18px rgba(14, 34, 22, 0.16);
+
+  /* Fresh botanical & clear-sky Space Cards (Light) */
+  --sp-teal-bg: #DFF5EE;    --sp-teal-hd: #0F8A72;
+  --sp-blue-bg: #DFEEFF;    --sp-blue-hd: #1D70D6;
+  --sp-green-bg: #E0F5E3;   --sp-green-hd: #1B8A3C;
+  --sp-rust-bg: #FDEEE1;    --sp-rust-hd: #D46C17;
+  --sp-purple-bg: #EDE7FF;  --sp-purple-hd: #6A44D4;
+
+  background: var(--bg);
+  color: var(--ink-primary);
+}
+
+[data-theme='dark'] .v4-page {
+  /* Calm, luminous deep-sky sapphire twilight canvas */
+  --bg: #080E18;
+  --bg-subtle: #0F1726;
+  --surface: #131D2F;
+  --surface-elevated: rgba(19, 29, 47, 0.90);
+  --surface-glass: rgba(9, 15, 26, 0.78);
+  --hairline: rgba(235, 244, 255, 0.10);
+  --hairline-strong: rgba(235, 244, 255, 0.20);
+
+  --ink-primary: #F5F8FC;
+  --ink-secondary: #C3D2E6;
+  --ink-muted: #8AA0BD;
+  --ink-faint: #5E7491;
+
+  /* Fresh luminous meadow mint + clear twilight cerulean + alpine horizon gold */
+  --accent-primary: #34D378;
+  --accent-primary-hover: #4EE58F;
+  --accent-primary-soft: rgba(52, 211, 120, 0.15);
+  --accent-secondary: #4FA3FF;
+  --accent-secondary-soft: rgba(79, 163, 255, 0.16);
+  --accent-amber: #F5A623;
+  --accent-amber-soft: rgba(245, 166, 35, 0.16);
+
+  --btn-bg: #34D378;
+  --btn-fg: #06170E;
+  --btn-bg-hover: #4EE58F;
+  --btn-ghost-hover: rgba(79, 163, 255, 0.11);
+
+  --hero-text: #FFFFFF;
+  --hero-text-muted: #DAE6F7;
+  --hero-scrim-top: rgba(8, 14, 24, 0.44);
+  --hero-scrim-mid: rgba(8, 14, 24, 0.12);
+  --hero-scrim-bottom: #080E18;
+
+  --footer-scrim-top: #080E18;
+  --footer-scrim-mid: rgba(8, 14, 24, 0.34);
+  --footer-scrim-bottom: rgba(6, 11, 20, 0.72);
+  --footer-bottom-ink: #FFFFFF;
+
+  --win-bg: #0C1320;
+  --win-chrome: #121B2C;
+  --win-sidebar: #0F1726;
+  --win-toolbar: #121B2C;
+  --win-grid-header: #162135;
+  --win-grid-line: rgba(235, 244, 255, 0.085);
+  --win-tbl-head-bg: #1B55A8;
+  --win-tbl-head-ink: #FFFFFF;
+  --win-row-hover: rgba(52, 211, 120, 0.045);
+  --win-cell-selected-bg: rgba(79, 163, 255, 0.16);
+  --win-cell-selected-border: #4FA3FF;
+  --win-proposal-bg: rgba(52, 211, 120, 0.16);
+  --win-proposal-border: #34D378;
+  --win-panel-bg: #0F1726;
+  --win-status-bg: #121B2C;
+  --win-shadow: 0 44px 108px -20px rgba(0, 0, 0, 0.88), 0 0 0 1px rgba(79, 163, 255, 0.22);
+  --shadow-card: 0 16px 36px -18px rgba(0, 0, 0, 0.62);
+
+  --sp-teal-bg: #0E2B29;    --sp-teal-hd: #149680;
+  --sp-blue-bg: #102544;    --sp-blue-hd: #266BE0;
+  --sp-green-bg: #102E1E;   --sp-green-hd: #1D9E53;
+  --sp-rust-bg: #2E1E12;    --sp-rust-hd: #DA731D;
+  --sp-purple-bg: #1F183B;  --sp-purple-hd: #7C52F2;
+}
+
+/* ---------- Floating Architectural Glass Navbar (v2 structure) ---------- */
+.v4-header {
+  position: fixed;
+  top: 14px;
+  left: 0;
+  right: 0;
+  z-index: 120;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.v4-nav-bar {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 920px;
+  height: 52px;
+  padding: 0 8px 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--surface-glass);
+  backdrop-filter: blur(18px) saturate(165%);
+  -webkit-backdrop-filter: blur(18px) saturate(165%);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 5px;
+  box-shadow: 0 14px 36px -14px rgba(14, 34, 22, 0.22);
+  transition: background-color var(--t-theme), border-color var(--t-theme);
+}
+
+.v4-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  font-size: 0.96rem;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+}
+
+.v4-brand svg {
+  display: block;
+  border-radius: 3px;
+}
+
+.v4-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.v4-nav-links a {
+  padding: 6px 12px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  border-radius: 3px;
+  transition: color 0.16s ease, background-color 0.16s ease;
+}
+
+.v4-nav-links a:hover {
+  color: var(--ink-primary);
+  background: var(--accent-primary-soft);
+}
+
+.v4-nav-links a.v4-versions-link {
+  opacity: 0.68;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+}
+
+.v4-nav-links a.v4-versions-link:hover {
+  opacity: 1;
+  background: var(--accent-secondary-soft);
+}
+
+.v4-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.v4-page .icon-link {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 3px;
+  color: var(--ink-secondary);
+  background: var(--surface);
+  transition: color 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+}
+
+.v4-page .icon-link:hover {
+  color: var(--ink-primary);
+  border-color: var(--ink-primary);
+}
+
+.v4-page .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 34px;
+  padding: 0 0.72rem;
+  border-radius: 3px;
+  border: 1px solid var(--hairline-strong);
+  background: var(--surface);
+  color: var(--ink-primary);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.v4-page .theme-toggle:hover {
+  border-color: var(--ink-primary);
+}
+
+.v4-page .theme-toggle svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.v4-page .theme-toggle .icon-moon,
+.v4-page .theme-toggle .label-dark {
+  display: none;
+}
+
+[data-theme='dark'] .v4-page .theme-toggle .icon-sun,
+[data-theme='dark'] .v4-page .theme-toggle .label-light {
+  display: none;
+}
+
+[data-theme='dark'] .v4-page .theme-toggle .icon-moon,
+[data-theme='dark'] .v4-page .theme-toggle .label-dark {
+  display: inline;
+}
+
+/* ---------- Fresh Meadow & Clear Cerulean Hero Backdrops ---------- */
+.v4-page .hero {
+  padding-top: 7.4rem;
+}
+
+.v4-page .backdrop-light {
+  background-image: url('/art/v4/hero-day.jpg');
+  background-position: center bottom;
+  filter: saturate(1.06) contrast(1.03);
+}
+
+.v4-page .backdrop-dark {
+  background-image: url('/art/v4/hero-night.jpg');
+  background-position: center 34%;
+  filter: saturate(1.14) contrast(1.06);
+}
+
+.v4-page .hero-scrim {
+  background: linear-gradient(
+    180deg,
+    var(--hero-scrim-top) 0%,
+    var(--hero-scrim-mid) 36%,
+    rgba(0, 0, 0, 0) 58%,
+    color-mix(in srgb, var(--hero-scrim-bottom) 24%, transparent) 72%,
+    color-mix(in srgb, var(--hero-scrim-bottom) 68%, transparent) 86%,
+    var(--hero-scrim-bottom) 100%
+  );
+}
+
+.v4-page .hero-title {
+  text-shadow: 0 2px 24px rgba(10, 32, 110, 0.34);
+}
+
+.v4-page .hero-sub {
+  text-shadow: 0 1px 14px rgba(10, 32, 110, 0.32);
+}
+
+.v4-page .hero-sub code {
+  background: rgba(255, 255, 255, 0.16);
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: #FFFFFF;
+}
+
+.v4-page .hero-kicker {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.32);
+  color: #FFFFFF;
+  backdrop-filter: blur(10px);
+}
+
+.v4-page .hero-kicker-dot {
+  background: #8BF5B8;
+  box-shadow: 0 0 0 3px rgba(139, 245, 184, 0.25);
+}
+
+.v4-page .hero-title em {
+  color: #B8FAD2;
+}
+
+/* Qredible-style crisp ink CTA + frosted white ghost CTA over cobalt sky */
+.v4-page .hero .btn-primary {
+  background: #0E1520;
+  color: #FFFFFF;
+  border-color: #0E1520;
+}
+
+.v4-page .hero .btn-primary:hover {
+  background: #1C2738;
+  border-color: #1C2738;
+}
+
+.v4-page .hero .btn-ghost {
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.v4-page .hero .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: #FFFFFF;
+}
+
+[data-theme='dark'] .v4-page .hero .btn-primary {
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border-color: var(--btn-bg);
+}
+
+[data-theme='dark'] .v4-page .hero-title em {
+  color: var(--accent-primary);
+}
+
+/* ---------- Download Section Sunlit Valley & Blue-Hour Backdrops ---------- */
+.v4-page .download-print {
+  display: none;
+}
+
+.v4-page .download-art-layer::before,
+.v4-page .download-art-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 44%;
+  transition: opacity var(--t-bg);
+}
+
+.v4-page .download-art-layer::before {
+  background-image: url('/art/v4/horizon-day.jpg');
+  opacity: 0.46;
+  filter: saturate(1.16) contrast(1.04);
+}
+
+.v4-page .download-art-layer::after {
+  background-image: url('/art/v4/horizon-night.jpg');
+  background-position: center 46%;
+  opacity: 0;
+  filter: saturate(1.18) contrast(1.05) brightness(0.90);
+}
+
+[data-theme='dark'] .v4-page .download-art-layer::before {
+  opacity: 0;
+}
+
+[data-theme='dark'] .v4-page .download-art-layer::after {
+  opacity: 0.56;
+}
+
+/* ---------- Footer Sunlit Valley & Blue-Hour Backdrops ---------- */
+.v4-page .footer-light {
+  background-image: url('/art/v4/horizon-day.jpg');
+  background-position: center 46%;
+  filter: saturate(1.16) contrast(1.04);
+}
+
+.v4-page .footer-dark {
+  background-image: url('/art/v4/horizon-night.jpg');
+  background-position: center 48%;
+  filter: saturate(1.18) contrast(1.05);
+}
+
+/* Crisp meadow-green top accent line on interactive forge & download cards */
+.v4-page .forge-shell,
+.v4-page .download-card {
+  border-top: 2px solid var(--accent-primary);
+}
+
+.v4-page .status-pill {
+  background: var(--accent-primary-soft);
+  color: var(--accent-primary);
+}
+
+@media (max-width: 720px) {
+  .v4-nav-links {
+    display: none;
+  }
+}

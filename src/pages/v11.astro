@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import VirtualGridSection from '../components/VirtualGridSection.astro';
+import ProvidersSection from '../components/ProvidersSection.astro';
+import DownloadSection from '../components/DownloadSection.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/v4.css';
+---
+
+<BaseLayout title="Zenkai — v11 Swiss Emerald Blueprint">
+  <div class="v4-page v11-override">
+    <header class="v4-header">
+      <nav class="v4-nav-bar" aria-label="Primary">
+        <a class="v4-brand" href="/v11">
+          <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+            <rect width="128" height="128" rx="14" fill="#065F46" />
+            <rect x="4" y="4" width="120" height="120" rx="11" stroke="rgba(255,255,255,0.22)" stroke-width="2" />
+            <path d="M44 20V108M84 20V108M20 44H108M20 84H108" stroke="rgba(255,255,255,0.14)" stroke-width="1.5" />
+            <path d="M28 30H100V44L48 84H100V98H28V84L80 44H28V30Z" fill="#FFFFFF" />
+            <rect x="84" y="20" width="24" height="24" fill="#0A120F" />
+          </svg>
+          <span>Zenkai</span>
+        </a>
+
+        <div class="v4-nav-links">
+          <a href="#grid">Grid</a>
+          <a href="#providers">Providers</a>
+          <a href="#download">Download</a>
+          <a href="/versions" class="v4-versions-link">Versions ↗</a>
+        </div>
+
+        <div class="v4-nav-actions">
+          <a class="icon-link" href="https://github.com/EmilioGiordano/Zenkai" target="_blank" rel="noopener noreferrer" aria-label="Zenkai on GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <button class="theme-toggle" id="v11-theme-toggle" type="button" aria-label="Toggle Light and Dark theme">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41" />
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <span class="label-light">Emerald</span>
+            <span class="label-dark">Obsidian</span>
+          </button>
+          <a class="btn btn-primary btn-sm" href="#download">Download</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <Hero />
+      <VirtualGridSection />
+      <ProvidersSection />
+      <DownloadSection />
+    </main>
+
+    <Footer />
+  </div>
+
+  <script is:inline>
+    (function () {
+      var btn = document.getElementById('v11-theme-toggle');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('zenkai-natural-theme', next); } catch (e) {}
+      });
+    })();
+  </script>
+</BaseLayout>
+
+<style is:global>
+  /* v11: Swiss Architectural Emerald Engraving (v9 sharp graphic system in Forest Emerald) */
+  .v11-override {
+    --bg: #F3F5F4;
+    --bg-subtle: #E5EBE8;
+    --surface: #FFFFFF;
+    --ink-primary: #0A1410;
+    --ink-secondary: #31473E;
+    --ink-muted: #587065;
+
+    --accent-primary: #057A55;
+    --accent-primary-hover: #046244;
+    --accent-primary-soft: rgba(5, 122, 85, 0.12);
+    --accent-secondary: #057A55;
+    --btn-bg: #0A1410;
+    --btn-fg: #FFFFFF;
+    --btn-bg-hover: #192E26;
+
+    --hero-text: #FFFFFF;
+    --hero-text-muted: rgba(255, 255, 255, 0.90);
+    --hero-scrim-top: rgba(4, 78, 54, 0.56);
+    --hero-scrim-mid: rgba(5, 108, 75, 0.24);
+    --hero-scrim-bottom: #F3F5F4;
+    --footer-scrim-top: #F3F5F4;
+    --footer-scrim-mid: rgba(5, 108, 75, 0.34);
+    --footer-scrim-bottom: rgba(6, 36, 26, 0.84);
+
+    --radius-sm: 2px;
+    --radius-md: 2px;
+    --radius-lg: 3px;
+  }
+
+  [data-theme='dark'] .v11-override {
+    --bg: #070D0B;
+    --bg-subtle: #0D1814;
+    --surface: #12211B;
+    --accent-primary: #18D48C;
+    --accent-primary-hover: #3CE4A2;
+    --accent-primary-soft: rgba(24, 212, 140, 0.16);
+    --btn-bg: #18D48C;
+    --btn-fg: #04150E;
+    --hero-scrim-top: rgba(7, 13, 11, 0.58);
+    --hero-scrim-mid: rgba(6, 42, 30, 0.26);
+    --hero-scrim-bottom: #070D0B;
+    --footer-scrim-top: #070D0B;
+  }
+
+  .v11-override .v4-nav-bar { border-radius: 2px; }
+  .v11-override .hero { padding-top: 8.2rem; background: #057A55; }
+  [data-theme='dark'] .v11-override .hero { background: #070D0B; }
+  .v11-override .hero-title em { color: #B4F8DC !important; }
+
+  /* Emerald Duotone Classical Engraving Hero */
+  .v11-override .backdrop-light {
+    background-color: #057A55 !important;
+    background-image: url('/art/v9-pack/piranesi-pantheon.jpg') !important;
+    background-position: center 46% !important;
+    background-size: 120% auto !important;
+    background-blend-mode: multiply !important;
+    filter: contrast(1.38) brightness(1.06) !important;
+  }
+
+  .v11-override .backdrop-dark {
+    background-image: url('/art/concepts/09-nocturnal-moon-horizon.jpg') !important;
+    background-position: 82% 8% !important;
+    background-size: 118% auto !important;
+    filter: hue-rotate(-32deg) saturate(1.15) !important;
+  }
+
+  .v11-override .hero-backdrop::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.13) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+  }
+
+  .v11-override .download-art-layer::before,
+  .v11-override .footer-light {
+    background-color: #057A55 !important;
+    background-image: url('/art/v9-pack/piranesi-forum.jpg') !important;
+    background-position: center 44% !important;
+    background-size: 132% auto !important;
+    background-blend-mode: multiply !important;
+    filter: contrast(1.35) brightness(1.06) !important;
+  }
+
+  .v11-override .download-art-layer::after,
+  .v11-override .footer-dark {
+    background-color: #082018 !important;
+    background-image: url('/art/v9-pack/piranesi-pantheon.jpg') !important;
+    background-position: center 48% !important;
+    background-size: 120% auto !important;
+    filter: invert(1) contrast(1.22) brightness(0.36) sepia(1) hue-rotate(115deg) saturate(3.8) !important;
+  }
+</style>

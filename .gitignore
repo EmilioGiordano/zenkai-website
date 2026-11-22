@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Build & Astro cache
+dist/
+.astro/
+
+# Logs & OS
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*

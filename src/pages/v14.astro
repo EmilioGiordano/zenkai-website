@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import VirtualGridSection from '../components/VirtualGridSection.astro';
+import ProvidersSection from '../components/ProvidersSection.astro';
+import DownloadSection from '../components/DownloadSection.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/v4.css';
+---
+
+<BaseLayout title="Zenkai — v14 Ultraviolet Halftone">
+  <div class="v4-page v14-override">
+    <header class="v4-header">
+      <nav class="v4-nav-bar" aria-label="Primary">
+        <a class="v4-brand" href="/v14">
+          <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+            <rect width="128" height="128" rx="14" fill="#5224E0" />
+            <rect x="4" y="4" width="120" height="120" rx="11" stroke="rgba(255,255,255,0.22)" stroke-width="2" />
+            <path d="M44 20V108M84 20V108M20 44H108M20 84H108" stroke="rgba(255,255,255,0.14)" stroke-width="1.5" />
+            <path d="M28 30H100V44L48 84H100V98H28V84L80 44H28V30Z" fill="#FFFFFF" />
+            <rect x="84" y="20" width="24" height="24" fill="#130C2B" />
+          </svg>
+          <span>Zenkai</span>
+        </a>
+        <div class="v4-nav-links">
+          <a href="#grid">Grid</a>
+          <a href="#providers">Providers</a>
+          <a href="#download">Download</a>
+          <a href="/versions" class="v4-versions-link">Versions ↗</a>
+        </div>
+        <div class="v4-nav-actions">
+          <a class="icon-link" href="https://github.com/EmilioGiordano/Zenkai" target="_blank" rel="noopener noreferrer" aria-label="Zenkai on GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
+          </a>
+          <button class="theme-toggle" id="v14-theme-toggle" type="button" aria-label="Toggle Light and Dark theme">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41" /></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
+            <span class="label-light">Violet</span>
+            <span class="label-dark">Obsidian</span>
+          </button>
+          <a class="btn btn-primary btn-sm" href="#download">Download</a>
+        </div>
+      </nav>
+    </header>
+    <main id="main-content"><Hero /><VirtualGridSection /><ProvidersSection /><DownloadSection /></main>
+    <Footer />
+  </div>
+  <script is:inline>
+    (function () {
+      var btn = document.getElementById('v14-theme-toggle');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('zenkai-natural-theme', next); } catch (e) {}
+      });
+    })();
+  </script>
+</BaseLayout>
+
+<style is:global>
+  .v14-override {
+    --bg: #F4F3F8; --bg-subtle: #EAE7F4; --surface: #FFFFFF;
+    --ink-primary: #130C2B; --ink-secondary: #413566; --ink-muted: #6C6091;
+    --accent-primary: #5224E0; --accent-primary-hover: #3F17BA;
+    --accent-primary-soft: rgba(82, 36, 224, 0.11);
+    --accent-secondary: #5224E0;
+    --btn-bg: #130C2B; --btn-fg: #FFFFFF; --btn-bg-hover: #261A52;
+    --hero-text: #FFFFFF; --hero-text-muted: rgba(255, 255, 255, 0.90);
+    --hero-scrim-top: rgba(66, 24, 190, 0.42);
+    --hero-scrim-mid: rgba(82, 36, 224, 0.14);
+    --hero-scrim-bottom: #F4F3F8;
+    --footer-scrim-top: #F4F3F8;
+    --footer-scrim-mid: rgba(82, 36, 224, 0.30);
+    --footer-scrim-bottom: rgba(24, 12, 74, 0.86);
+    --radius-sm: 2px; --radius-md: 2px; --radius-lg: 3px;
+  }
+  [data-theme='dark'] .v14-override {
+    --bg: #0A0814; --bg-subtle: #141029; --surface: #1B1636;
+    --accent-primary: #9B7BFF; --accent-primary-hover: #B79FFF;
+    --accent-primary-soft: rgba(155, 123, 255, 0.16);
+    --btn-bg: #9B7BFF; --btn-fg: #0D0720;
+    --hero-scrim-top: rgba(10, 8, 20, 0.56);
+    --hero-scrim-bottom: #0A0814; --footer-scrim-top: #0A0814;
+  }
+  .v14-override .v4-nav-bar { border-radius: 2px; }
+  .v14-override .hero { padding-top: 8.2rem; background: #5224E0; }
+  [data-theme='dark'] .v14-override .hero { background: #0A0814; }
+  .v14-override .hero-title em { color: #DDD0FF !important; }
+  .v14-override .backdrop-light {
+    background-image: url('/art/concepts/01-halftone-cobalt-clouds.jpg') !important;
+    background-position: center 42% !important;
+    filter: hue-rotate(34deg) saturate(1.22) contrast(1.06) !important;
+  }
+  .v14-override .backdrop-dark {
+    background-color: #150C38 !important;
+    background-image: url('/art/v9-pack/piranesi-forum.jpg') !important;
+    background-position: center 42% !important;
+    background-size: 132% auto !important;
+    filter: grayscale(1) invert(1) contrast(1.24) brightness(0.38) sepia(1) hue-rotate(232deg) saturate(4.5) !important;
+  }
+  .v14-override .download-art-layer::before, .v14-override .footer-light {
+    background-color: #5224E0 !important;
+    background-image: url('/art/v9-pack/piranesi-forum.jpg') !important;
+    background-size: 130% auto !important;
+    background-blend-mode: multiply !important;
+    filter: grayscale(1) contrast(1.38) brightness(1.08) !important;
+  }
+  .v14-override .download-art-layer::after, .v14-override .footer-dark {
+    background-color: #150C38 !important;
+    background-image: url('/art/v9-pack/piranesi-pantheon.jpg') !important;
+    background-size: 118% auto !important;
+    filter: grayscale(1) invert(1) contrast(1.22) brightness(0.36) sepia(1) hue-rotate(232deg) saturate(4.5) !important;
+  }
+</style>

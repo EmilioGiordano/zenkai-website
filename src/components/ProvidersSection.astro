@@ -1,0 +1,222 @@
+---
+import { PROVIDERS, ProviderIconSvg } from './ProviderBadge';
+---
+
+<section id="providers" class="section-shell providers-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-heading-group">
+        <p class="section-kicker">02 · Bring your own agents</p>
+        <h2 class="section-title">Zenkai is not another <em>AI subscription</em>.</h2>
+        <p class="section-lead">
+          No extra AI billing, no proxy, no locked-in chat wrapper. Connect the agent accounts you
+          already run—or keep the panel closed. Every edit lands in the grid for approval first, and{' '}
+          <code>Ctrl+Z</code> undoes it cleanly.
+        </p>
+      </div>
+    </div>
+
+    <div class="providers-grid" role="list">
+      {
+        PROVIDERS.map((agent) => (
+          <article
+            class="provider-tile"
+            role="listitem"
+            style={`--brand-accent: ${agent.accent}; --brand-soft: ${agent.accentSoft}; --brand-border: ${agent.badgeBorder};`}
+          >
+            <div class="provider-brand-strip" aria-hidden="true" />
+            <div class="provider-tile-head">
+              <div class="provider-emblem" aria-hidden="true">
+                <ProviderIconSvg brand={agent.id} size={44} />
+              </div>
+              <div class="provider-title-wrap">
+                <span class="provider-vendor">{agent.vendor}</span>
+                <h3 class="provider-name">{agent.name}</h3>
+              </div>
+            </div>
+
+            <p class="provider-note">{agent.note}</p>
+
+            <div class="provider-cli-bar">
+              <span class="provider-cli-prompt" aria-hidden="true">$</span>
+              <code class="provider-cmd">{agent.cmd}</code>
+              <span class="provider-tag-pill">{agent.tag}</span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="providers-manifesto">
+      <span>100% optional built-in panel</span>
+      <span class="manifesto-dot" aria-hidden="true">·</span>
+      <span>Your accounts &amp; keys stay untouched</span>
+      <span class="manifesto-dot" aria-hidden="true">·</span>
+      <span>Ask before changes · Ctrl+Z undo</span>
+      <span class="manifesto-dot" aria-hidden="true">·</span>
+      <span>Nothing saved without you</span>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .providers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.05rem;
+  }
+
+  .provider-tile {
+    position: relative;
+    overflow: hidden;
+    padding: 1.35rem 1.25rem 1.2rem;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    transition:
+      border-color 0.22s ease,
+      transform 0.2s ease,
+      box-shadow 0.22s ease;
+  }
+
+  .provider-brand-strip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--brand-accent);
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+
+  .provider-tile:hover {
+    border-color: var(--brand-border);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -18px var(--brand-soft), var(--shadow-card);
+  }
+
+  .provider-tile:hover .provider-brand-strip {
+    opacity: 1;
+  }
+
+  .provider-tile-head {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .provider-emblem {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px var(--hairline-strong);
+  }
+
+  .provider-emblem svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .provider-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.08rem;
+    min-width: 0;
+  }
+
+  .provider-vendor {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand-accent);
+    font-weight: 600;
+  }
+
+  .provider-name {
+    font-family: var(--font-serif);
+    font-size: 1.28rem;
+    font-weight: 500;
+    color: var(--ink-primary);
+    line-height: 1.18;
+  }
+
+  .provider-note {
+    font-size: 0.86rem;
+    color: var(--ink-secondary);
+    line-height: 1.62;
+    flex: 1;
+  }
+
+  .provider-cli-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.65rem;
+    border-radius: var(--radius-sm);
+    background: var(--bg-subtle);
+    border: 1px solid var(--hairline);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+  }
+
+  .provider-cli-prompt {
+    color: var(--brand-accent);
+    font-weight: 600;
+    user-select: none;
+  }
+
+  .provider-cmd {
+    color: var(--ink-primary);
+    font-weight: 500;
+    flex: 1;
+  }
+
+  .provider-tag-pill {
+    font-size: 0.61rem;
+    letter-spacing: 0.07em;
+    padding: 0.1rem 0.36rem;
+    border-radius: var(--radius-xs);
+    background: var(--brand-soft);
+    color: var(--brand-accent);
+    font-weight: 600;
+  }
+
+  .providers-manifesto {
+    margin-top: 2rem;
+    padding-top: 1.3rem;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .manifesto-dot {
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 1024px) {
+    .providers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .providers-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

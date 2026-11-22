@@ -1,0 +1,232 @@
+---
+import DownloadCard from './DownloadCard.tsx';
+---
+
+<section id="download" class="section-shell download-section">
+  <div class="download-art-layer" aria-hidden="true">
+    <img src="/art/horizon-sierra.jpg" alt="" class="download-print download-print-light" loading="lazy" decoding="async" />
+    <img src="/art/horizon-orbital.jpg" alt="" class="download-print download-print-dark" loading="lazy" decoding="async" />
+    <div class="download-bokashi-top"></div>
+    <div class="download-bokashi-bottom"></div>
+  </div>
+
+  <div class="container download-content">
+    <div class="section-header download-header">
+      <div class="section-heading-group">
+        <p class="section-kicker">03 · Download</p>
+        <h2 class="section-title">Open your workbooks in <em>peace</em>.</h2>
+        <p class="section-lead">
+          Native desktop speed without accounts, subscriptions, or cloud lock-in. Grab the Windows
+          release or build directly from source.
+        </p>
+      </div>
+    </div>
+
+    <div class="download-card-wrap">
+      <DownloadCard client:visible />
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .download-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .download-art-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .download-print {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 46%;
+    transition: opacity var(--t-bg), filter 0.45s ease;
+  }
+
+  .download-print-light {
+    opacity: 0.28;
+    filter: saturate(0.75) contrast(0.96);
+  }
+
+  .download-print-dark {
+    opacity: 0;
+    filter: saturate(0.85) contrast(1.04) brightness(0.68);
+  }
+
+  [data-theme='dark'] .download-print-light {
+    opacity: 0;
+  }
+
+  [data-theme='dark'] .download-print-dark {
+    opacity: 0.42;
+  }
+
+  .download-bokashi-top {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 74%, transparent) 26%,
+      color-mix(in srgb, var(--bg) 38%, transparent) 62%,
+      color-mix(in srgb, var(--bg) 82%, transparent) 90%,
+      var(--bg) 100%
+    );
+  }
+
+  .download-bokashi-bottom {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 84% 70% at 50% 52%,
+      transparent 38%,
+      color-mix(in srgb, var(--bg) 76%, transparent) 100%
+    );
+  }
+
+  .download-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .download-card-wrap {
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  .download-card {
+    background: color-mix(in srgb, var(--surface) 94%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--hairline-strong);
+    border-radius: var(--radius-md);
+    padding: clamp(1.35rem, 3vw, 2rem);
+    box-shadow: var(--win-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+  }
+
+  .download-card-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .download-version-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .version-badge {
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-xs);
+    background: var(--bg-subtle);
+    border: 1px solid var(--hairline-strong);
+    color: var(--ink-primary);
+  }
+
+  .license-note {
+    font-size: 0.85rem;
+    color: var(--ink-secondary);
+  }
+
+  .download-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .download-meta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+  }
+
+  .download-req {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--ink-primary);
+  }
+
+  .download-subnote {
+    font-size: 0.84rem;
+    color: var(--ink-secondary);
+  }
+
+  .os-soon-tag {
+    opacity: 0.68;
+    font-size: 0.68rem;
+  }
+
+  .download-command-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .command-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.69rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .download-command-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem;
+    padding: 0.65rem 0.9rem;
+    background: var(--bg-subtle);
+    border: 1px solid var(--hairline-strong);
+    border-radius: var(--radius-sm);
+  }
+
+  .command-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    line-height: 1.55;
+    color: var(--ink-primary);
+    min-width: 0;
+    flex: 1;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .command-prompt {
+    color: var(--accent-primary);
+    user-select: none;
+  }
+
+  .copy-btn {
+    flex-shrink: 0;
+  }
+
+  .download-privacy {
+    font-size: 0.83rem;
+    color: var(--ink-muted);
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--hairline);
+  }
+</style>

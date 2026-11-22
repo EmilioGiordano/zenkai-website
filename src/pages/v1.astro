@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import VirtualGridSection from '../components/VirtualGridSection.astro';
+import ProvidersSection from '../components/ProvidersSection.astro';
+import DownloadSection from '../components/DownloadSection.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout>
+  <Header />
+  <main id="main-content">
+    <Hero />
+    <VirtualGridSection />
+    <ProvidersSection />
+    <DownloadSection />
+  </main>
+  <Footer />
+</BaseLayout>

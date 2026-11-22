@@ -1,0 +1,391 @@
+/* ==========================================================================
+   Zenkai v5 — Sunlit Turquoise Lake & Alpine Clarity
+   Scoped under .v5-page so "/", "/v2", "/v3", and "/v4" stay 100% untouched.
+   Palette derived directly from sunlit Peyto Lake, aerial Lake Brienz,
+   and nocturnal Lake McDonald / Lake Bohinj photography.
+   ========================================================================== */
+
+.v5-page {
+  --bg: #F8FBFB;
+  --bg-subtle: #ECF4F4;
+  --surface: #FFFFFF;
+  --surface-elevated: rgba(255, 255, 255, 0.92);
+  --surface-glass: rgba(255, 255, 255, 0.80);
+  --hairline: rgba(11, 34, 38, 0.11);
+  --hairline-strong: rgba(11, 34, 38, 0.21);
+
+  --ink-primary: #0B1A1C;
+  --ink-secondary: #264449;
+  --ink-muted: #4A696F;
+  --ink-faint: #759398;
+
+  /* Sunlit glacial turquoise-teal + alpine sky azure + warm sunbeam amber */
+  --accent-primary: #06777F;
+  --accent-primary-hover: #055E65;
+  --accent-primary-soft: rgba(6, 119, 127, 0.12);
+  --accent-secondary: #1672D8;
+  --accent-secondary-soft: rgba(22, 114, 216, 0.12);
+  --accent-amber: #D97706;
+  --accent-amber-soft: rgba(217, 119, 6, 0.13);
+
+  --btn-bg: #06777F;
+  --btn-fg: #FFFFFF;
+  --btn-bg-hover: #055E65;
+  --btn-ghost-hover: rgba(6, 119, 127, 0.09);
+
+  --hero-text: #09181B;
+  --hero-text-muted: #183237;
+  --hero-scrim-top: rgba(248, 251, 251, 0.72);
+  --hero-scrim-mid: rgba(248, 251, 251, 0.12);
+  --hero-scrim-bottom: #F8FBFB;
+
+  --footer-scrim-top: #F8FBFB;
+  --footer-scrim-mid: rgba(248, 251, 251, 0.36);
+  --footer-scrim-bottom: rgba(6, 22, 26, 0.68);
+  --footer-bottom-ink: #FFFFFF;
+
+  --win-bg: #FFFFFF;
+  --win-chrome: #EFF6F6;
+  --win-sidebar: #F4F9F9;
+  --win-toolbar: #F9FCFC;
+  --win-grid-header: #EAF2F3;
+  --win-grid-line: #D5E4E5;
+  --win-tbl-head-bg: #0B5D8C;
+  --win-tbl-head-ink: #FFFFFF;
+  --win-row-hover: #EEF8F8;
+  --win-cell-selected-bg: rgba(22, 114, 216, 0.11);
+  --win-cell-selected-border: #1672D8;
+  --win-proposal-bg: rgba(6, 119, 127, 0.13);
+  --win-proposal-border: #06777F;
+  --win-panel-bg: #F6FAFA;
+  --win-status-bg: #E9F2F3;
+  --win-shadow: 0 38px 92px -24px rgba(6, 36, 42, 0.26), 0 0 0 1px rgba(6, 119, 127, 0.15);
+  --shadow-card: 0 14px 32px -18px rgba(6, 36, 42, 0.17);
+
+  /* Fresh Glacial Space Cards (Light) */
+  --sp-teal-bg: #D7F4F3;    --sp-teal-hd: #06777F;
+  --sp-blue-bg: #DCEEFF;    --sp-blue-hd: #1672D8;
+  --sp-green-bg: #DAF4E7;   --sp-green-hd: #138251;
+  --sp-rust-bg: #FDECE0;    --sp-rust-hd: #CC6318;
+  --sp-purple-bg: #EAE4FF;  --sp-purple-hd: #6741D9;
+
+  background: var(--bg);
+  color: var(--ink-primary);
+}
+
+[data-theme='dark'] .v5-page {
+  --bg: #060D11;
+  --bg-subtle: #0C171E;
+  --surface: #101E26;
+  --surface-elevated: rgba(16, 30, 38, 0.90);
+  --surface-glass: rgba(7, 15, 20, 0.78);
+  --hairline: rgba(226, 246, 250, 0.10);
+  --hairline-strong: rgba(226, 246, 250, 0.20);
+
+  --ink-primary: #F2F9FA;
+  --ink-secondary: #B4CED4;
+  --ink-muted: #7FA1AA;
+  --ink-faint: #54757E;
+
+  /* Luminous glacial cyan-teal + starlight sky blue + lakeside amber */
+  --accent-primary: #20C9C0;
+  --accent-primary-hover: #3EE0D7;
+  --accent-primary-soft: rgba(32, 201, 192, 0.15);
+  --accent-secondary: #4DA3FF;
+  --accent-secondary-soft: rgba(77, 163, 255, 0.16);
+  --accent-amber: #F5A524;
+  --accent-amber-soft: rgba(245, 165, 36, 0.16);
+
+  --btn-bg: #20C9C0;
+  --btn-fg: #041517;
+  --btn-bg-hover: #3EE0D7;
+  --btn-ghost-hover: rgba(32, 201, 192, 0.10);
+
+  --hero-text: #FFFFFF;
+  --hero-text-muted: #CFE2EC;
+  --hero-scrim-top: rgba(6, 13, 17, 0.56);
+  --hero-scrim-mid: rgba(6, 13, 17, 0.12);
+  --hero-scrim-bottom: #060D11;
+
+  --footer-scrim-top: #060D11;
+  --footer-scrim-mid: rgba(6, 13, 17, 0.38);
+  --footer-scrim-bottom: rgba(6, 13, 17, 0.68);
+  --footer-bottom-ink: #FFFFFF;
+
+  --win-bg: #0A1318;
+  --win-chrome: #101C23;
+  --win-sidebar: #0D181E;
+  --win-toolbar: #101C23;
+  --win-grid-header: #13212A;
+  --win-grid-line: rgba(215, 244, 250, 0.085);
+  --win-tbl-head-bg: #0E5A8A;
+  --win-tbl-head-ink: #FFFFFF;
+  --win-row-hover: rgba(32, 201, 192, 0.05);
+  --win-cell-selected-bg: rgba(77, 163, 255, 0.16);
+  --win-cell-selected-border: #4DA3FF;
+  --win-proposal-bg: rgba(32, 201, 192, 0.16);
+  --win-proposal-border: #20C9C0;
+  --win-panel-bg: #0D181E;
+  --win-status-bg: #101C23;
+  --win-shadow: 0 44px 105px -20px rgba(0, 0, 0, 0.88), 0 0 0 1px rgba(32, 201, 192, 0.20);
+  --shadow-card: 0 16px 36px -18px rgba(0, 0, 0, 0.62);
+
+  --sp-teal-bg: #0B2B2C;    --sp-teal-hd: #14A39B;
+  --sp-blue-bg: #0F233D;    --sp-blue-hd: #2678E8;
+  --sp-green-bg: #0E2B1F;   --sp-green-hd: #16A364;
+  --sp-rust-bg: #2E1D11;    --sp-rust-hd: #D96B1C;
+  --sp-purple-bg: #1E1838;  --sp-purple-hd: #7C52F5;
+}
+
+/* ---------- Floating Architectural Glass Navbar ---------- */
+.v5-header {
+  position: fixed;
+  top: 14px;
+  left: 0;
+  right: 0;
+  z-index: 120;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.v5-nav-bar {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 920px;
+  height: 52px;
+  padding: 0 8px 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--surface-glass);
+  backdrop-filter: blur(18px) saturate(165%);
+  -webkit-backdrop-filter: blur(18px) saturate(165%);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 5px;
+  box-shadow: 0 14px 36px -14px rgba(6, 30, 36, 0.22);
+  transition: background-color var(--t-theme), border-color var(--t-theme);
+}
+
+.v5-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  font-size: 0.96rem;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+}
+
+.v5-brand svg {
+  display: block;
+  border-radius: 3px;
+}
+
+.v5-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.v5-nav-links a {
+  padding: 6px 12px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  border-radius: 3px;
+  transition: color 0.16s ease, background-color 0.16s ease;
+}
+
+.v5-nav-links a:hover {
+  color: var(--ink-primary);
+  background: var(--accent-primary-soft);
+}
+
+.v5-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.v5-page .icon-link {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 3px;
+  color: var(--ink-secondary);
+  background: var(--surface);
+  transition: color 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+}
+
+.v5-page .icon-link:hover {
+  color: var(--ink-primary);
+  border-color: var(--ink-primary);
+}
+
+.v5-page .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 34px;
+  padding: 0 0.72rem;
+  border-radius: 3px;
+  border: 1px solid var(--hairline-strong);
+  background: var(--surface);
+  color: var(--ink-primary);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.v5-page .theme-toggle:hover {
+  border-color: var(--ink-primary);
+}
+
+.v5-page .theme-toggle svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.v5-page .theme-toggle .icon-moon,
+.v5-page .theme-toggle .label-dark {
+  display: none;
+}
+
+[data-theme='dark'] .v5-page .theme-toggle .icon-sun,
+[data-theme='dark'] .v5-page .theme-toggle .label-light {
+  display: none;
+}
+
+[data-theme='dark'] .v5-page .theme-toggle .icon-moon,
+[data-theme='dark'] .v5-page .theme-toggle .label-dark {
+  display: inline;
+}
+
+/* ---------- Sunlit Turquoise Lake & Alpine Clarity Backdrops ---------- */
+.v5-page .hero {
+  padding-top: 7.4rem;
+}
+
+.v5-page .backdrop-light {
+  background-image: url('/art/v5/hero-day.jpg');
+  background-position: center 46%;
+  filter: saturate(1.14) contrast(1.04) brightness(1.02);
+}
+
+.v5-page .backdrop-dark {
+  background-image: url('/art/v5/hero-night.jpg');
+  background-position: center 42%;
+  filter: saturate(1.18) contrast(1.06);
+}
+
+.v5-page .hero-scrim {
+  background: linear-gradient(
+    180deg,
+    var(--hero-scrim-top) 0%,
+    var(--hero-scrim-mid) 30%,
+    rgba(0, 0, 0, 0) 52%,
+    var(--hero-scrim-bottom) 97%
+  );
+}
+
+.v5-page .hero-title {
+  text-shadow: 0 1px 18px rgba(255, 255, 255, 0.78);
+}
+
+.v5-page .hero-sub {
+  text-shadow: 0 1px 12px rgba(255, 255, 255, 0.82);
+}
+
+[data-theme='dark'] .v5-page .hero-title,
+[data-theme='dark'] .v5-page .hero-sub {
+  text-shadow: 0 2px 22px rgba(4, 10, 14, 0.78);
+}
+
+.v5-page .hero-kicker {
+  border-color: color-mix(in srgb, var(--accent-primary) 40%, var(--hairline));
+  color: var(--ink-primary);
+}
+
+.v5-page .hero-kicker-dot {
+  background: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-primary-soft);
+}
+
+.v5-page .hero-title em {
+  color: var(--accent-primary);
+}
+
+/* ---------- Download Section Vivid Alpine Lake Backdrops ---------- */
+.v5-page .download-print {
+  display: none;
+}
+
+.v5-page .download-art-layer::before,
+.v5-page .download-art-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 44%;
+  transition: opacity var(--t-bg);
+}
+
+.v5-page .download-art-layer::before {
+  background-image: url('/art/v5/horizon-day.jpg');
+  opacity: 0.44;
+  filter: saturate(1.14) contrast(1.04);
+}
+
+.v5-page .download-art-layer::after {
+  background-image: url('/art/v5/horizon-night.jpg');
+  background-position: center 48%;
+  opacity: 0;
+  filter: saturate(1.16) contrast(1.06) brightness(0.92);
+}
+
+[data-theme='dark'] .v5-page .download-art-layer::before {
+  opacity: 0;
+}
+
+[data-theme='dark'] .v5-page .download-art-layer::after {
+  opacity: 0.54;
+}
+
+/* ---------- Footer Vivid Horizon Backdrops ---------- */
+.v5-page .footer-light {
+  background-image: url('/art/v5/horizon-day.jpg');
+  background-position: center 46%;
+  filter: saturate(1.15) contrast(1.04);
+}
+
+.v5-page .footer-dark {
+  background-image: url('/art/v5/horizon-night.jpg');
+  background-position: center 50%;
+  filter: saturate(1.18) contrast(1.06);
+}
+
+/* Crisp glacial turquoise accent line on interactive forge & download cards */
+.v5-page .forge-shell,
+.v5-page .download-card {
+  border-top: 2px solid var(--accent-primary);
+}
+
+/* Accent badge in status bar */
+.v5-page .status-pill {
+  background: var(--accent-primary-soft);
+  color: var(--accent-primary);
+}
+
+@media (max-width: 720px) {
+  .v5-nav-links {
+    display: none;
+  }
+}

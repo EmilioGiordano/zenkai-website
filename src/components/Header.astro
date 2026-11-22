@@ -1,0 +1,215 @@
+---
+---
+
+<header class="site-header">
+  <div class="container-wide header-inner">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true" style="display:block;border-radius:3px;">
+        <rect width="128" height="128" rx="14" fill="#151715" />
+        <rect x="4" y="4" width="120" height="120" rx="11" stroke="rgba(255,255,255,0.14)" stroke-width="2" />
+        <path d="M44 20V108M84 20V108M20 44H108M20 84H108" stroke="rgba(255,255,255,0.09)" stroke-width="1.5" />
+        <path d="M28 30H100V44L48 84H100V98H28V84L80 44H28V30Z" fill="#F6F5F0" />
+        <rect x="84" y="20" width="24" height="24" fill="#16A368" />
+      </svg>
+      <span class="brand-word">Zenkai</span>
+    </a>
+
+    <nav class="header-nav" aria-label="Primary">
+      <a href="#grid">Grid</a>
+      <a href="#providers">Providers</a>
+      <a href="#download">Download</a>
+      <a href="/" style="font-family:var(--font-mono);font-size:0.74rem;color:var(--accent-primary);">Versions ↗</a>
+    </nav>
+
+    <div class="header-actions">
+      <a
+        class="icon-link"
+        href="https://github.com/EmilioGiordano/Zenkai"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Zenkai on GitHub"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+        </svg>
+      </a>
+
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle Light and Dark theme"
+      >
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41" />
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+        <span class="label-light">Meadow</span>
+        <span class="label-dark">Obsidian</span>
+      </button>
+
+      <a class="btn btn-primary btn-sm" href="#download">Download</a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var cur = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try {
+        localStorage.setItem('zenkai-natural-theme', next);
+      } catch (e) {}
+    });
+  })();
+</script>
+
+<style is:global>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface-glass);
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
+    border-bottom: 1px solid var(--hairline);
+    transition: background-color var(--t-theme), border-color var(--t-theme);
+  }
+
+  .header-inner {
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 700;
+    font-size: 0.96rem;
+    letter-spacing: -0.02em;
+    color: var(--ink-primary);
+  }
+
+  .brand-mark {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xs);
+    background: var(--accent-primary);
+    color: #ffffff;
+  }
+
+  [data-theme='dark'] .brand-mark {
+    color: #0c0c0e;
+  }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .header-nav a {
+    padding: 0.35rem 0.72rem;
+    font-size: 0.87rem;
+    font-weight: 500;
+    color: var(--ink-secondary);
+    border-radius: var(--radius-sm);
+    transition: color 0.16s ease, background-color 0.16s ease;
+  }
+
+  .header-nav a:hover {
+    color: var(--ink-primary);
+    background: var(--btn-ghost-hover);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .icon-link {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    color: var(--ink-secondary);
+    background: transparent;
+    transition: color 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+  }
+
+  .icon-link:hover {
+    color: var(--ink-primary);
+    border-color: var(--hairline-strong);
+    background: var(--btn-ghost-hover);
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    height: 34px;
+    padding: 0 0.72rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--hairline-strong);
+    background: var(--surface);
+    color: var(--ink-primary);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--ink-primary);
+  }
+
+  .theme-toggle svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle .icon-moon,
+  .theme-toggle .label-dark {
+    display: none;
+  }
+
+  [data-theme='dark'] .theme-toggle .icon-sun,
+  [data-theme='dark'] .theme-toggle .label-light {
+    display: none;
+  }
+
+  [data-theme='dark'] .theme-toggle .icon-moon,
+  [data-theme='dark'] .theme-toggle .label-dark {
+    display: inline;
+  }
+
+  @media (max-width: 720px) {
+    .header-nav {
+      display: none;
+    }
+
+    .theme-toggle .label-light,
+    .theme-toggle .label-dark {
+      display: none !important;
+    }
+  }
+</style>

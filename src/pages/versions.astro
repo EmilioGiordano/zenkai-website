@@ -1,0 +1,383 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const versions = [
+  {
+    id: 'v1',
+    href: '/v1',
+    tag: 'v1 · Original Editorial',
+    title: 'Warm Paper & Bierstadt',
+    desc: 'Base editorial original con papel cálido (#F6F5F0), verde pino suave, barra superior recta y obras de Bierstadt + NASA.',
+    thumb: '/art/hero-meadow.jpg',
+    swatches: ['#F6F5F0', '#2A5E40', '#26549E', '#0C0C0E'],
+  },
+  {
+    id: 'v2',
+    href: '/v2',
+    tag: 'v2 · Vivid Horizon',
+    title: 'Floating Bar & Vivid Accents',
+    desc: 'Navbar flotante de cristal, Icono 01 (Monolith Z-Grid), esmeralda vibrante y horizonte ISS azul-ámbar en modo oscuro.',
+    thumb: '/art/horizon-orbital.jpg',
+    swatches: ['#FAFBFA', '#0E8F5B', '#1D63ED', '#08090C'],
+  },
+  {
+    id: 'v3',
+    href: '/v3',
+    tag: 'v3 · Vivid Sky & Meadow',
+    title: 'Vivid Nature & High Contrast',
+    desc: 'Fotografía natural real con verdes intensos, cielos celestes/cobalto vivos y nubes blancas nítidas derivando toda la paleta.',
+    thumb: '/art/v3/hero-day.jpg',
+    swatches: ['#F5F9FC', '#0A8A50', '#1660E8', '#07090E'],
+  },
+  {
+    id: 'v4',
+    href: '/v4',
+    tag: 'v4 · Conceptual Cobalt & Meadow',
+    title: 'Qredible × Pluto Horizon',
+    desc: 'Dirección conceptual con cielo azul cobalto puro, tipografía blanca nítida y pradera verde escultórica (estilo Qredible / Pluto).',
+    thumb: '/art/v4/hero-day.jpg',
+    swatches: ['#1D54D6', '#2FA84F', '#FFFFFF', '#080E18'],
+  },
+  {
+    id: 'v5',
+    href: '/v5',
+    tag: 'v5 · Alpine Lake Clarity',
+    title: 'Turquoise Water & Azure Sky',
+    desc: 'Lagos alpinos turquesa-esmeralda, laderas verdes luminosas y cielo azul limpio con contraste nítido y sereno.',
+    thumb: '/art/v5/hero-day.jpg',
+    swatches: ['#F6FAFA', '#0D9488', '#2563EB', '#090D12'],
+  },
+  {
+    id: 'v6',
+    href: '/v6',
+    tag: 'v6 · Halftone Swiss Editorial',
+    title: 'Risograph Ridge & Clouds',
+    desc: 'Cordillera esmeralda y nubes cúmulus en trama halftone/risograph sobre cielo azul cobalto + nocturno conceptual con luna.',
+    thumb: '/art/concepts/07-halftone-emerald-ridge.jpg',
+    swatches: ['#155EEF', '#009B5A', '#FFFFFF', '#07090F'],
+  },
+  {
+    id: 'v7',
+    href: '/v7',
+    tag: 'v7 · Rocket Turquoise & Coast',
+    title: 'Turquoise Sky & Coastal Meadow',
+    desc: 'Cielo turquesa-cian radiante con tipografía oscura nítida sobre cordillera verde y costa mediterránea luminosa.',
+    thumb: '/art/concepts/04-rocket-turquoise-horizon.jpg',
+    swatches: ['#00A6A6', '#4CAF50', '#0C1A1C', '#07090F'],
+  },
+  {
+    id: 'v8',
+    href: '/v8',
+    tag: 'v8 · Cobalt Daisies & Pluto',
+    title: 'Daisies Hill & Conceptual Path',
+    desc: 'Colina verde con margaritas blancas bajo cielo cobalto puro + paisaje conceptual minimalista con sendero hacia el cielo.',
+    thumb: '/art/concepts/06-cobalt-sky-daisies.jpg',
+    swatches: ['#1D54D6', '#22A84D', '#FFFFFF', '#07090F'],
+  },
+  {
+    id: 'v9',
+    href: '/v9',
+    tag: 'v9 · Orbit Klein Halftone',
+    title: 'Klein Blue & Risograph Clouds',
+    desc: 'Dirección conceptual moderna estilo Orbit: azul Klein eléctrico (#1744E8), nubes en trama halftone, esquinas rectas de 2px y canvas galería frío.',
+    thumb: '/art/concepts/01-halftone-cobalt-clouds.jpg',
+    swatches: ['#1744E8', '#F2F4F7', '#0D1220', '#080B14'],
+  },
+  {
+    id: 'v10',
+    href: '/v10',
+    tag: 'v10 · Orbit Piranesi Duotone',
+    title: 'Klein Engraving & Blueprint',
+    desc: 'Grabados clásicos de Piranesi (Dominio Público) tratados en duotono Azul Klein eléctrico con trama halftone + modo oscuro plano arquitectónico.',
+    thumb: '/art/v9-pack/piranesi-forum.jpg',
+    swatches: ['#143CE8', '#F2F3F6', '#0B1020', '#070B18'],
+  },
+  {
+    id: 'v11',
+    href: '/v11',
+    tag: 'v11 · Swiss Emerald Blueprint',
+    title: 'Architectural Emerald Engraving',
+    desc: 'Mismo sistema gráfico afilado de v9/v10 (2px, halftone, planos de Piranesi) llevado a verde esmeralda arquitectónico y obsidiana.',
+    thumb: '/art/v9-pack/piranesi-pantheon.jpg',
+    swatches: ['#057A55', '#F3F5F4', '#0A1410', '#070D0B'],
+  },
+  {
+    id: 'v12',
+    href: '/v12',
+    tag: 'v12 · Celestial Atlas Indigo',
+    title: 'Indigo Star Chart Engraving',
+    desc: 'Carta celeste de Cellarius (Harmonia Macrocosmica, PD) en duotono índigo real eléctrico (#2520B8) + modo oscuro constelación.',
+    thumb: '/art/v9-pack/celestial-atlas.jpg',
+    swatches: ['#2520B8', '#F3F3F8', '#0F0E24', '#080816'],
+  },
+  {
+    id: 'v13',
+    href: '/v13',
+    tag: 'v13 · Vermilion Swiss Print',
+    title: 'Risograph Red & Piranesi Vaults',
+    desc: 'Grabado de bóvedas de Piranesi (Le Carceri) en bermellón risograph suizo (#C92E18) sobre papel cálido y tinta carbón.',
+    thumb: '/art/v9-pack/piranesi-colosseum.jpg',
+    swatches: ['#C92E18', '#F6F4F0', '#171211', '#110B0A'],
+  },
+  {
+    id: 'v14',
+    href: '/v14',
+    tag: 'v14 · Ultraviolet Halftone',
+    title: 'Electric Violet & Classical Duotone',
+    desc: 'Nubes halftone llevadas a ultravioleta eléctrico (#5224E0) + grabados clásicos violeta en Download y Footer.',
+    thumb: '/art/concepts/01-halftone-cobalt-clouds.jpg',
+    swatches: ['#5224E0', '#F4F3F8', '#130C2B', '#0A0814'],
+  },
+  {
+    id: 'v15',
+    href: '/v15',
+    tag: 'v15 · Cerulean Alpine Halftone',
+    title: 'Teal Peaks & Celestial Chart',
+    desc: 'Picos alpinos en duotono azul-petróleo/cerúleo (#03667A) con trama halftone + carta celeste en Download/Footer.',
+    thumb: '/art/concepts/05-mist-dawn-peaks.jpg',
+    swatches: ['#03667A', '#F2F6F7', '#08181C', '#060E12'],
+  },
+  {
+    id: 'v16',
+    href: '/v16',
+    tag: 'v16 · Monochrome Ink & Ochre',
+    title: 'Brutalist Graphite & Warm Ochre',
+    desc: 'Grabado arquitectónico monocromático en grafito puro con acentos ocre cálido (#C2660A / #F59E0B) y estética editorial suiza.',
+    thumb: '/art/v9-pack/piranesi-colosseum.jpg',
+    swatches: ['#141416', '#C2660A', '#F4F4F2', '#0A0A0B'],
+  },
+];
+---
+
+<BaseLayout title="Zenkai — Visual Versions Preview">
+  <div class="versions-wrap">
+    <header class="versions-head">
+      <div>
+        <p class="versions-kicker">Zenkai Web · Visual Explorations Hub</p>
+        <h1 class="versions-title">Compare <em>v1 – v16</em> live</h1>
+        <p class="versions-sub">
+          Mismo contenido, mismos componentes interactivos de Preact y el Icono 01 oficial — variando únicamente imágenes, paletas y atmósfera visual.
+        </p>
+      </div>
+      <div class="versions-actions">
+        <button class="btn btn-ghost btn-sm" id="versions-theme-btn" type="button">
+          Toggle Light / Dark
+        </button>
+      </div>
+    </header>
+
+    <main class="versions-grid">
+      {
+        versions.map((v) => (
+          <a class="version-card" href={v.href}>
+            <div class="version-thumb-wrap">
+              <img
+                class="version-thumb"
+                src={v.thumb}
+                alt={`${v.title} preview`}
+                loading="lazy"
+                onerror="this.style.opacity='0.15'"
+              />
+              <span class="version-badge-pill">{v.id}</span>
+            </div>
+            <div class="version-body">
+              <span class="version-tag">{v.tag}</span>
+              <h2 class="version-name">{v.title}</h2>
+              <p class="version-desc">{v.desc}</p>
+              <div class="version-foot">
+                <div class="swatches" aria-label="Color palette">
+                  {v.swatches.map((hex) => (
+                    <span class="swatch" style={`background:${hex}`} title={hex} />
+                  ))}
+                </div>
+                <span class="version-open">Open {v.href} →</span>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </main>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var btn = document.getElementById('versions-theme-btn');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var cur = document.documentElement.getAttribute('data-theme') || 'light';
+        var next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try {
+          localStorage.setItem('zenkai-natural-theme', next);
+        } catch (e) {}
+      });
+    })();
+  </script>
+</BaseLayout>
+
+<style is:global>
+  .versions-wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 3.2rem 1.5rem 5rem;
+  }
+
+  .versions-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 1.8rem;
+    margin-bottom: 2.2rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .versions-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin-bottom: 0.55rem;
+  }
+
+  .versions-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 4.4vw, 3.3rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
+  .versions-title em {
+    font-style: italic;
+    color: var(--accent-primary);
+  }
+
+  .versions-sub {
+    margin-top: 0.55rem;
+    max-width: 62ch;
+    color: var(--ink-secondary);
+    font-size: 0.96rem;
+  }
+
+  .versions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 1.35rem;
+  }
+
+  .version-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--hairline-strong);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.2s ease;
+  }
+
+  .version-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-card);
+  }
+
+  .version-thumb-wrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--bg-subtle);
+    overflow: hidden;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .version-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .version-card:hover .version-thumb {
+    transform: scale(1.03);
+  }
+
+  .version-badge-pill {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 2px 8px;
+    border-radius: var(--radius-xs);
+    background: rgba(12, 12, 14, 0.78);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .version-body {
+    padding: 1.25rem 1.3rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    flex: 1;
+  }
+
+  .version-tag {
+    font-family: var(--font-mono);
+    font-size: 0.69rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    font-weight: 600;
+  }
+
+  .version-name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--ink-primary);
+  }
+
+  .version-desc {
+    font-size: 0.87rem;
+    color: var(--ink-secondary);
+    line-height: 1.58;
+    flex: 1;
+  }
+
+  .version-foot {
+    margin-top: 0.75rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .swatches {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    border: 1px solid var(--hairline-strong);
+  }
+
+  .version-open {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--ink-primary);
+  }
+</style>

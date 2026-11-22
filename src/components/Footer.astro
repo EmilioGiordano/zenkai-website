@@ -1,0 +1,204 @@
+---
+---
+
+<footer class="site-footer">
+  <div class="footer-backdrop" aria-hidden="true">
+    <div class="footer-layer footer-light"></div>
+    <div class="footer-layer footer-dark"></div>
+    <div class="footer-scrim"></div>
+  </div>
+
+  <div class="container footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="brand">
+          <svg width="24" height="24" viewBox="0 0 128 128" fill="none" aria-hidden="true" style="display:block;border-radius:3px;">
+            <rect width="128" height="128" rx="14" fill="#151715" />
+            <rect x="4" y="4" width="120" height="120" rx="11" stroke="rgba(255,255,255,0.14)" stroke-width="2" />
+            <path d="M44 20V108M84 20V108M20 44H108M20 84H108" stroke="rgba(255,255,255,0.09)" stroke-width="1.5" />
+            <path d="M28 30H100V44L48 84H100V98H28V84L80 44H28V30Z" fill="#F6F5F0" />
+            <rect x="84" y="20" width="24" height="24" fill="#16A368" />
+          </svg>
+          <span>Zenkai</span>
+        </div>
+        <p class="footer-quote">
+          A fast, quiet native spreadsheet — built for the files that deserve fresh air.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="#grid">60 fps Virtual Grid</a></li>
+          <li><a href="#providers">AI Providers</a></li>
+          <li><a href="#download">Download</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Open Source</h4>
+        <ul>
+          <li>
+            <a href="https://github.com/EmilioGiordano/Zenkai" target="_blank" rel="noopener noreferrer">
+              GitHub Repository
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/EmilioGiordano/Zenkai/releases" target="_blank" rel="noopener noreferrer">
+              Releases
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/EmilioGiordano/Zenkai/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">
+              Apache-2.0 License
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stack</h4>
+        <ul>
+          <li><span>Rust + GPUI</span></li>
+          <li><span>IronCalc Engine</span></li>
+          <li><span>calamine Fallback</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Zenkai · Apache-2.0 Open Source · 100% Local</span>
+      <span>Artwork (Public Domain): Albert Bierstadt · NASA ISS Earth Science &amp; Remote Sensing</span>
+    </div>
+  </div>
+</footer>
+
+<style is:global>
+  .site-footer {
+    position: relative;
+    padding: 7.5rem 0 4rem;
+    overflow: hidden;
+  }
+
+  .footer-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .footer-layer {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 48%;
+    transition: opacity var(--t-bg);
+  }
+
+  .footer-light {
+    background-image: url('/art/horizon-sierra.jpg');
+    opacity: 1;
+  }
+
+  .footer-dark {
+    background-image: url('/art/horizon-orbital.jpg');
+    background-position: center 56%;
+    opacity: 0;
+  }
+
+  [data-theme='dark'] .footer-light {
+    opacity: 0;
+  }
+
+  [data-theme='dark'] .footer-dark {
+    opacity: 1;
+  }
+
+  .footer-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      var(--footer-scrim-top) 0%,
+      color-mix(in srgb, var(--footer-scrim-top) 92%, transparent) 18%,
+      var(--footer-scrim-mid) 46%,
+      var(--footer-scrim-bottom) 100%
+    );
+  }
+
+  .footer-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .footer-quote {
+    font-family: var(--font-serif);
+    font-size: 1.48rem;
+    line-height: 1.25;
+    color: var(--ink-primary);
+    margin-top: 0.75rem;
+    max-width: 26ch;
+  }
+
+  .footer-col h4 {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+  }
+
+  .footer-col a {
+    color: var(--ink-primary);
+    opacity: 0.84;
+    transition: opacity 0.15s ease;
+  }
+
+  .footer-col a:hover {
+    opacity: 1;
+  }
+
+  .footer-col span {
+    color: var(--ink-secondary);
+  }
+
+  .footer-bottom {
+    padding-top: 1.35rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--footer-bottom-ink);
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

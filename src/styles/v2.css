@@ -1,0 +1,335 @@
+/* ==========================================================================
+   Zenkai v2 — Vivid Horizon & High-Identity Palette
+   Scoped under .v2-page so "/" stays 100% untouched.
+   ========================================================================== */
+
+.v2-page {
+  --bg: #FAFBFA;
+  --bg-subtle: #EFF3F1;
+  --surface: #FFFFFF;
+  --surface-elevated: rgba(255, 255, 255, 0.92);
+  --surface-glass: rgba(255, 255, 255, 0.78);
+  --hairline: rgba(12, 20, 18, 0.11);
+  --hairline-strong: rgba(12, 20, 18, 0.22);
+
+  --ink-primary: #0D1412;
+  --ink-secondary: #32423D;
+  --ink-muted: #556962;
+  --ink-faint: #7C9089;
+
+  /* Vivid, unapologetic emerald + cobalt + warm amber */
+  --accent-primary: #0E8F5B;
+  --accent-primary-hover: #0A7348;
+  --accent-primary-soft: rgba(14, 143, 91, 0.12);
+  --accent-secondary: #1D63ED;
+  --accent-secondary-soft: rgba(29, 99, 237, 0.12);
+  --accent-amber: #DF7B16;
+  --accent-amber-soft: rgba(223, 123, 22, 0.13);
+
+  --btn-bg: #0E8F5B;
+  --btn-fg: #FFFFFF;
+  --btn-bg-hover: #0A7348;
+  --btn-ghost-hover: rgba(14, 143, 91, 0.08);
+
+  --hero-text: #0D1412;
+  --hero-text-muted: #1E2E29;
+  --hero-scrim-top: rgba(250, 251, 250, 0.78);
+  --hero-scrim-mid: rgba(250, 251, 250, 0.14);
+  --hero-scrim-bottom: #FAFBFA;
+
+  --footer-scrim-top: #FAFBFA;
+  --footer-scrim-mid: rgba(250, 251, 250, 0.42);
+  --footer-scrim-bottom: rgba(8, 16, 14, 0.62);
+  --footer-bottom-ink: #FFFFFF;
+
+  --win-bg: #FFFFFF;
+  --win-chrome: #F2F5F4;
+  --win-sidebar: #F6F9F8;
+  --win-toolbar: #FAFCFB;
+  --win-grid-header: #EEF2F0;
+  --win-grid-line: #DCE4E0;
+  --win-tbl-head-bg: #1B4F9C;
+  --win-tbl-head-ink: #FFFFFF;
+  --win-row-hover: #F2F9F6;
+  --win-cell-selected-bg: rgba(29, 99, 237, 0.11);
+  --win-cell-selected-border: #1D63ED;
+  --win-proposal-bg: rgba(14, 143, 91, 0.14);
+  --win-proposal-border: #0E8F5B;
+  --win-panel-bg: #F8FBFA;
+  --win-status-bg: #EDF2F0;
+  --win-shadow: 0 38px 92px -24px rgba(10, 28, 22, 0.28), 0 0 0 1px rgba(14, 143, 91, 0.14);
+  --shadow-card: 0 14px 32px -18px rgba(10, 28, 22, 0.18);
+
+  /* Crisp vivid Space Cards (Light) */
+  --sp-teal-bg: #DDF5EE;    --sp-teal-hd: #0F8B6D;
+  --sp-blue-bg: #E0ECFF;    --sp-blue-hd: #1D63ED;
+  --sp-green-bg: #DEF5E6;   --sp-green-hd: #128C4F;
+  --sp-rust-bg: #FDECE0;    --sp-rust-hd: #D46619;
+  --sp-purple-bg: #ECE5FF;  --sp-purple-hd: #6E42D9;
+
+  background: var(--bg);
+  color: var(--ink-primary);
+}
+
+[data-theme='dark'] .v2-page {
+  --bg: #08090C;
+  --bg-subtle: #101218;
+  --surface: #13161D;
+  --surface-elevated: rgba(19, 22, 29, 0.90);
+  --surface-glass: rgba(10, 12, 16, 0.78);
+  --hairline: rgba(242, 246, 255, 0.10);
+  --hairline-strong: rgba(242, 246, 255, 0.20);
+
+  --ink-primary: #F5F7FA;
+  --ink-secondary: #B8C2D1;
+  --ink-muted: #8492A8;
+  --ink-faint: #5D6A80;
+
+  /* Vivid luminous mint + electric sky + solar amber */
+  --accent-primary: #22C984;
+  --accent-primary-hover: #3CE09B;
+  --accent-primary-soft: rgba(34, 201, 132, 0.15);
+  --accent-secondary: #3D9BFF;
+  --accent-secondary-soft: rgba(61, 155, 255, 0.16);
+  --accent-amber: #F59E0B;
+  --accent-amber-soft: rgba(245, 158, 11, 0.16);
+
+  --btn-bg: #22C984;
+  --btn-fg: #06130D;
+  --btn-bg-hover: #3CE09B;
+  --btn-ghost-hover: rgba(34, 201, 132, 0.10);
+
+  --hero-text: #FFFFFF;
+  --hero-text-muted: #D2DCF0;
+  --hero-scrim-top: rgba(8, 9, 12, 0.62);
+  --hero-scrim-mid: rgba(8, 9, 12, 0.16);
+  --hero-scrim-bottom: #08090C;
+
+  --footer-scrim-top: #08090C;
+  --footer-scrim-mid: rgba(8, 9, 12, 0.42);
+  --footer-scrim-bottom: rgba(8, 9, 12, 0.68);
+  --footer-bottom-ink: #FFFFFF;
+
+  --win-bg: #0D0F14;
+  --win-chrome: #13161E;
+  --win-sidebar: #10131A;
+  --win-toolbar: #13161E;
+  --win-grid-header: #161A24;
+  --win-grid-line: rgba(255, 255, 255, 0.085);
+  --win-tbl-head-bg: #1D4E9E;
+  --win-tbl-head-ink: #FFFFFF;
+  --win-row-hover: rgba(34, 201, 132, 0.04);
+  --win-cell-selected-bg: rgba(61, 155, 255, 0.16);
+  --win-cell-selected-border: #3D9BFF;
+  --win-proposal-bg: rgba(34, 201, 132, 0.17);
+  --win-proposal-border: #22C984;
+  --win-panel-bg: #10131A;
+  --win-status-bg: #13161E;
+  --win-shadow: 0 44px 105px -20px rgba(0, 0, 0, 0.88), 0 0 0 1px rgba(61, 155, 255, 0.18);
+  --shadow-card: 0 16px 36px -18px rgba(0, 0, 0, 0.6);
+
+  --sp-teal-bg: #0E2B24;    --sp-teal-hd: #139675;
+  --sp-blue-bg: #11223D;    --sp-blue-hd: #2563EB;
+  --sp-green-bg: #102B1D;   --sp-green-hd: #16A35B;
+  --sp-rust-bg: #2E1D11;    --sp-rust-hd: #D96B1C;
+  --sp-purple-bg: #201738;  --sp-purple-hd: #7C4DFF;
+}
+
+/* ---------- Floating Architectural Glass Navbar (Requested!) ---------- */
+.v2-header {
+  position: fixed;
+  top: 14px;
+  left: 0;
+  right: 0;
+  z-index: 120;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.v2-nav-bar {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 920px;
+  height: 52px;
+  padding: 0 8px 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--surface-glass);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 5px;
+  box-shadow: 0 14px 36px -14px rgba(0, 0, 0, 0.22);
+  transition: background-color var(--t-theme), border-color var(--t-theme);
+}
+
+.v2-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  font-size: 0.96rem;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+}
+
+.v2-brand svg {
+  display: block;
+  border-radius: 3px;
+}
+
+.v2-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.v2-nav-links a {
+  padding: 6px 12px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  border-radius: 3px;
+  transition: color 0.16s ease, background-color 0.16s ease;
+}
+
+.v2-nav-links a:hover {
+  color: var(--ink-primary);
+  background: var(--accent-primary-soft);
+}
+
+.v2-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.v2-page .icon-link {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 3px;
+  color: var(--ink-secondary);
+  background: var(--surface);
+  transition: color 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+}
+
+.v2-page .icon-link:hover {
+  color: var(--ink-primary);
+  border-color: var(--ink-primary);
+}
+
+.v2-page .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 34px;
+  padding: 0 0.72rem;
+  border-radius: 3px;
+  border: 1px solid var(--hairline-strong);
+  background: var(--surface);
+  color: var(--ink-primary);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.v2-page .theme-toggle:hover {
+  border-color: var(--ink-primary);
+}
+
+.v2-page .theme-toggle svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.v2-page .theme-toggle .icon-moon,
+.v2-page .theme-toggle .label-dark {
+  display: none;
+}
+
+[data-theme='dark'] .v2-page .theme-toggle .icon-sun,
+[data-theme='dark'] .v2-page .theme-toggle .label-light {
+  display: none;
+}
+
+[data-theme='dark'] .v2-page .theme-toggle .icon-moon,
+[data-theme='dark'] .v2-page .theme-toggle .label-dark {
+  display: inline;
+}
+
+/* ---------- Vivid Artwork Boost (NO washed-out opacity!) ---------- */
+.v2-page .hero {
+  padding-top: 7.4rem;
+}
+
+.v2-page .backdrop-light {
+  filter: saturate(1.34) contrast(1.06) brightness(1.02);
+}
+
+.v2-page .backdrop-dark {
+  background-image: url('/art/horizon-orbital.jpg');
+  background-position: center 44%;
+  filter: saturate(1.32) contrast(1.08);
+}
+
+.v2-page .hero-kicker {
+  border-color: color-mix(in srgb, var(--accent-primary) 38%, var(--hairline));
+  color: var(--ink-primary);
+}
+
+.v2-page .hero-kicker-dot {
+  background: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-primary-soft);
+}
+
+.v2-page .hero-title em {
+  color: var(--accent-primary);
+}
+
+/* Vivid footer & download art */
+.v2-page .download-print-light {
+  opacity: 0.36;
+  filter: saturate(1.28) contrast(1.04);
+}
+
+.v2-page .download-print-dark {
+  filter: saturate(1.35) contrast(1.08) brightness(0.82);
+}
+
+.v2-page .footer-light {
+  filter: saturate(1.26) contrast(1.05);
+}
+
+.v2-page .footer-dark {
+  background-image: url('/art/hero-stratosphere.jpg');
+  background-position: center 32%;
+  filter: saturate(1.28) contrast(1.06);
+}
+
+/* Subtle emerald accent line on interactive forge & download cards */
+.v2-page .forge-shell,
+.v2-page .download-card {
+  border-top: 2px solid var(--accent-primary);
+}
+
+/* Accent badge in status bar */
+.v2-page .status-pill {
+  background: var(--accent-primary-soft);
+  color: var(--accent-primary);
+}
+
+@media (max-width: 720px) {
+  .v2-nav-links {
+    display: none;
+  }
+}
