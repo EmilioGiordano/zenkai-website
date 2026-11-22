@@ -1,5 +1,8 @@
 ---
 import ZenkaiWindow from './ZenkaiWindow.tsx';
+import { downloadHref, fetchLatestRelease } from '../lib/release';
+
+const release = await fetchLatestRelease();
 ---
 
 <section class="hero">
@@ -19,26 +22,32 @@ import ZenkaiWindow from './ZenkaiWindow.tsx';
         A calm, native spreadsheet for files <em>too large</em> for the usual tools.
       </h1>
       <p class="hero-sub">
-        Open, edit, recalculate, and save <code>.xlsx</code>, <code>.csv</code>, and{' '}
-        <code>.tsv</code> locally at 60 fps. No cloud, no account, and Excel muscle memory from day
-        one.
+        Open, edit and save <code>.xlsx</code>, <code>.csv</code> and <code>.tsv</code> files on
+        your own machine, with the Excel shortcuts you already know.
       </p>
       <div class="hero-ctas">
-        <a
-          class="btn btn-primary"
-          href="https://github.com/EmilioGiordano/Zenkai/releases"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a class="btn btn-primary" href={downloadHref(release, 'windows')} data-latest-download="windows">
           Download for Windows
         </a>
-        <a class="btn btn-ghost" href="#grid">Scrub 1,048,576 rows ↓</a>
+        <a class="btn btn-ghost" href="#grid">Try the grid</a>
       </div>
     </div>
 
     <ZenkaiWindow client:load />
   </div>
 </section>
+
+<script>
+  import { downloadHref, fetchLatestRelease } from '../lib/release';
+
+  // Keep the hero CTA pointing at the newest installer, even before the next deploy.
+  fetchLatestRelease().then((release) => {
+    if (!release.tag) return;
+    document.querySelectorAll<HTMLAnchorElement>('[data-latest-download="windows"]').forEach((link) => {
+      link.href = downloadHref(release, 'windows');
+    });
+  });
+</script>
 
 <style is:global>
   .hero {
@@ -63,13 +72,13 @@ import ZenkaiWindow from './ZenkaiWindow.tsx';
   }
 
   .backdrop-light {
-    background-image: url('/art/hero-day.jpg');
+    background-image: url('/art/hero-day.webp');
     opacity: 1;
     transform: scale(1);
   }
 
   .backdrop-dark {
-    background-image: url('/art/hero-night.jpg');
+    background-image: url('/art/hero-night.webp');
     background-position: center 22%;
     opacity: 0;
     transform: scale(1.03);
@@ -720,6 +729,11 @@ import ZenkaiWindow from './ZenkaiWindow.tsx';
     }
   }
 
+  /* Mobile-only cells are hidden on larger screens */
+  .app-window .zk-monly {
+    display: none;
+  }
+
   @media (max-width: 740px) {
     .win-body {
       grid-template-columns: 1fr;
@@ -727,6 +741,55 @@ import ZenkaiWindow from './ZenkaiWindow.tsx';
 
     .win-sidebar {
       display: none;
+    }
+  }
+
+  /* Phones: keep only the columns that matter (name, debits, credits, closing) */
+  @media (max-width: 600px) {
+    .hero-kicker {
+      font-size: 0.6rem;
+      letter-spacing: 0;
+      padding: 5px 9px;
+      white-space: nowrap;
+    }
+
+    .app-window .zk-mhide {
+      display: none;
+    }
+
+    .app-window td.zk-monly {
+      display: table-cell;
+    }
+
+    .app-window span.zk-monly {
+      display: inline;
+    }
+
+    .sheet-table {
+      font-size: 0.68rem;
+    }
+
+    .sheet-table th,
+    .sheet-table td {
+      padding: 0 5px;
+      height: 30px;
+    }
+
+    .sheet-table col.col-rn { width: 24px; }
+    .sheet-table col.col-b { width: auto; }
+    .sheet-table col.col-num { width: 26%; }
+
+    .win-title-center {
+      font-size: 0.66rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+
+    .win-statusbar .status-group {
+      gap: 10px;
+      white-space: nowrap;
     }
   }
 </style>

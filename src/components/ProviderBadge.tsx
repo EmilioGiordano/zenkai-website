@@ -5,11 +5,9 @@ export interface ProviderMeta {
   name: string;
   vendor: string;
   cmd: string;
-  tag: string;
   accent: string;
   accentSoft: string;
   badgeBorder: string;
-  note: string;
 }
 
 export const PROVIDERS: ProviderMeta[] = [
@@ -18,44 +16,36 @@ export const PROVIDERS: ProviderMeta[] = [
     name: 'Claude Code',
     vendor: 'Anthropic',
     cmd: 'claude',
-    tag: 'MCP · DIFF',
     accent: '#D96B47',
     accentSoft: 'rgba(217, 107, 71, 0.14)',
     badgeBorder: 'rgba(217, 107, 71, 0.42)',
-    note: 'Audit formulas, reconcile trial balances, and clean sheets with your existing Anthropic account.',
   },
   {
     id: 'codex',
     name: 'Codex',
     vendor: 'OpenAI',
     cmd: 'codex',
-    tag: 'CTRL+Z SAFE',
     accent: '#10A37F',
     accentSoft: 'rgba(16, 163, 127, 0.14)',
     badgeBorder: 'rgba(16, 163, 127, 0.40)',
-    note: 'Connect OpenAI’s coding agent to normalize messy imports and explain nested workbook logic.',
   },
   {
     id: 'opencode',
     name: 'OpenCode',
     vendor: 'Open Source',
     cmd: 'opencode',
-    tag: 'BYO MODEL',
     accent: '#7A7A7A',
     accentSoft: 'rgba(122, 122, 122, 0.14)',
     badgeBorder: 'rgba(150, 150, 150, 0.36)',
-    note: 'Open-source agent wired to whichever local or hosted model provider you already run.',
   },
   {
     id: 'grok',
     name: 'Grok',
     vendor: 'xAI',
     cmd: 'grok',
-    tag: 'APPROVAL',
     accent: '#52525B',
     accentSoft: 'rgba(113, 113, 122, 0.14)',
     badgeBorder: 'rgba(130, 130, 140, 0.38)',
-    note: 'Fast reasoning across workbook tabs with every proposed cell edit gated behind your review.',
   },
 ];
 

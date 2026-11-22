@@ -30,7 +30,7 @@
         <h4>Sections</h4>
         <ul>
           <li><a href="#grid">60 fps Virtual Grid</a></li>
-          <li><a href="#providers">AI Providers</a></li>
+          <li><a href="#providers">AI Analysis</a></li>
           <li><a href="#download">Download</a></li>
         </ul>
       </div>
@@ -61,14 +61,13 @@
         <ul>
           <li><span>Rust + GPUI</span></li>
           <li><span>IronCalc Engine</span></li>
-          <li><span>calamine Fallback</span></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>Zenkai · Apache-2.0 Open Source · 100% Local</span>
-      <span>Night photography: Dreamy Pixel (CC BY 4.0) · Eddie basler (CC BY-SA 4.0)</span>
+      <span class="footer-facts"><span>Zenkai</span><span>Apache-2.0 Open Source</span><span>100% Local</span></span>
+      <span class="footer-facts"><span>Night photography: Dreamy Pixel (CC BY 4.0)</span><span>Eddie basler (CC BY-SA 4.0)</span></span>
     </div>
   </div>
 </footer>
@@ -96,12 +95,12 @@
   }
 
   .footer-light {
-    background-image: url('/art/hero-day.jpg');
+    background-image: url('/art/hero-day.webp');
     opacity: 1;
   }
 
   .footer-dark {
-    background-image: url('/art/horizon-night.jpg');
+    background-image: url('/art/horizon-night.webp');
     background-position: center 56%;
     opacity: 0;
   }
@@ -178,6 +177,19 @@
     color: var(--ink-secondary);
   }
 
+  .footer-facts {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 1.1rem;
+  }
+
+  .footer-facts > span + span {
+    padding-left: 1.1rem;
+    border-left: 1px solid currentColor;
+    border-left-color: color-mix(in srgb, currentColor 35%, transparent);
+  }
+
   .footer-bottom {
     padding-top: 1.35rem;
     border-top: 1px solid rgba(255, 255, 255, 0.22);
@@ -198,7 +210,25 @@
 
   @media (max-width: 600px) {
     .footer-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-brand-col {
+      grid-column: 1 / -1;
+    }
+
+    .footer-facts {
+      gap: 0.35rem 0.8rem;
+    }
+
+    .footer-bottom > .footer-facts:last-child {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-bottom > .footer-facts:last-child > span + span {
+      padding-left: 0;
+      border-left: none;
     }
   }
 </style>

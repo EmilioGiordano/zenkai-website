@@ -8,9 +8,12 @@ interface Props {
 }
 
 const {
-  title = 'Zenkai — Fast, Native Desktop Spreadsheet',
-  description = 'A fast, native, open-source desktop spreadsheet written in Rust + GPUI with IronCalc. Built for files too large or too messy for the usual tools.',
+  title = 'Zenkai: Fast, Native Spreadsheet for Large Excel and CSV Files',
+  description = 'Free, open-source desktop spreadsheet for large .xlsx, .csv and .tsv files. Data analysis, formulas, metrics and dashboards with the AI you already use. Built in Rust.',
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.jpg', Astro.site);
 ---
 
 <!doctype html>
@@ -21,6 +24,23 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#03667A" />
+
+    <!-- Social previews (WhatsApp, LinkedIn, X, Slack, Discord) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Zenkai" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Zenkai: a calm, native spreadsheet for files too large for the usual tools." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Zero-FOUC theme initialization -->
     <script is:inline>

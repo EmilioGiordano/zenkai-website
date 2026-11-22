@@ -8,7 +8,7 @@ import Footer from '../components/Footer.astro';
 import '../styles/v4.css';
 ---
 
-<BaseLayout title="Zenkai — Fast, Native Desktop Spreadsheet">
+<BaseLayout>
   <div class="v4-page v15-override">
     <header class="v4-header">
       <nav class="v4-nav-bar" aria-label="Primary">
@@ -24,7 +24,7 @@ import '../styles/v4.css';
         </a>
         <div class="v4-nav-links">
           <a href="#grid">Grid</a>
-          <a href="#providers">Providers</a>
+          <a href="#providers">AI</a>
           <a href="#download">Download</a>
         </div>
         <div class="v4-nav-actions">
@@ -192,7 +192,7 @@ import '../styles/v4.css';
   /* Hero Light: Cerulean-Teal Duotone Alpine Peaks */
   .v15-override .backdrop-light {
     background-color: #03667A !important;
-    background-image: url('/art/hero-day.jpg') !important;
+    background-image: url('/art/hero-day.webp') !important;
     background-position: center 48% !important;
     background-blend-mode: luminosity !important;
     filter: contrast(1.24) brightness(1.04) !important;
@@ -201,7 +201,7 @@ import '../styles/v4.css';
   /* Hero Dark: Julian Alps Starlight Milky Way */
   .v15-override .backdrop-dark {
     background-color: #060E12 !important;
-    background-image: url('/art/hero-night.jpg') !important;
+    background-image: url('/art/hero-night.webp') !important;
     background-position: center 36% !important;
     background-size: cover !important;
     filter: saturate(1.16) contrast(1.08) !important;
@@ -242,7 +242,7 @@ import '../styles/v4.css';
 
   .v15-closing-light {
     background-color: #03667A;
-    background-image: url('/art/hero-day.jpg');
+    background-image: url('/art/hero-day.webp');
     background-blend-mode: luminosity;
     filter: contrast(1.2) brightness(1.02);
     opacity: 1;
@@ -250,7 +250,7 @@ import '../styles/v4.css';
 
   .v15-closing-dark {
     background-color: #060E12;
-    background-image: url('/art/horizon-night.jpg');
+    background-image: url('/art/horizon-night.webp');
     background-position: center 46%;
     filter: saturate(1.15) contrast(1.06) brightness(0.86);
     opacity: 0;

@@ -1,15 +1,19 @@
-import { useState } from 'preact/hooks';
-
-type OsKey = 'windows' | 'linux' | 'macos';
-
-const RELEASES_URL = 'https://github.com/EmilioGiordano/Zenkai/releases';
-const REPO_URL = 'https://github.com/EmilioGiordano/Zenkai';
+import { useEffect, useState } from 'preact/hooks';
+import {
+  EMPTY_RELEASE,
+  REPO_URL,
+  downloadHref,
+  fetchLatestRelease,
+  type OsKey,
+  type ReleaseInfo,
+} from '../lib/release';
 
 interface OsOption {
   key: OsKey;
   label: string;
   badge?: string;
   ctaLabel: string;
+  fallbackLabel: string;
   requirement: string;
   note: string;
   commandLabel: string;
@@ -21,8 +25,9 @@ const OS_OPTIONS: OsOption[] = [
     key: 'windows',
     label: 'Windows',
     ctaLabel: 'Download Zenkai for Windows',
-    requirement: 'Windows 10 / Windows 11 · x64 · Primary Platform (Rust + GPUI)',
-    note: 'Unsigned early Windows build: SmartScreen may ask on first launch—click “More info” → “Run anyway”.',
+    fallbackLabel: 'Get Zenkai for Windows on GitHub',
+    requirement: 'Windows 10 and 11 (x64)',
+    note: 'Early unsigned build: if SmartScreen warns you on first launch, click More info, then Run anyway.',
     commandLabel: 'Or build from source (Rust)',
     command: 'git clone https://github.com/EmilioGiordano/Zenkai.git && cd Zenkai && cargo run --release',
   },
@@ -30,8 +35,9 @@ const OS_OPTIONS: OsOption[] = [
     key: 'linux',
     label: 'Linux',
     badge: 'experimental',
-    ctaLabel: 'View Linux Releases on GitHub',
-    requirement: 'Linux x64 · Experimental build · Native GPUI',
+    ctaLabel: 'Download Zenkai for Linux',
+    fallbackLabel: 'View Linux releases on GitHub',
+    requirement: 'Linux (x64), experimental build',
     note: 'Windows is the main target today; Linux builds are published as experimental releases on GitHub.',
     commandLabel: 'Build from source (Rust)',
     command: 'git clone https://github.com/EmilioGiordano/Zenkai.git && cd Zenkai && cargo run --release',
@@ -40,19 +46,29 @@ const OS_OPTIONS: OsOption[] = [
     key: 'macos',
     label: 'macOS',
     badge: 'Apple Silicon',
-    ctaLabel: 'View macOS Releases on GitHub',
-    requirement: 'macOS · Apple Silicon (arm64) · Experimental build',
+    ctaLabel: 'Download Zenkai for macOS',
+    fallbackLabel: 'View macOS releases on GitHub',
+    requirement: 'macOS on Apple Silicon (arm64), experimental build',
     note: 'Windows is the main target today; Apple Silicon builds are published as experimental previews.',
     commandLabel: 'Build from source (Rust)',
     command: 'git clone https://github.com/EmilioGiordano/Zenkai.git && cd Zenkai && cargo run --release',
   },
 ];
 
-export default function DownloadCard() {
+export default function DownloadCard({ initialRelease = EMPTY_RELEASE }: { initialRelease?: ReleaseInfo }) {
   const [os, setOs] = useState<OsKey>('windows');
   const [copied, setCopied] = useState(false);
+  const [release, setRelease] = useState<ReleaseInfo>(initialRelease);
+
+  // Refresh in the browser so a new release is picked up without redeploying the site.
+  useEffect(() => {
+    fetchLatestRelease().then((latest) => {
+      if (latest.tag) setRelease(latest);
+    });
+  }, []);
 
   const current = OS_OPTIONS.find((item) => item.key === os) ?? OS_OPTIONS[0];
+  const directUrl = release.assets[os];
 
   const handleCopy = async () => {
     try {
@@ -70,8 +86,9 @@ export default function DownloadCard() {
     <div class="download-card">
       <div class="download-card-top">
         <div class="download-version-row">
+          {release.tag && <span class="version-badge">{release.tag}</span>}
           <span class="version-badge">Apache-2.0</span>
-          <span class="license-note">Free &amp; open source · Local desktop spreadsheet</span>
+          <span class="license-note">Free &amp; open source</span>
         </div>
 
         <div class="layout-switcher" role="tablist" aria-label="Choose operating system">
@@ -88,21 +105,27 @@ export default function DownloadCard() {
               }}
             >
               {item.label}
-              {item.badge && <span class="os-soon-tag"> · {item.badge}</span>}
+              {item.badge && <span class="os-soon-tag">{item.badge}</span>}
             </button>
           ))}
         </div>
       </div>
 
       <div class="download-card-actions">
-        <a
-          href={RELEASES_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-primary"
-        >
-          {current.ctaLabel}
-        </a>
+        {directUrl ? (
+          <a href={downloadHref(release, os)} class="btn btn-primary" download>
+            {current.ctaLabel}
+          </a>
+        ) : (
+          <a
+            href={downloadHref(release, os)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+          >
+            {current.fallbackLabel}
+          </a>
+        )}
         <a
           href={REPO_URL}
           target="_blank"

@@ -1,9 +1,9 @@
-import { useState, useRef } from 'preact/hooks';
+import { useState, useRef, useEffect } from 'preact/hooks';
 
 const ROWS_VISIBLE = 9;
-const COLS_VISIBLE = 6;
+const COLS_DESKTOP = 6;
+const COLS_MOBILE = 3;
 const MAX_ROW = 1_048_576 - (ROWS_VISIBLE - 1);
-const MAX_COL = 16_384 - COLS_VISIBLE;
 
 const ACCOUNTS = [
   'Cash',
@@ -43,11 +43,21 @@ export default function VirtualGridDemo() {
   const [startCol, setStartCol] = useState(0);
   const [frameMs, setFrameMs] = useState('0.4');
   const lastStamp = useRef<number>(0);
+  const [colsVisible, setColsVisible] = useState(COLS_DESKTOP);
+  const maxCol = 16_384 - colsVisible;
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 600px)');
+    const sync = () => setColsVisible(mq.matches ? COLS_MOBILE : COLS_DESKTOP);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
 
   const updatePos = (nextR: number, nextC: number) => {
     const t0 = performance.now();
     setStartRow(Math.max(1, Math.min(MAX_ROW, nextR)));
-    setStartCol(Math.max(0, Math.min(MAX_COL, nextC)));
+    setStartCol(Math.max(0, Math.min(maxCol, nextC)));
     const dt = lastStamp.current ? Math.min(16.6, Math.max(0.2, performance.now() - t0)) : 0.4;
     lastStamp.current = t0;
     setFrameMs(dt.toFixed(1));
@@ -65,7 +75,7 @@ export default function VirtualGridDemo() {
     }
   };
 
-  const cols = Array.from({ length: COLS_VISIBLE }, (_, i) => startCol + i);
+  const cols = Array.from({ length: colsVisible }, (_, i) => startCol + i);
   const rows = Array.from({ length: ROWS_VISIBLE }, (_, i) => startRow + i);
   const anchorCol = colName(startCol);
 
@@ -76,13 +86,13 @@ export default function VirtualGridDemo() {
           <span class="hud-chip">
             Viewport <strong>{anchorCol}{startRow.toLocaleString('en-US')}</strong>
           </span>
-          <span class="hud-chip">
-            Drawn <strong>{ROWS_VISIBLE} × {COLS_VISIBLE}</strong>
+          <span class="hud-chip hud-secondary">
+            Drawn <strong>{ROWS_VISIBLE} × {colsVisible}</strong>
           </span>
           <span class="hud-chip">
             Virtual <strong>1,048,576 × 16,384</strong>
           </span>
-          <span class="hud-chip">
+          <span class="hud-chip hud-secondary">
             Render <strong>{frameMs} ms · 60 fps</strong>
           </span>
         </div>
@@ -105,7 +115,7 @@ export default function VirtualGridDemo() {
           <button
             class="seg-btn"
             type="button"
-            onClick={() => updatePos(MAX_ROW, MAX_COL)}
+            onClick={() => updatePos(MAX_ROW, maxCol)}
           >
             XFD1,048,576
           </button>
@@ -167,13 +177,13 @@ export default function VirtualGridDemo() {
         <input
           type="range"
           min={0}
-          max={MAX_COL}
+          max={maxCol}
           value={startCol}
           step={1}
           aria-label="Horizontal column scrubber (A to XFD)"
           onInput={(e) => updatePos(startRow, Number((e.target as HTMLInputElement).value))}
         />
-        <span>Wheel = rows · Shift + Wheel = columns</span>
+        <span class="forge-hint">Wheel = rows · Shift + Wheel = columns</span>
       </div>
     </div>
   );

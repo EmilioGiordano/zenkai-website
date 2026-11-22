@@ -177,4 +177,38 @@ import VirtualGridDemo from './VirtualGridDemo.tsx';
       grid-template-columns: 1fr;
     }
   }
+
+  @media (max-width: 600px) {
+    .forge-topbar {
+      padding: 0.7rem;
+    }
+
+    .forge-hud .hud-secondary,
+    .forge-hint {
+      display: none;
+    }
+
+    .forge-table {
+      font-size: 0.7rem;
+    }
+
+    .forge-table th,
+    .forge-table td {
+      padding: 0 6px;
+    }
+
+    .forge-table .f-rn {
+      width: 62px;
+      padding-right: 6px;
+    }
+
+    .forge-stage {
+      grid-template-columns: minmax(0, 1fr) 34px;
+    }
+
+    .forge-bottombar {
+      padding: 0.7rem;
+      gap: 0.5rem;
+    }
+  }
 </style>

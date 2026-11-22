@@ -205,7 +205,7 @@ export default function ZenkaiWindow() {
               <span>.00</span>
             </div>
             <span class="tb-sep" />
-            <div class="tb-group">
+            <div class="tb-group zk-mhide">
               <span>Click any Debit / Credit cell to edit live</span>
             </div>
           </div>
@@ -221,10 +221,10 @@ export default function ZenkaiWindow() {
               <table class="sheet-table">
                 <colgroup>
                   <col class="col-rn" />
-                  <col class="col-a" />
+                  <col class="col-a zk-mhide" />
                   <col class="col-b" />
-                  <col class="col-c" />
-                  <col class="col-num" />
+                  <col class="col-c zk-mhide" />
+                  <col class="col-num zk-mhide" />
                   <col class="col-num" />
                   <col class="col-num" />
                   <col class="col-num" />
@@ -232,10 +232,10 @@ export default function ZenkaiWindow() {
                 <thead>
                   <tr>
                     <th />
-                    <th>A</th>
+                    <th class="zk-mhide">A</th>
                     <th>B</th>
-                    <th>C</th>
-                    <th>D</th>
+                    <th class="zk-mhide">C</th>
+                    <th class="zk-mhide">D</th>
                     <th>E</th>
                     <th>F</th>
                     <th>G</th>
@@ -244,16 +244,19 @@ export default function ZenkaiWindow() {
                 <tbody>
                   <tr class="row-caption">
                     <td class="rn">2</td>
-                    <td colSpan={7}>
+                    <td colSpan={4} class="zk-monly">
+                      Closing balances. Edit Debits or Credits to recalculate.
+                    </td>
+                    <td colSpan={7} class="zk-mhide">
                       Closing balances from the general ledger. Debits and credits must agree (edit E or F cells to test live IronCalc recalc).
                     </td>
                   </tr>
                   <tr class="row-tbl-head">
                     <td class="rn">4</td>
-                    <td>Account</td>
+                    <td class="zk-mhide">Account</td>
                     <td>Account name</td>
-                    <td>Type</td>
-                    <td class="num">Opening</td>
+                    <td class="zk-mhide">Type</td>
+                    <td class="num zk-mhide">Opening</td>
                     <td class="num">Debits</td>
                     <td class="num">Credits</td>
                     <td class="num">Closing</td>
@@ -267,10 +270,10 @@ export default function ZenkaiWindow() {
                     return (
                       <tr key={r.account}>
                         <td class="rn">{r.rowNum}</td>
-                        <td class="mono">{r.account}</td>
+                        <td class="mono zk-mhide">{r.account}</td>
                         <td>{r.name}</td>
-                        <td>{r.type}</td>
-                        <td class="num">{r.opening === 0 ? '-' : fmtMoney(r.opening)}</td>
+                        <td class="zk-mhide">{r.type}</td>
+                        <td class="num zk-mhide">{r.opening === 0 ? '-' : fmtMoney(r.opening)}</td>
                         <td
                           class={`num is-editable ${selectedCell.ref === `E${r.rowNum}` ? 'cell-selected' : ''}`}
                           onClick={() => {
@@ -347,10 +350,12 @@ export default function ZenkaiWindow() {
                   })}
                   <tr class="row-total">
                     <td class="rn">13</td>
-                    <td>Total</td>
-                    <td />
-                    <td />
-                    <td class="num">-</td>
+                    <td class="zk-mhide">Total</td>
+                    <td>
+                      <span class="zk-monly">Total</span>
+                    </td>
+                    <td class="zk-mhide" />
+                    <td class="num zk-mhide">-</td>
                     <td
                       class="num"
                       onClick={() => setSelectedCell({ ref: 'E13', formula: '=SUM(E5:E12)' })}
@@ -372,10 +377,18 @@ export default function ZenkaiWindow() {
                   </tr>
                   <tr>
                     <td class="rn">14</td>
-                    <td colSpan={3}>
+                    <td colSpan={3} class="zk-mhide">
                       <strong>Check: debits minus credits</strong>
                     </td>
-                    <td colSpan={4}>
+                    <td class="zk-monly">
+                      <strong>Check</strong>
+                    </td>
+                    <td colSpan={4} class="zk-mhide">
+                      <span class={`badge-check ${isBalanced ? 'is-ok' : 'is-warn'}`}>
+                        {isBalanced ? 'Balanced' : `Out of balance (${fmtMoney(totalDebits - totalCredits)})`}
+                      </span>
+                    </td>
+                    <td colSpan={3} class="zk-monly">
                       <span class={`badge-check ${isBalanced ? 'is-ok' : 'is-warn'}`}>
                         {isBalanced ? 'Balanced' : `Out of balance (${fmtMoney(totalDebits - totalCredits)})`}
                       </span>
@@ -387,9 +400,9 @@ export default function ZenkaiWindow() {
               <table class="sheet-table">
                 <colgroup>
                   <col class="col-rn" />
-                  <col class="col-a" />
+                  <col class="col-a zk-mhide" />
                   <col class="col-b" />
-                  <col class="col-c" />
+                  <col class="col-c zk-mhide" />
                   <col class="col-num" />
                   <col class="col-num" />
                   <col class="col-num" />
@@ -397,9 +410,9 @@ export default function ZenkaiWindow() {
                 <thead>
                   <tr>
                     <th />
-                    <th>A</th>
+                    <th class="zk-mhide">A</th>
                     <th>B</th>
-                    <th>C</th>
+                    <th class="zk-mhide">C</th>
                     <th>D</th>
                     <th>E</th>
                     <th>F</th>
@@ -408,13 +421,14 @@ export default function ZenkaiWindow() {
                 <tbody>
                   <tr class="row-caption">
                     <td class="rn">2</td>
-                    <td colSpan={6}>Quarterly income statement summary (linked to general ledger).</td>
+                    <td colSpan={4} class="zk-monly">Quarterly income statement summary.</td>
+                    <td colSpan={6} class="zk-mhide">Quarterly income statement summary (linked to general ledger).</td>
                   </tr>
                   <tr class="row-tbl-head">
                     <td class="rn">4</td>
-                    <td>Code</td>
+                    <td class="zk-mhide">Code</td>
                     <td>Line item</td>
-                    <td>Group</td>
+                    <td class="zk-mhide">Group</td>
                     <td class="num">Q3 2026</td>
                     <td class="num">Q4 2026</td>
                     <td class="num">Variance</td>
@@ -422,9 +436,9 @@ export default function ZenkaiWindow() {
                   {INCOME_ROWS.map((item) => (
                     <tr key={item.code}>
                       <td class="rn">{item.rowNum}</td>
-                      <td class="mono">{item.code}</td>
+                      <td class="mono zk-mhide">{item.code}</td>
                       <td>{item.name}</td>
-                      <td>{item.category}</td>
+                      <td class="zk-mhide">{item.category}</td>
                       <td class="num">{fmtMoney(item.q3)}</td>
                       <td class="num">{fmtMoney(item.q4)}</td>
                       <td class="num">{fmtMoney(item.q4 - item.q3)}</td>
@@ -432,8 +446,9 @@ export default function ZenkaiWindow() {
                   ))}
                   <tr class="row-total">
                     <td class="rn">11</td>
-                    <td>Net</td>
-                    <td colSpan={2}>Operating income</td>
+                    <td class="zk-mhide">Net</td>
+                    <td colSpan={2} class="zk-mhide">Operating income</td>
+                    <td class="zk-monly">Operating income</td>
                     <td class="num">$691,550.00</td>
                     <td class="num">$786,712.38</td>
                     <td class="num">$95,162.38</td>
@@ -529,11 +544,11 @@ export default function ZenkaiWindow() {
             Opened in <strong>23 ms</strong>
           </span>
           <span>Sum: {fmtMoney(totalDebits)}</span>
-          <span>Count: {rows.length * 3}</span>
+          <span class="zk-mhide">Count: {rows.length * 3}</span>
         </div>
         <div class="status-group">
           <span class="status-pill">Agents can edit</span>
-          <span>150%</span>
+          <span class="zk-mhide">150%</span>
         </div>
       </div>
     </div>

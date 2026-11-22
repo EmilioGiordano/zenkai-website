@@ -1,65 +1,452 @@
 ---
 import { PROVIDERS, ProviderIconSvg } from './ProviderBadge';
+
+const bars = [38, 52, 46, 64, 58, 80, 100];
 ---
 
 <section id="providers" class="section-shell providers-section">
   <div class="container">
     <div class="section-header">
       <div class="section-heading-group">
-        <p class="section-kicker">02 · Bring your own agents</p>
-        <h2 class="section-title">Zenkai is not another <em>AI subscription</em>.</h2>
+        <p class="section-kicker">02 · AI Analysis</p>
+        <h2 class="section-title">Data analysis with the <em>AI you already use</em>.</h2>
         <p class="section-lead">
-          No extra AI billing, no proxy, no locked-in chat wrapper. Connect the agent accounts you
-          already run—or keep the panel closed. Every edit lands in the grid for approval first, and{' '}
-          <code>Ctrl+Z</code> undoes it cleanly.
+          Ask about your data in plain language. Every change waits for your approval, and{' '}
+          <code>Ctrl+Z</code> undoes it.
         </p>
       </div>
     </div>
 
-    <div class="providers-grid" role="list">
-      {
-        PROVIDERS.map((agent) => (
-          <article
-            class="provider-tile"
-            role="listitem"
-            style={`--brand-accent: ${agent.accent}; --brand-soft: ${agent.accentSoft}; --brand-border: ${agent.badgeBorder};`}
-          >
-            <div class="provider-brand-strip" aria-hidden="true" />
-            <div class="provider-tile-head">
+    <div class="caps-grid" role="list">
+      <article class="cap-card" role="listitem">
+        <div class="cap-fig fig-join" aria-hidden="true">
+          <div class="join-files">
+            <span class="file-chip"><i class="file-dot"></i>Sales.xlsx</span>
+            <span class="file-chip"><i class="file-dot"></i>Costs.csv</span>
+            <span class="file-chip"><i class="file-dot"></i>Budget 2026</span>
+          </div>
+          <svg class="join-lines" viewBox="0 0 44 88" preserveAspectRatio="none">
+            <path d="M0 12 C24 12 20 44 44 44" />
+            <path d="M0 44 L44 44" />
+            <path d="M0 76 C24 76 20 44 44 44" />
+          </svg>
+          <div class="join-result">
+            <span>Margin by region</span>
+            <strong>31.4%</strong>
+          </div>
+        </div>
+        <h3 class="cap-title">Cross-file analysis</h3>
+        <p class="cap-text">Connect sheets, CSVs and workbooks in a single question.</p>
+      </article>
+
+      <article class="cap-card" role="listitem">
+        <div class="cap-fig fig-review" aria-hidden="true">
+          <div class="mini-sheet">
+            <div class="mini-row"><span class="ref">B4</span><span>Revenue</span><span class="val">12,400</span></div>
+            <div class="mini-row is-flagged">
+              <span class="ref">B5</span><span>Costs</span>
+              <span class="val"><s>8,3O0</s><b>8,300</b></span>
+            </div>
+            <div class="mini-row"><span class="ref">B6</span><span>Margin</span><span class="val">4,100</span></div>
+          </div>
+          <div class="review-foot">
+            <span>1 fix proposed</span>
+            <span class="review-pill">Approve</span>
+          </div>
+        </div>
+        <h3 class="cap-title">Summaries, reviews and fixes</h3>
+        <p class="cap-text">Catch errors and inconsistencies, then get a clear summary.</p>
+      </article>
+
+      <article class="cap-card" role="listitem">
+        <div class="cap-fig fig-formula" aria-hidden="true">
+          <div class="fx-bar is-old"><span class="fx">fx</span><code>=B2+B3+B4+B5+B6+B7</code></div>
+          <svg class="fx-arrow" viewBox="0 0 16 16"><path d="M8 2v11M3.5 8.5 8 13l4.5-4.5" /></svg>
+          <div class="fx-bar is-new"><span class="fx">fx</span><code>=SUM(B2:B7)</code></div>
+        </div>
+        <h3 class="cap-title">AI formulas</h3>
+        <p class="cap-text">Write, explain and optimize formulas across the workbook.</p>
+      </article>
+
+      <article class="cap-card" role="listitem">
+        <div class="cap-fig fig-dash" aria-hidden="true">
+          <div class="kpi">
+            <span>Revenue</span>
+            <strong>$1.26M</strong>
+            <em>+9.1%</em>
+          </div>
+          <div class="bars">
+            {bars.map((h, i) => (
+              <span class={`bar${i === bars.length - 1 ? ' is-last' : ''}`} style={`--h:${h}%; --i:${i};`} />
+            ))}
+          </div>
+        </div>
+        <h3 class="cap-title">Metrics, charts and dashboards</h3>
+        <p class="cap-text">Turn raw tables into KPIs, charts and reports.</p>
+      </article>
+    </div>
+
+    <div class="providers-block">
+      <p class="providers-label">Works with the account you already have</p>
+      <div class="providers-grid" role="list">
+        {
+          PROVIDERS.map((agent) => (
+            <article
+              class="provider-tile"
+              role="listitem"
+              style={`--brand-accent: ${agent.accent}; --brand-soft: ${agent.accentSoft}; --brand-border: ${agent.badgeBorder};`}
+            >
+              <div class="provider-brand-strip" aria-hidden="true" />
               <div class="provider-emblem" aria-hidden="true">
-                <ProviderIconSvg brand={agent.id} size={44} />
+                <ProviderIconSvg brand={agent.id} size={36} />
               </div>
               <div class="provider-title-wrap">
                 <span class="provider-vendor">{agent.vendor}</span>
                 <h3 class="provider-name">{agent.name}</h3>
               </div>
-            </div>
-
-            <p class="provider-note">{agent.note}</p>
-
-            <div class="provider-cli-bar">
-              <span class="provider-cli-prompt" aria-hidden="true">$</span>
-              <code class="provider-cmd">{agent.cmd}</code>
-              <span class="provider-tag-pill">{agent.tag}</span>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-
-    <div class="providers-manifesto">
-      <span>100% optional built-in panel</span>
-      <span class="manifesto-dot" aria-hidden="true">·</span>
-      <span>Your accounts &amp; keys stay untouched</span>
-      <span class="manifesto-dot" aria-hidden="true">·</span>
-      <span>Ask before changes · Ctrl+Z undo</span>
-      <span class="manifesto-dot" aria-hidden="true">·</span>
-      <span>Nothing saved without you</span>
+              <code class="provider-cmd"><span aria-hidden="true">$</span> {agent.cmd}</code>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
 
 <style is:global>
+  .providers-section {
+    --cap-warn: #C2412D;
+  }
+
+  [data-theme='dark'] .providers-section {
+    --cap-warn: #F27C66;
+  }
+
+  /* ---------- Capability cards ---------- */
+  .caps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.05rem;
+  }
+
+  .cap-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition:
+      border-color 0.22s ease,
+      transform 0.2s ease,
+      box-shadow 0.22s ease;
+  }
+
+  .cap-card:hover {
+    border-color: var(--hairline-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .cap-fig {
+    height: 136px;
+    padding: 1rem;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--hairline);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--ink-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cap-title {
+    margin: 1.05rem 1.15rem 0.3rem;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink-primary);
+  }
+
+  .cap-text {
+    margin: 0 1.15rem 1.15rem;
+    font-size: 0.84rem;
+    line-height: 1.55;
+    color: var(--ink-secondary);
+  }
+
+  /* Shared mini spreadsheet surfaces */
+  .file-chip,
+  .join-result,
+  .mini-sheet,
+  .fx-bar,
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--hairline-strong);
+    border-radius: var(--radius-sm);
+  }
+
+  /* Cross-file analysis */
+  .join-files {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .file-chip {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+    white-space: nowrap;
+  }
+
+  .file-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    background: var(--accent-primary);
+    opacity: 0.7;
+  }
+
+  .join-lines {
+    width: 34px;
+    height: 88px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: var(--accent-primary);
+    stroke-width: 1.4;
+    stroke-dasharray: 3 3;
+  }
+
+  .join-lines path {
+    vector-effect: non-scaling-stroke;
+  }
+
+  .cap-card:hover .join-lines path {
+    animation: cap-flow 0.9s linear infinite;
+  }
+
+  @keyframes cap-flow {
+    to {
+      stroke-dashoffset: -12;
+    }
+  }
+
+  .join-result {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 7px 9px;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-primary-soft);
+  }
+
+  .join-result strong {
+    font-size: 1rem;
+    color: var(--ink-primary);
+  }
+
+  /* Reviews and fixes */
+  .fig-review {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .mini-sheet {
+    overflow: hidden;
+  }
+
+  .mini-row {
+    display: grid;
+    grid-template-columns: 24px 1fr auto;
+    gap: 8px;
+    padding: 3px 8px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .mini-row:first-child {
+    border-top: none;
+  }
+
+  .mini-row .ref {
+    color: var(--ink-faint);
+  }
+
+  .mini-row .val {
+    color: var(--ink-primary);
+    display: flex;
+    gap: 6px;
+  }
+
+  .mini-row.is-flagged {
+    background: color-mix(in srgb, var(--cap-warn) 9%, transparent);
+    box-shadow: inset 2px 0 0 var(--cap-warn);
+  }
+
+  .mini-row s {
+    color: var(--cap-warn);
+    transition: opacity 0.3s ease;
+  }
+
+  .mini-row b {
+    font-weight: 600;
+    color: var(--accent-primary);
+  }
+
+  .cap-card:hover .mini-row s {
+    opacity: 0.35;
+  }
+
+  .review-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--ink-muted);
+  }
+
+  .review-pill {
+    padding: 2px 8px;
+    border-radius: var(--radius-xs);
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    font-weight: 600;
+  }
+
+  /* AI formulas */
+  .fig-formula {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .fx-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .fx-bar .fx {
+    font-style: italic;
+    color: var(--ink-faint);
+    padding-right: 8px;
+    border-right: 1px solid var(--hairline);
+  }
+
+  .fx-bar code {
+    font-family: inherit;
+    font-size: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .fx-bar.is-old code {
+    color: var(--ink-muted);
+    text-decoration: line-through;
+    text-decoration-color: color-mix(in srgb, var(--ink-muted) 60%, transparent);
+  }
+
+  .fx-bar.is-new {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-primary-soft);
+  }
+
+  .fx-bar.is-new code {
+    color: var(--ink-primary);
+    font-weight: 600;
+  }
+
+  .fx-arrow {
+    width: 14px;
+    height: 14px;
+    align-self: center;
+    fill: none;
+    stroke: var(--accent-primary);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.25s ease;
+  }
+
+  .cap-card:hover .fx-arrow {
+    transform: translateY(2px);
+  }
+
+  /* Metrics and dashboards */
+  .fig-dash {
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .kpi {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    padding: 8px 10px;
+    flex-shrink: 0;
+  }
+
+  .kpi strong {
+    font-size: 1rem;
+    color: var(--ink-primary);
+  }
+
+  .kpi em {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--accent-primary);
+  }
+
+  .bars {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    padding-bottom: 1px;
+    border-bottom: 1px solid var(--hairline-strong);
+  }
+
+  .bar {
+    flex: 1;
+    height: var(--h);
+    background: color-mix(in srgb, var(--accent-primary) 30%, transparent);
+    border-radius: 1px 1px 0 0;
+    transform-origin: bottom;
+    transform: scaleY(0.84);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--i) * 35ms);
+  }
+
+  .bar.is-last {
+    background: var(--accent-primary);
+  }
+
+  .cap-card:hover .bar {
+    transform: scaleY(1);
+  }
+
+  /* ---------- Providers ---------- */
+  .providers-block {
+    margin-top: 2.4rem;
+  }
+
+  .providers-label {
+    margin-bottom: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+  }
+
   .providers-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -69,13 +456,13 @@ import { PROVIDERS, ProviderIconSvg } from './ProviderBadge';
   .provider-tile {
     position: relative;
     overflow: hidden;
-    padding: 1.35rem 1.25rem 1.2rem;
+    padding: 1rem 1.05rem;
     background: var(--surface);
     border: 1px solid var(--hairline);
     border-radius: var(--radius-md);
     display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
+    align-items: center;
+    gap: 0.75rem;
     transition:
       border-color 0.22s ease,
       transform 0.2s ease,
@@ -103,15 +490,9 @@ import { PROVIDERS, ProviderIconSvg } from './ProviderBadge';
     opacity: 1;
   }
 
-  .provider-tile-head {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-  }
-
   .provider-emblem {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-sm);
     overflow: hidden;
     flex-shrink: 0;
@@ -127,13 +508,14 @@ import { PROVIDERS, ProviderIconSvg } from './ProviderBadge';
   .provider-title-wrap {
     display: flex;
     flex-direction: column;
-    gap: 0.08rem;
+    gap: 0.05rem;
     min-width: 0;
+    flex: 1;
   }
 
   .provider-vendor {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--brand-accent);
@@ -142,79 +524,37 @@ import { PROVIDERS, ProviderIconSvg } from './ProviderBadge';
 
   .provider-name {
     font-family: var(--font-serif);
-    font-size: 1.28rem;
+    font-size: 1.12rem;
     font-weight: 500;
     color: var(--ink-primary);
     line-height: 1.18;
   }
 
-  .provider-note {
-    font-size: 0.86rem;
-    color: var(--ink-secondary);
-    line-height: 1.62;
-    flex: 1;
-  }
-
-  .provider-cli-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.45rem 0.65rem;
-    border-radius: var(--radius-sm);
+  .provider-cmd {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.45rem;
+    border-radius: var(--radius-xs);
     background: var(--bg-subtle);
     border: 1px solid var(--hairline);
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
+    color: var(--ink-secondary);
+    white-space: nowrap;
   }
 
-  .provider-cli-prompt {
-    color: var(--brand-accent);
-    font-weight: 600;
-    user-select: none;
-  }
-
-  .provider-cmd {
-    color: var(--ink-primary);
-    font-weight: 500;
-    flex: 1;
-  }
-
-  .provider-tag-pill {
-    font-size: 0.61rem;
-    letter-spacing: 0.07em;
-    padding: 0.1rem 0.36rem;
-    border-radius: var(--radius-xs);
-    background: var(--brand-soft);
+  .provider-cmd span {
     color: var(--brand-accent);
     font-weight: 600;
   }
 
-  .providers-manifesto {
-    margin-top: 2rem;
-    padding-top: 1.3rem;
-    border-top: 1px solid var(--hairline);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0.85rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--ink-muted);
-    letter-spacing: 0.02em;
-  }
-
-  .manifesto-dot {
-    color: var(--ink-faint);
-  }
-
-  @media (max-width: 1024px) {
+  @media (max-width: 1100px) {
+    .caps-grid,
     .providers-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (max-width: 600px) {
+    .caps-grid,
     .providers-grid {
       grid-template-columns: 1fr;
     }
