@@ -45,24 +45,26 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
               </linearGradient>
             </defs>
             <g class="flow-base" stroke="url(#flow-base-in)">
-              <path d="M1 13 C34 13 30 25 63 25" />
+              <path d="M1 13 C38 13 28 47 63 47" />
               <path d="M1 47 H63" />
-              <path d="M1 81 C34 81 30 69 63 69" />
+              <path d="M1 81 C38 81 28 47 63 47" />
             </g>
             <g class="flow-comets">
-              <circle r="2.4"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite" path="M1 13 C34 13 30 25 63 25" /></circle>
+              <circle r="2.4"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite" path="M1 13 C38 13 28 47 63 47" /></circle>
               <circle r="2.4"><animateMotion dur="2.4s" begin="-0.8s" repeatCount="indefinite" path="M1 47 H63" /></circle>
-              <circle r="2.4"><animateMotion dur="2.4s" begin="-1.6s" repeatCount="indefinite" path="M1 81 C34 81 30 69 63 69" /></circle>
+              <circle r="2.4"><animateMotion dur="2.4s" begin="-1.6s" repeatCount="indefinite" path="M1 81 C38 81 28 47 63 47" /></circle>
             </g>
             <g class="flow-ports">
               <circle cx="1" cy="13" r="3.2" /><circle cx="1" cy="47" r="3.2" /><circle cx="1" cy="81" r="3.2" />
-              <circle cx="63" cy="25" r="3.2" /><circle cx="63" cy="47" r="3.2" /><circle cx="63" cy="69" r="3.2" />
+              <circle cx="63" cy="47" r="3.2" />
             </g>
           </svg>
           <div class="ai-core">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 2.5 13.9 10.1 21.5 12 13.9 13.9 12 21.5 10.1 13.9 2.5 12 10.1 10.1Z" />
-            </svg>
+            <div class="ai-orb">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2.5 13.9 10.1 21.5 12 13.9 13.9 12 21.5 10.1 13.9 2.5 12 10.1 10.1Z" />
+              </svg>
+            </div>
             <span>{d.report.aiLabel}</span>
           </div>
           <svg class="flow flow-out" viewBox="0 0 48 94" aria-hidden="true">
@@ -240,7 +242,16 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
   }
 
   [data-theme='dark'] .providers-section {
-    --cap-warn: #F27C66;
+    --cap-warn: #E58A78;
+  }
+
+  /* In dark mode the page accent (#22D3EE) works as a highlight on the hero photo,
+     but repeated across every mockup it reads as neon. The cards use a muted teal. */
+  [data-theme='dark'] .providers-section .caps-grid {
+    --accent-primary: #6BB3C0;
+    --accent-primary-hover: #86C4CF;
+    --accent-primary-soft: rgba(107, 179, 192, 0.12);
+    --btn-bg: #6BB3C0;
   }
 
   /* ---------- Capability cards ---------- */
@@ -386,52 +397,85 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     filter: drop-shadow(0 0 3px var(--accent-primary));
   }
 
+  /* AI node: a round processor with a scanning arc around it; the label sits below. */
   .ai-core {
     position: relative;
-    width: 46px;
+    width: 50px;
     height: 94px;
     flex-shrink: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 7px;
-    background: var(--surface);
-    border: 1px solid var(--accent-primary);
-    border-radius: var(--radius-sm);
     color: var(--accent-primary);
-    box-shadow: 0 0 0 3px var(--accent-primary-soft);
-    animation: core-think 3.6s ease-in-out infinite;
   }
 
-  .ai-core svg {
-    width: 16px;
-    height: 16px;
+  .ai-orb {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 50%, var(--accent-primary-soft), transparent 70%),
+      var(--surface);
+    border: 1px solid var(--hairline-strong);
+  }
+
+  /* Scanning arc */
+  .ai-orb::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0 62%, var(--accent-primary) 100%);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+    animation: orb-scan 2.4s linear infinite;
+  }
+
+  /* Faint static orbit */
+  .ai-orb::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px dashed color-mix(in srgb, var(--accent-primary) 30%, transparent);
+  }
+
+  .ai-orb svg {
+    width: 17px;
+    height: 17px;
     fill: currentColor;
+    animation: orb-pulse 2.4s ease-in-out infinite;
   }
 
   .ai-core span {
     position: absolute;
-    bottom: 10px;
+    top: calc(50% + 30px);
     left: 0;
     right: 0;
     text-align: center;
-    font-size: 0.66rem;
+    font-size: 0.62rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
   }
 
-  @keyframes core-think {
-    0%,
-    28%,
-    62%,
-    100% {
-      box-shadow: 0 0 0 3px var(--accent-primary-soft);
+  @keyframes orb-scan {
+    to {
+      transform: rotate(360deg);
     }
-    42% {
-      box-shadow:
-        0 0 0 3px var(--accent-primary-soft),
-        0 0 18px 2px color-mix(in srgb, var(--accent-primary) 45%, transparent);
+  }
+
+  @keyframes orb-pulse {
+    0%,
+    100% {
+      transform: scale(0.88);
+      opacity: 0.75;
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 1;
     }
   }
 
@@ -921,7 +965,8 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
       display: none;
     }
 
-    .ai-core {
+    .ai-orb::before,
+    .ai-orb svg {
       animation: none;
     }
   }
@@ -1081,9 +1126,18 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     .ai-core {
       width: auto;
       height: auto;
-      flex-direction: row;
       align-self: center;
-      padding: 4px 10px;
+      gap: 8px;
+    }
+
+    .ai-orb {
+      width: 28px;
+      height: 28px;
+    }
+
+    .ai-orb svg {
+      width: 12px;
+      height: 12px;
     }
 
     .ai-core span {
