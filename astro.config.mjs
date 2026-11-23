@@ -22,7 +22,7 @@ const localized404 = {
 };
 
 export default defineConfig({
-  // Public URL, used for canonical and social preview links. Update when a custom domain is set.
-  site: 'https://zenkai-website-sandy.vercel.app',
+  // Public URL, used for canonical, hreflang and social preview links.
+  site: 'https://getzenkai.com',
   integrations: [preact(), localized404],
 });
