@@ -102,7 +102,7 @@ export default function ZenkaiWindow({ lang = defaultLang }: { lang?: Lang }) {
   };
 
   const statusLabel =
-    agentStatus === 'pending' ? w.oneCell : agentStatus === 'approved' ? w.approved : w.discarded;
+    agentStatus === 'pending' ? '' : agentStatus === 'approved' ? w.approved : w.discarded;
 
   const renderEditableCell = (r: LedgerRow, idx: number, field: 'debits' | 'credits', col: 'E' | 'F') => {
     const isEditing = editing?.idx === idx && editing.field === field;
@@ -436,7 +436,7 @@ export default function ZenkaiWindow({ lang = defaultLang }: { lang?: Lang }) {
             <div class="agent-proposal">
               <div class="prop-kicker">
                 <span>{w.proposedEdit}</span>
-                <span>{statusLabel}</span>
+                {statusLabel && <span>{statusLabel}</span>}
               </div>
               <div class="prop-diff">G11: =D11+E11-F11 → {fmtMoney(220467.52)}</div>
               {agentStatus === 'pending' ? (
