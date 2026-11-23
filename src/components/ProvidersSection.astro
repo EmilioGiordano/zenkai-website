@@ -9,6 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 const d = t(lang).ai;
 const bars = [38, 52, 46, 64, 58, 80, 100];
+const spark = [42, 55, 48, 62, 58, 74, 88];
 ---
 
 <section id="providers" class="section-shell providers-section">
@@ -22,34 +23,54 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
     </div>
 
     <div class="caps-grid" role="list">
-      <article class="cap-card" role="listitem">
-        <div class="cap-fig fig-join" aria-hidden="true">
+      <article class="cap-card is-wide" role="listitem">
+        <div class="cap-fig fig-report" aria-hidden="true">
           <div class="join-files">
-            {d.join.files.map((file) => <span class="file-chip"><i class="file-dot"></i>{file}</span>)}
+            {d.report.files.map((file) => <span class="file-chip"><i class="file-dot"></i>{file}</span>)}
           </div>
           <svg class="join-lines" viewBox="0 0 44 88" preserveAspectRatio="none">
             <path d="M0 12 C24 12 20 44 44 44" />
             <path d="M0 44 L44 44" />
             <path d="M0 76 C24 76 20 44 44 44" />
           </svg>
-          <div class="join-result">
-            <span>{d.join.result}</span>
-            <strong>{d.join.value}</strong>
+          <div class="rep-doc">
+            <div class="rep-head">
+              <strong>{d.report.heading}</strong>
+              <span>{d.report.meta}</span>
+            </div>
+            {
+              d.report.rows.map((row, i) => (
+                <div class={`rep-row is-${row.kind}`} style={`--i:${i};`}>
+                  <i class="rep-icon">{row.kind === 'up' ? '▲' : row.kind === 'down' ? '▼' : '!'}</i>
+                  <span>{row.label}</span>
+                  <b>{row.value}</b>
+                </div>
+              ))
+            }
+            <div class="rep-spark">
+              {spark.map((h, i) => <span style={`--h:${h}%; --i:${i};`} />)}
+            </div>
           </div>
         </div>
-        <h3 class="cap-title">{d.join.title}</h3>
-        <p class="cap-text">{d.join.text}</p>
+        <h3 class="cap-title">{d.report.title}</h3>
+        <p class="cap-text">{d.report.text}</p>
       </article>
 
       <article class="cap-card" role="listitem">
         <div class="cap-fig fig-review" aria-hidden="true">
           <div class="mini-sheet">
-            <div class="mini-row"><span class="ref">B4</span><span>{d.review.revenue}</span><span class="val">{d.review.v1}</span></div>
-            <div class="mini-row is-flagged">
-              <span class="ref">B5</span><span>{d.review.costs}</span>
-              <span class="val"><s>{d.review.bad}</s><b>{d.review.good}</b></span>
-            </div>
-            <div class="mini-row"><span class="ref">B6</span><span>{d.review.margin}</span><span class="val">{d.review.v3}</span></div>
+            {
+              d.review.issues.map((issue) => (
+                <div class="mini-row is-flagged">
+                  <span class="ref">{issue.ref}</span>
+                  <span class="val">
+                    {issue.old && <s>{issue.old}</s>}
+                    <b class={issue.value.startsWith('#') ? 'is-error' : ''}>{issue.value}</b>
+                  </span>
+                  <span class="tag">{issue.tag}</span>
+                </div>
+              ))
+            }
           </div>
           <div class="review-foot">
             <span>{d.review.fixes}</span>
@@ -61,21 +82,17 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
       </article>
 
       <article class="cap-card" role="listitem">
-        <div class="cap-fig fig-formula" aria-hidden="true">
-          <div class="fx-bar is-old"><span class="fx">fx</span><code>=B2+B3+B4+B5+B6+B7</code></div>
-          <svg class="fx-arrow" viewBox="0 0 16 16"><path d="M8 2v11M3.5 8.5 8 13l4.5-4.5" /></svg>
-          <div class="fx-bar is-new"><span class="fx">fx</span><code>=SUM(B2:B7)</code></div>
-        </div>
-        <h3 class="cap-title">{d.formula.title}</h3>
-        <p class="cap-text">{d.formula.text}</p>
-      </article>
-
-      <article class="cap-card" role="listitem">
         <div class="cap-fig fig-dash" aria-hidden="true">
-          <div class="kpi">
-            <span>{d.dash.label}</span>
-            <strong>{d.dash.value}</strong>
-            <em>{d.dash.delta}</em>
+          <div class="kpis">
+            {
+              d.dash.kpis.map((kpi) => (
+                <div class="kpi">
+                  <span>{kpi.label}</span>
+                  <strong>{kpi.value}</strong>
+                  <em>{kpi.delta}</em>
+                </div>
+              ))
+            }
           </div>
           <div class="bars">
             {bars.map((h, i) => (
@@ -85,6 +102,25 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
         </div>
         <h3 class="cap-title">{d.dash.title}</h3>
         <p class="cap-text">{d.dash.text}</p>
+      </article>
+
+      <article class="cap-card is-wide" role="listitem">
+        <div class="cap-fig fig-formula" aria-hidden="true">
+          <div class="fx-block is-old">
+            <span class="fx-label">{d.formula.beforeLabel}</span>
+            <div class="fx-bar"><span class="fx">fx</span><code>{d.formula.before}</code></div>
+          </div>
+          <svg class="fx-arrow" viewBox="0 0 16 16"><path d="M8 2v11M3.5 8.5 8 13l4.5-4.5" /></svg>
+          <div class="fx-block is-new">
+            <span class="fx-label">{d.formula.afterLabel}</span>
+            <div class="fx-bar"><span class="fx">fx</span><code>{d.formula.after}</code></div>
+          </div>
+          <div class="fx-checks">
+            {d.formula.checks.map((check) => <span class="fx-check">{check}</span>)}
+          </div>
+        </div>
+        <h3 class="cap-title">{d.formula.title}</h3>
+        <p class="cap-text">{d.formula.text}</p>
       </article>
     </div>
 
@@ -125,10 +161,15 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
   }
 
   /* ---------- Capability cards ---------- */
+  /* Bento: the two heaviest capabilities (reports, formulas) take two columns. */
   .caps-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.05rem;
+  }
+
+  .cap-card.is-wide {
+    grid-column: span 2;
   }
 
   .cap-card {
@@ -151,8 +192,8 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
   }
 
   .cap-fig {
-    height: 136px;
-    padding: 1rem;
+    height: 196px;
+    padding: 1rem 1.15rem;
     background: var(--bg-subtle);
     border-bottom: 1px solid var(--hairline);
     font-family: var(--font-mono);
@@ -181,7 +222,7 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
 
   /* Shared mini spreadsheet surfaces */
   .file-chip,
-  .join-result,
+  .rep-doc,
   .mini-sheet,
   .fx-bar,
   .kpi {
@@ -190,7 +231,7 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
     border-radius: var(--radius-sm);
   }
 
-  /* Cross-file analysis */
+  /* Cross-file report */
   .join-files {
     display: flex;
     flex-direction: column;
@@ -198,11 +239,11 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
   }
 
   .file-chip {
-    height: 24px;
+    height: 26px;
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 0 8px;
+    padding: 0 9px;
     white-space: nowrap;
   }
 
@@ -215,8 +256,8 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
   }
 
   .join-lines {
-    width: 34px;
-    height: 88px;
+    width: 48px;
+    height: 96px;
     flex-shrink: 0;
     fill: none;
     stroke: var(--accent-primary);
@@ -238,25 +279,113 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
     }
   }
 
-  .join-result {
+  .rep-doc {
+    flex: 1;
+    max-width: 340px;
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    padding: 7px 9px;
+    gap: 5px;
+    padding: 9px 11px 8px;
     border-color: var(--accent-primary);
     box-shadow: 0 0 0 3px var(--accent-primary-soft);
   }
 
-  .join-result strong {
-    font-size: 1rem;
+  .rep-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    margin-bottom: 1px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .rep-head strong {
+    font-size: 0.74rem;
     color: var(--ink-primary);
+    letter-spacing: 0.02em;
+  }
+
+  .rep-head span {
+    color: var(--ink-faint);
+  }
+
+  .rep-row {
+    display: grid;
+    grid-template-columns: 14px 1fr auto;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rep-row b {
+    font-weight: 600;
+    color: var(--ink-primary);
+  }
+
+  .rep-icon {
+    width: 14px;
+    height: 14px;
+    display: grid;
+    place-items: center;
+    font-style: normal;
+    font-size: 0.5rem;
+    font-weight: 700;
+    border-radius: 2px;
+    color: var(--accent-primary);
+    background: var(--accent-primary-soft);
+  }
+
+  .rep-row.is-down .rep-icon,
+  .rep-row.is-warn .rep-icon {
+    color: var(--cap-warn);
+    background: color-mix(in srgb, var(--cap-warn) 14%, transparent);
+  }
+
+  .rep-row.is-up b {
+    color: var(--accent-primary);
+  }
+
+  .rep-row.is-down b,
+  .rep-row.is-warn b {
+    color: var(--cap-warn);
+  }
+
+  .rep-spark {
+    height: 18px;
+    margin-top: 2px;
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+  }
+
+  .rep-spark span {
+    flex: 1;
+    height: var(--h);
+    border-radius: 1px 1px 0 0;
+    background: color-mix(in srgb, var(--accent-primary) 28%, transparent);
+  }
+
+  .rep-spark span:last-child {
+    background: var(--accent-primary);
+  }
+
+  /* Findings get "written" again each time the card is hovered. */
+  .cap-card:hover .rep-row {
+    animation: rep-in 0.45s ease both;
+    animation-delay: calc(var(--i) * 140ms);
+  }
+
+  @keyframes rep-in {
+    from {
+      opacity: 0;
+      transform: translateX(-4px);
+    }
   }
 
   /* Reviews and fixes */
   .fig-review {
     flex-direction: column;
     align-items: stretch;
-    gap: 6px;
+    gap: 8px;
   }
 
   .mini-sheet {
@@ -265,9 +394,10 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
 
   .mini-row {
     display: grid;
-    grid-template-columns: 24px 1fr auto;
+    grid-template-columns: 26px 1fr auto;
+    align-items: center;
     gap: 8px;
-    padding: 3px 8px;
+    padding: 5px 8px;
     border-top: 1px solid var(--hairline);
   }
 
@@ -283,10 +413,11 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
     color: var(--ink-primary);
     display: flex;
     gap: 6px;
+    white-space: nowrap;
   }
 
   .mini-row.is-flagged {
-    background: color-mix(in srgb, var(--cap-warn) 9%, transparent);
+    background: color-mix(in srgb, var(--cap-warn) 7%, transparent);
     box-shadow: inset 2px 0 0 var(--cap-warn);
   }
 
@@ -300,8 +431,27 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
     color: var(--accent-primary);
   }
 
+  .mini-row b.is-error {
+    color: var(--cap-warn);
+  }
+
+  .mini-row .tag {
+    padding: 1px 6px;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--hairline-strong);
+    color: var(--ink-muted);
+    font-size: 0.6rem;
+    white-space: nowrap;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
   .cap-card:hover .mini-row s {
     opacity: 0.35;
+  }
+
+  .cap-card:hover .mini-row .tag {
+    color: var(--cap-warn);
+    border-color: color-mix(in srgb, var(--cap-warn) 45%, transparent);
   }
 
   .review-foot {
@@ -323,16 +473,35 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
   .fig-formula {
     flex-direction: column;
     align-items: stretch;
-    gap: 6px;
+    gap: 5px;
+  }
+
+  .fx-block {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    align-items: start;
+    gap: 10px;
+  }
+
+  .fx-label {
+    padding-top: 7px;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .fx-block.is-new .fx-label {
+    color: var(--accent-primary);
+    font-weight: 600;
   }
 
   .fx-bar {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     padding: 6px 8px;
-    white-space: nowrap;
-    overflow: hidden;
+    min-width: 0;
   }
 
   .fx-bar .fx {
@@ -340,28 +509,35 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
     color: var(--ink-faint);
     padding-right: 8px;
     border-right: 1px solid var(--hairline);
+    flex-shrink: 0;
   }
 
   .fx-bar code {
     font-family: inherit;
     font-size: inherit;
+    line-height: 1.5;
     background: none;
     border: none;
     padding: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
-  .fx-bar.is-old code {
+  /* The legacy formula is long on purpose: show two lines, then fade out. */
+  .fx-block.is-old code {
     color: var(--ink-muted);
-    text-decoration: line-through;
-    text-decoration-color: color-mix(in srgb, var(--ink-muted) 60%, transparent);
+    max-height: 3em;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent);
+    mask-image: linear-gradient(180deg, #000 55%, transparent);
   }
 
-  .fx-bar.is-new {
+  .fx-block.is-new .fx-bar {
     border-color: var(--accent-primary);
     box-shadow: 0 0 0 3px var(--accent-primary-soft);
   }
 
-  .fx-bar.is-new code {
+  .fx-block.is-new code {
     color: var(--ink-primary);
     font-weight: 600;
   }
@@ -369,7 +545,7 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
   .fx-arrow {
     width: 14px;
     height: 14px;
-    align-self: center;
+    margin-left: 62px;
     fill: none;
     stroke: var(--accent-primary);
     stroke-width: 1.6;
@@ -382,23 +558,55 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
     transform: translateY(2px);
   }
 
+  .fx-checks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 5px;
+    padding-left: 62px;
+  }
+
+  .fx-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 7px;
+    border-radius: var(--radius-xs);
+    background: var(--accent-primary-soft);
+    color: var(--accent-primary);
+    font-weight: 600;
+    font-size: 0.62rem;
+    white-space: nowrap;
+  }
+
+  .fx-check::before {
+    content: '\2713';
+  }
+
   /* Metrics and dashboards */
   .fig-dash {
     gap: 12px;
     align-items: stretch;
   }
 
-  .kpi {
+  .kpis {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 2px;
-    padding: 8px 10px;
+    gap: 8px;
     flex-shrink: 0;
   }
 
+  .kpi {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1px;
+    padding: 6px 10px;
+  }
+
   .kpi strong {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--ink-primary);
   }
 
@@ -434,6 +642,13 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
 
   .cap-card:hover .bar {
     transform: scaleY(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cap-card:hover .rep-row,
+    .cap-card:hover .join-lines path {
+      animation: none;
+    }
   }
 
   /* ---------- Providers ---------- */
@@ -559,6 +774,58 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
     .caps-grid,
     .providers-grid {
       grid-template-columns: 1fr;
+    }
+
+    .cap-card.is-wide {
+      grid-column: auto;
+    }
+
+    .cap-fig {
+      height: auto;
+      min-height: 196px;
+    }
+
+    /* Report: files on one row above the report, no connector lines. */
+    .fig-report {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .fig-report .join-files {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .fig-report .join-lines {
+      display: none;
+    }
+
+    .rep-doc {
+      max-width: none;
+    }
+
+    .fx-block {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .fx-label {
+      padding-top: 0;
+    }
+
+    .fx-arrow {
+      margin-left: 0;
+      align-self: center;
+    }
+
+    .fx-checks {
+      padding-left: 0;
+    }
+
+    .fx-block.is-old code {
+      max-height: 4.5em;
     }
   }
 </style>

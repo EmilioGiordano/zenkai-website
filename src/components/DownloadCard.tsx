@@ -104,7 +104,7 @@ export default function DownloadCard({ initialRelease = EMPTY_RELEASE, lang = de
 
       <div class="download-meta-block">
         <span class="download-req">{current.requirement}</span>
-        <span class="download-subnote">{current.note}</span>
+        {current.note && <span class="download-subnote">{current.note}</span>}
       </div>
 
       <div class="download-command-wrap" role="tabpanel" aria-label={d.commandAria(label)}>
@@ -129,6 +129,7 @@ export default function DownloadCard({ initialRelease = EMPTY_RELEASE, lang = de
       </div>
 
       <p class="download-privacy">{d.privacy}</p>
+      {os === 'windows' && <p class="download-signnote">{d.signNote}</p>}
     </div>
   );
 }
