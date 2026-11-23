@@ -238,20 +238,11 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
 
 <style is:global>
   .providers-section {
-    --cap-warn: #C2412D;
+    --cap-warn: #B23A27;
   }
 
   [data-theme='dark'] .providers-section {
     --cap-warn: #E58A78;
-  }
-
-  /* In dark mode the page accent (#22D3EE) works as a highlight on the hero photo,
-     but repeated across every mockup it reads as neon. The cards use a muted teal. */
-  [data-theme='dark'] .providers-section .caps-grid {
-    --accent-primary: #6BB3C0;
-    --accent-primary-hover: #86C4CF;
-    --accent-primary-soft: rgba(107, 179, 192, 0.12);
-    --btn-bg: #6BB3C0;
   }
 
   /* ---------- Capability cards ---------- */
@@ -394,7 +385,7 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
 
   .flow-comets circle {
     fill: var(--accent-primary);
-    filter: drop-shadow(0 0 3px var(--accent-primary));
+    filter: none;
   }
 
   /* AI node: a round processor with a scanning arc around it; the label sits below. */
@@ -406,7 +397,7 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--accent-primary);
+    color: var(--accent-gold);
   }
 
   .ai-orb {
@@ -416,9 +407,7 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background:
-      radial-gradient(circle at 50% 50%, var(--accent-primary-soft), transparent 70%),
-      var(--surface);
+    background: var(--surface);
     border: 1px solid var(--hairline-strong);
   }
 
@@ -428,7 +417,7 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     position: absolute;
     inset: -4px;
     border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent 0 62%, var(--accent-primary) 100%);
+    background: conic-gradient(from 0deg, transparent 0 62%, var(--accent-gold) 100%);
     -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
     mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
     animation: orb-scan 2.4s linear infinite;
@@ -440,7 +429,7 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     position: absolute;
     inset: -4px;
     border-radius: 50%;
-    border: 1px dashed color-mix(in srgb, var(--accent-primary) 30%, transparent);
+    border: 1px dashed color-mix(in srgb, var(--accent-gold) 35%, transparent);
   }
 
   .ai-orb svg {
@@ -487,7 +476,7 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     gap: 5px;
     padding: 9px 11px 8px;
     border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px var(--accent-primary-soft);
+    box-shadow: 0 8px 18px -14px rgba(0, 0, 0, 0.45);
   }
 
   .rep-head {
@@ -790,7 +779,6 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
 
   .fx-block.is-new .fx-bar {
     border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px var(--accent-primary-soft);
   }
 
   .fx-block.is-new code {
@@ -840,8 +828,8 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
   }
 
   .fx-check.is-status {
-    background: var(--accent-primary);
-    color: var(--btn-fg);
+    background: var(--accent-gold-soft);
+    color: var(--accent-gold);
   }
 
   /* Metrics and dashboards */

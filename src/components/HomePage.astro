@@ -130,13 +130,20 @@ const alt = otherLang(lang);
 </BaseLayout>
 
 <style is:global>
+  /* Light: warm paper under the cerulean hero; teal for UI, the hero's gold for highlights. */
   .v15-override {
-    --bg: #F2F6F7;
-    --bg-subtle: #E3ECEE;
-    --surface: #FFFFFF;
-    --ink-primary: #08181C;
-    --ink-secondary: #2F4B52;
-    --ink-muted: #56737A;
+    --bg: #F5F3EE;
+    --bg-subtle: #ECE8DF;
+    --surface: #FFFEFB;
+    --hairline: rgba(38, 33, 24, 0.10);
+    --hairline-strong: rgba(38, 33, 24, 0.19);
+    --ink-primary: #15191A;
+    --ink-secondary: #3B4446;
+    --ink-muted: #565E5F;
+    --ink-faint: #5B6263;
+    --accent-gold: #94600F;
+    --title-gold: #A8740F;
+    --accent-gold-soft: rgba(196, 140, 40, 0.14);
     --accent-primary: #03667A;
     --accent-primary-hover: #025161;
     --accent-primary-soft: rgba(3, 102, 122, 0.12);
@@ -149,28 +156,56 @@ const alt = otherLang(lang);
     --hero-text-muted: #F0F9FB;
     --hero-scrim-top: rgba(3, 50, 62, 0.58);
     --hero-scrim-mid: rgba(3, 76, 92, 0.22);
-    --hero-scrim-bottom: #F2F6F7;
+    --hero-scrim-bottom: #F5F3EE;
 
     --radius-sm: 2px;
     --radius-md: 2px;
     --radius-lg: 3px;
   }
 
+  /* Dark: matte alpine night. Slate surfaces, a desaturated glacier blue for UI,
+     moonlit sand for highlights, off-white primary buttons instead of neon fills. */
   [data-theme='dark'] .v15-override {
-    --bg: #060E12;
-    --bg-subtle: #0C1A20;
-    --surface: #11242C;
-    --ink-primary: #F2F8FA;
-    --ink-secondary: #B8CFD6;
-    --ink-muted: #7F9EA8;
-    --accent-primary: #22D3EE;
-    --accent-primary-hover: #4BE3FA;
-    --accent-primary-soft: rgba(34, 211, 238, 0.16);
-    --btn-bg: #22D3EE;
-    --btn-fg: #041418;
-    --hero-scrim-top: rgba(6, 14, 18, 0.62);
-    --hero-scrim-mid: rgba(6, 14, 18, 0.22);
-    --hero-scrim-bottom: #060E12;
+    --bg: #0A0F14;
+    --bg-subtle: #10171E;
+    --surface: #151E26;
+    --hairline: rgba(226, 232, 238, 0.09);
+    --hairline-strong: rgba(226, 232, 238, 0.17);
+    --ink-primary: #ECEFF1;
+    --ink-secondary: #B5BFC5;
+    --ink-muted: #8D99A0;
+    --ink-faint: #828E95;
+    --accent-gold: #DCC28A;
+    --title-gold: #E6CF9B;
+    --accent-gold-soft: rgba(220, 194, 138, 0.13);
+    --accent-primary: #8FB6C3;
+    --accent-primary-hover: #A8C8D2;
+    --accent-primary-soft: rgba(143, 182, 195, 0.12);
+    --accent-secondary: #8FB6C3;
+    --btn-bg: #E2C27F;
+    --btn-fg: #1A1408;
+    --btn-bg-hover: #ECD29B;
+
+    /* Demo window: same matte palette instead of neon green and saturated blue. */
+    --win-bg: #0D1318;
+    --win-chrome: #131B22;
+    --win-sidebar: #10171E;
+    --win-toolbar: #131B22;
+    --win-grid-header: #18212A;
+    --win-tbl-head-bg: #2B4A63;
+    --win-row-hover: rgba(143, 182, 195, 0.05);
+    --win-cell-selected-bg: rgba(143, 182, 195, 0.14);
+    --win-cell-selected-border: #8FB6C3;
+    --win-proposal-bg: rgba(220, 194, 138, 0.10);
+    --win-proposal-border: #DCC28A;
+    --hero-scrim-top: rgba(10, 15, 20, 0.62);
+    --hero-scrim-mid: rgba(10, 15, 20, 0.22);
+    --hero-scrim-bottom: #0A0F14;
+  }
+
+  /* Section titles share the hero's gold highlight. */
+  .v15-override .section-title em {
+    color: var(--title-gold);
   }
 
   .v15-override .v4-nav-bar {
@@ -190,7 +225,7 @@ const alt = otherLang(lang);
   }
 
   [data-theme='dark'] .v15-override .hero {
-    background: #060E12;
+    background: #0A0F14;
   }
 
   /* High-contrast Hero Typography (Light & Dark) */
@@ -242,12 +277,12 @@ const alt = otherLang(lang);
   }
 
   [data-theme='dark'] .v15-override .hero-kicker-dot {
-    background: #22D3EE !important;
-    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.28) !important;
+    background: #DCC28A !important;
+    box-shadow: 0 0 0 3px rgba(220, 194, 138, 0.24) !important;
   }
 
   [data-theme='dark'] .v15-override .hero-title em {
-    color: #5CE6FF !important;
+    color: #E6CF9B !important;
     text-shadow: 0 2px 24px rgba(4, 14, 20, 0.78) !important;
   }
 
@@ -262,11 +297,11 @@ const alt = otherLang(lang);
 
   /* Hero Dark: Julian Alps Starlight Milky Way */
   .v15-override .backdrop-dark {
-    background-color: #060E12 !important;
+    background-color: #0A0F14 !important;
     background-image: url('/art/hero-night.webp') !important;
     background-position: center 36% !important;
     background-size: cover !important;
-    filter: saturate(1.16) contrast(1.08) !important;
+    filter: saturate(0.82) contrast(1.04) brightness(0.92) !important;
   }
 
   .v15-override .hero-backdrop::after {
@@ -311,10 +346,10 @@ const alt = otherLang(lang);
   }
 
   .v15-closing-dark {
-    background-color: #060E12;
+    background-color: #0A0F14;
     background-image: url('/art/horizon-night.webp');
     background-position: center 46%;
-    filter: saturate(1.15) contrast(1.06) brightness(0.86);
+    filter: saturate(0.82) contrast(1.04) brightness(0.82);
     opacity: 0;
   }
 
@@ -345,9 +380,9 @@ const alt = otherLang(lang);
       180deg,
       var(--bg) 0%,
       color-mix(in srgb, var(--bg) 78%, transparent) 16%,
-      rgba(6, 14, 18, 0.36) 44%,
-      rgba(6, 14, 18, 0.72) 74%,
-      rgba(4, 10, 14, 0.92) 100%
+      rgba(10, 15, 20, 0.36) 44%,
+      rgba(10, 15, 20, 0.72) 74%,
+      rgba(7, 10, 14, 0.92) 100%
     );
   }
 
@@ -376,7 +411,7 @@ const alt = otherLang(lang);
   }
 
   .v15-closing-band .site-footer .footer-col h4 {
-    color: #9EEAF9;
+    color: #FFE7A8;
   }
 
   .v15-closing-band .site-footer .footer-col span {
