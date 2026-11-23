@@ -139,11 +139,37 @@ const alt = otherLang(lang);
     --hairline-strong: rgba(38, 33, 24, 0.19);
     --ink-primary: #15191A;
     --ink-secondary: #3B4446;
-    --ink-muted: #565E5F;
-    --ink-faint: #5B6263;
-    --accent-gold: #94600F;
-    --title-gold: #A8740F;
+    --ink-muted: #545C5D;
+    --ink-faint: #5E6566;
+    --accent-gold: #80520B;
     --accent-gold-soft: rgba(196, 140, 40, 0.14);
+    /* The hero's yellow only works light-on-dark; on paper, titles use deep petrol. */
+    --title-gold: #0B5868;
+    --accent-amber: #B23A27;
+    --accent-amber-soft: rgba(178, 58, 39, 0.12);
+    --accent-secondary-soft: rgba(3, 102, 122, 0.08);
+    --btn-ghost-hover: rgba(3, 102, 122, 0.08);
+
+    --win-chrome: #F1EEE7;
+    --win-sidebar: #F4F1EA;
+    --win-toolbar: #FAF8F3;
+    --win-grid-header: #EEEAE1;
+    --win-grid-line: #E2DDD2;
+    --win-row-hover: #F6F3EC;
+    --win-panel-bg: #F7F5F0;
+    --win-status-bg: #EEEAE1;
+    --win-tbl-head-bg: #0E4F5C;
+    --win-cell-selected-bg: rgba(3, 102, 122, 0.10);
+    --win-cell-selected-border: #03667A;
+    --win-proposal-bg: rgba(196, 140, 40, 0.12);
+    --win-proposal-border: #94600F;
+    --win-shadow: 0 38px 94px -22px rgba(38, 33, 24, 0.22), 0 0 0 1px rgba(38, 33, 24, 0.10);
+
+    --sp-teal-bg: #E3EEEC;    --sp-teal-hd: #2F6F73;
+    --sp-blue-bg: #E5EAF1;    --sp-blue-hd: #3E5F86;
+    --sp-green-bg: #E6EEE5;   --sp-green-hd: #4F7A55;
+    --sp-rust-bg: #F3E8DF;    --sp-rust-hd: #A0623A;
+    --sp-purple-bg: #ECE8F1;  --sp-purple-hd: #6A5C8C;
     --accent-primary: #03667A;
     --accent-primary-hover: #025161;
     --accent-primary-soft: rgba(3, 102, 122, 0.12);
@@ -155,7 +181,7 @@ const alt = otherLang(lang);
     --hero-text: #FFFFFF;
     --hero-text-muted: #F0F9FB;
     --hero-scrim-top: rgba(3, 50, 62, 0.58);
-    --hero-scrim-mid: rgba(3, 76, 92, 0.22);
+    --hero-scrim-mid: rgba(3, 60, 74, 0.50);
     --hero-scrim-bottom: #F5F3EE;
 
     --radius-sm: 2px;
@@ -175,16 +201,20 @@ const alt = otherLang(lang);
     --ink-secondary: #B5BFC5;
     --ink-muted: #8D99A0;
     --ink-faint: #828E95;
-    --accent-gold: #DCC28A;
-    --title-gold: #E6CF9B;
-    --accent-gold-soft: rgba(220, 194, 138, 0.13);
+    --accent-gold: #E3CA94;
+    --accent-gold-soft: rgba(227, 202, 148, 0.13);
+    --title-gold: #E3CA94;
+    --accent-amber: #E58A78;
+    --accent-amber-soft: rgba(229, 138, 120, 0.14);
+    --accent-secondary-soft: rgba(143, 182, 195, 0.10);
+    --btn-ghost-hover: rgba(143, 182, 195, 0.10);
     --accent-primary: #8FB6C3;
     --accent-primary-hover: #A8C8D2;
     --accent-primary-soft: rgba(143, 182, 195, 0.12);
     --accent-secondary: #8FB6C3;
-    --btn-bg: #E2C27F;
-    --btn-fg: #1A1408;
-    --btn-bg-hover: #ECD29B;
+    --btn-bg: #A7C4CF;
+    --btn-fg: #0A151A;
+    --btn-bg-hover: #BDD5DD;
 
     /* Demo window: same matte palette instead of neon green and saturated blue. */
     --win-bg: #0D1318;
@@ -196,8 +226,15 @@ const alt = otherLang(lang);
     --win-row-hover: rgba(143, 182, 195, 0.05);
     --win-cell-selected-bg: rgba(143, 182, 195, 0.14);
     --win-cell-selected-border: #8FB6C3;
-    --win-proposal-bg: rgba(220, 194, 138, 0.10);
-    --win-proposal-border: #DCC28A;
+    --win-proposal-bg: rgba(227, 202, 148, 0.10);
+    --win-proposal-border: #E3CA94;
+    --win-shadow: 0 44px 108px -20px rgba(0, 0, 0, 0.88), 0 0 0 1px rgba(226, 232, 238, 0.10);
+
+    --sp-teal-bg: #15292A;    --sp-teal-hd: #3A7673;
+    --sp-blue-bg: #172234;    --sp-blue-hd: #4A6E9E;
+    --sp-green-bg: #16261C;   --sp-green-hd: #487851;
+    --sp-rust-bg: #2A1F17;    --sp-rust-hd: #9A5E33;
+    --sp-purple-bg: #1F1B2E;  --sp-purple-hd: #6F619E;
     --hero-scrim-top: rgba(10, 15, 20, 0.62);
     --hero-scrim-mid: rgba(10, 15, 20, 0.22);
     --hero-scrim-bottom: #0A0F14;
@@ -253,7 +290,7 @@ const alt = otherLang(lang);
   }
 
   .v15-override .hero-sub {
-    color: #F3FAFC !important;
+    color: var(--hero-text-muted) !important;
     text-shadow: 0 1px 16px rgba(3, 30, 38, 0.58) !important;
   }
 
@@ -266,7 +303,7 @@ const alt = otherLang(lang);
   }
 
   .v15-override .hero .btn-ghost {
-    background: rgba(4, 30, 38, 0.38) !important;
+    background: rgba(4, 30, 38, 0.52) !important;
     color: #FFFFFF !important;
     border-color: rgba(255, 255, 255, 0.50) !important;
   }
@@ -277,12 +314,12 @@ const alt = otherLang(lang);
   }
 
   [data-theme='dark'] .v15-override .hero-kicker-dot {
-    background: #DCC28A !important;
-    box-shadow: 0 0 0 3px rgba(220, 194, 138, 0.24) !important;
+    background: #E3CA94 !important;
+    box-shadow: 0 0 0 3px rgba(227, 202, 148, 0.24) !important;
   }
 
   [data-theme='dark'] .v15-override .hero-title em {
-    color: #E6CF9B !important;
+    color: #E3CA94 !important;
     text-shadow: 0 2px 24px rgba(4, 14, 20, 0.78) !important;
   }
 
@@ -411,11 +448,15 @@ const alt = otherLang(lang);
   }
 
   .v15-closing-band .site-footer .footer-col h4 {
-    color: #FFE7A8;
+    color: #FFE08A;
+  }
+
+  [data-theme='dark'] .v15-closing-band .site-footer .footer-col h4 {
+    color: #E3CA94;
   }
 
   .v15-closing-band .site-footer .footer-col span {
-    color: rgba(240, 250, 252, 0.82);
+    color: rgba(240, 250, 252, 0.84);
   }
 
   .v15-closing-band .site-footer .footer-bottom {

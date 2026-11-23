@@ -42,7 +42,7 @@ const en = {
   },
 
   hero: {
-    kicker: 'Rust + GPUI · IronCalc · Apache-2.0 · 100% Local',
+    kicker: 'Rust + GPUI / IronCalc / Apache-2.0 / 100% Local',
     title: 'A calm, native spreadsheet for files <em>too large</em> for the usual tools.',
     sub: 'Open, edit and save <code>.xlsx</code>, <code>.csv</code> and <code>.tsv</code> files on your own machine, with the Excel shortcuts you already know.',
     ctaDownload: 'Download for Windows',
@@ -50,7 +50,7 @@ const en = {
   },
 
   grid: {
-    kicker: '01 · Visible-Range Native Grid (Rust + GPUI)',
+    kicker: '01 / Visible-Range Native Grid (Rust + GPUI)',
     title: 'Scrub a million rows and <em>16,384 columns</em> without stutter.',
     lead: 'Zenkai draws only the visible cells from a visible-range cache while load, save, and IronCalc recalculations run off the UI thread. Drag the vertical or horizontal rails—or scroll fast with your wheel—across the full Excel grid bounds.',
     viewport: 'Viewport',
@@ -61,7 +61,7 @@ const en = {
     rowHeader: 'Row',
     col: 'Col',
     colTotal: '16,384',
-    hint: 'Wheel = rows · Shift + Wheel = columns',
+    hint: 'Wheel = rows, Shift + Wheel = columns',
     gridAria: 'Interactive virtual grid across 1,048,576 rows and 16,384 columns',
     vRailTitle: 'Scrub vertically across 1,048,576 rows',
     vRailAria: 'Vertical row scrubber (1 to 1,048,576)',
@@ -70,7 +70,7 @@ const en = {
   },
 
   ai: {
-    kicker: '02 · AI Analysis',
+    kicker: '02 / AI Analysis',
     title: 'Data analysis with the <em>AI you already use</em>.',
     lead: 'Build reports, analytics and dashboards from your data files, from a single sheet or many at once.',
     report: {
@@ -123,7 +123,7 @@ const en = {
   },
 
   download: {
-    kicker: '03 · Download',
+    kicker: '03 / Download',
     title: 'Open your workbooks with <em>Zenkai</em>.',
     lead: 'Native desktop speed without accounts, subscriptions, or cloud lock-in. Grab the Windows release or build directly from source.',
     license: 'Free & open source',
@@ -269,14 +269,14 @@ const en = {
     agentIntroBefore: 'Ask about the open workbook, or let the agent edit it for you.',
     agentIntroAfter: 'undoes any change.',
     userMsg: 'Verify COGS closing balance in G11 and confirm the trial balance nets to zero.',
-    proposedEdit: 'PROPOSED EDIT · G11',
+    proposedEdit: 'PROPOSED EDIT IN G11',
     approved: 'approved',
     discarded: 'discarded',
     approve: 'Approve',
     discard: 'Discard',
     undo: 'Undo (Ctrl+Z)',
     composer: 'Ask a question or ask for a change',
-    composerMeta: 'Claude Code ▾ · Ask before changes ▾',
+    composerMeta: ['Claude Code', 'Ask before changes'],
     openedIn: 'Opened in',
     sum: 'Sum:',
     count: 'Count:',
@@ -321,7 +321,7 @@ const es: Dict = {
   },
 
   hero: {
-    kicker: 'Rust + GPUI · IronCalc · Apache-2.0 · 100% local',
+    kicker: 'Rust + GPUI / IronCalc / Apache-2.0 / 100% local',
     title: 'Hoja de cálculo nativa y tranquila para archivos <em>demasiado grandes</em>.',
     sub: 'Abre, edita y guarda archivos <code>.xlsx</code>, <code>.csv</code> y <code>.tsv</code> en tu propio equipo, con los atajos de Excel que ya conoces.',
     ctaDownload: 'Descargar para Windows',
@@ -329,7 +329,7 @@ const es: Dict = {
   },
 
   grid: {
-    kicker: '01 · Cuadrícula nativa por rango visible (Rust + GPUI)',
+    kicker: '01 / Cuadrícula nativa por rango visible (Rust + GPUI)',
     title: 'Recorre un millón de filas y <em>16.384 columnas</em> sin tirones.',
     lead: 'Zenkai dibuja solo las celdas visibles desde una caché del rango visible, mientras la carga, el guardado y los recálculos de IronCalc se ejecutan fuera del hilo de la interfaz. Arrastra las barras vertical u horizontal, o desplázate rápido con la rueda, por todo el rango de Excel.',
     viewport: 'Vista',
@@ -340,7 +340,7 @@ const es: Dict = {
     rowHeader: 'Fila',
     col: 'Col',
     colTotal: '16.384',
-    hint: 'Rueda = filas · Mayús + Rueda = columnas',
+    hint: 'Rueda = filas, Mayús + Rueda = columnas',
     gridAria: 'Cuadrícula virtual interactiva de 1.048.576 filas y 16.384 columnas',
     vRailTitle: 'Recorre en vertical 1.048.576 filas',
     vRailAria: 'Desplazador vertical de filas (1 a 1.048.576)',
@@ -349,7 +349,7 @@ const es: Dict = {
   },
 
   ai: {
-    kicker: '02 · Análisis con IA',
+    kicker: '02 / Análisis con IA',
     title: 'Análisis de datos con la <em>IA que ya usas</em>.',
     lead: 'Crea informes, análisis y dashboards a partir de tus archivos de datos, desde una sola hoja o desde varias a la vez.',
     report: {
@@ -402,7 +402,7 @@ const es: Dict = {
   },
 
   download: {
-    kicker: '03 · Descarga',
+    kicker: '03 / Descarga',
     title: 'Abre tus libros con <em>Zenkai</em>.',
     lead: 'Velocidad nativa de escritorio sin cuentas, suscripciones ni dependencia de la nube. Descarga la versión para Windows o compílala desde el código fuente.',
     license: 'Libre y de código abierto',
@@ -548,14 +548,14 @@ const es: Dict = {
     agentIntroBefore: 'Pregunta por el libro abierto o deja que el agente lo edite por ti.',
     agentIntroAfter: 'deshace cualquier cambio.',
     userMsg: 'Revisa el saldo final del costo de ventas en G11 y confirma que el balance de sumas da cero.',
-    proposedEdit: 'EDICIÓN PROPUESTA · G11',
+    proposedEdit: 'EDICIÓN PROPUESTA EN G11',
     approved: 'aprobada',
     discarded: 'descartada',
     approve: 'Aprobar',
     discard: 'Descartar',
     undo: 'Deshacer (Ctrl+Z)',
     composer: 'Haz una pregunta o pide un cambio',
-    composerMeta: 'Claude Code ▾ · Preguntar antes ▾',
+    composerMeta: ['Claude Code', 'Preguntar antes'],
     openedIn: 'Abierto en',
     sum: 'Suma:',
     count: 'Recuento:',

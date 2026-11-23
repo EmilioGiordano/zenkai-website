@@ -88,7 +88,7 @@ export default function VirtualGridDemo({ lang = defaultLang }: { lang?: Lang })
             {d.virtual} <strong>{d.virtualSize}</strong>
           </span>
           <span class="hud-chip hud-secondary">
-            {d.render} <strong>{frameMs} ms · 60 fps</strong>
+            {d.render} <strong>{frameMs} ms / 60 fps</strong>
           </span>
         </div>
 

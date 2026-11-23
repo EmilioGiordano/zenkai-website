@@ -308,6 +308,10 @@ const release = await fetchLatestRelease();
     background: rgba(255, 255, 255, 0.1);
   }
 
+  .space-file.is-active span {
+    color: var(--ink-secondary);
+  }
+
   .sp-teal { background: var(--sp-teal-bg); }
   .sp-teal .space-head { background: var(--sp-teal-hd); }
   .sp-blue { background: var(--sp-blue-bg); }
@@ -654,7 +658,7 @@ const release = await fetchLatestRelease();
   }
 
   [data-theme='dark'] .prop-btn.is-approve {
-    color: #0c0c0e;
+    color: var(--btn-fg);
   }
 
   .agent-composer {
@@ -680,6 +684,27 @@ const release = await fetchLatestRelease();
     font-size: 0.65rem;
     color: var(--ink-muted);
     font-family: var(--font-mono);
+  }
+
+  .composer-picks {
+    display: flex;
+    gap: 12px;
+  }
+
+  .composer-pick {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .composer-pick svg {
+    width: 7px;
+    height: 5px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .composer-send {

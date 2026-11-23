@@ -464,7 +464,14 @@ export default function ZenkaiWindow({ lang = defaultLang }: { lang?: Lang }) {
           <div class="agent-composer">
             <div class="composer-placeholder">{w.composer}</div>
             <div class="composer-meta">
-              <span>{w.composerMeta}</span>
+              <span class="composer-picks">
+                {w.composerMeta.map((label) => (
+                  <span class="composer-pick">
+                    {label}
+                    <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" /></svg>
+                  </span>
+                ))}
+              </span>
               <span class="composer-send" aria-hidden="true">↑</span>
             </div>
           </div>
