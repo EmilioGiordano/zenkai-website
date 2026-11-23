@@ -77,6 +77,7 @@ const en = {
       files: ['Sales.xlsx', 'Costs.csv', 'Budget 2026'],
       heading: 'Q3 report',
       meta: '3 files',
+      aiLabel: 'AI',
       rows: [
         { kind: 'up', label: 'Revenue vs Q2', value: '+9.1%' },
         { kind: 'down', label: 'North region margin', value: '−4.2 pts' },
@@ -355,6 +356,7 @@ const es: Dict = {
       files: ['Ventas.xlsx', 'Costos.csv', 'Presupuesto 2026'],
       heading: 'Informe T3',
       meta: '3 archivos',
+      aiLabel: 'IA',
       rows: [
         { kind: 'up', label: 'Ingresos vs T2', value: '+9,1%' },
         { kind: 'down', label: 'Margen región Norte', value: '−4,2 pts' },

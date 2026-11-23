@@ -37,21 +37,44 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
           <div class="join-files">
             {d.report.files.map((file) => <span class="file-chip"><i class="file-dot"></i>{file}</span>)}
           </div>
-          <svg class="join-lines" viewBox="0 0 60 94">
-            <g class="join-track">
-              <path d="M0 13 C24 13 20 47 42 47" />
-              <path d="M0 47 H42" />
-              <path d="M0 81 C24 81 20 47 42 47" />
-              <path d="M42 47 H60" />
+          <svg class="flow flow-in" viewBox="0 0 64 94" aria-hidden="true">
+            <defs>
+              <linearGradient id="flow-base-in" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="64" y2="0">
+                <stop offset="0" class="base-stop-start" />
+                <stop offset="1" class="base-stop-end" />
+              </linearGradient>
+            </defs>
+            <g class="flow-base" stroke="url(#flow-base-in)">
+              <path d="M1 13 C34 13 30 25 63 25" />
+              <path d="M1 47 H63" />
+              <path d="M1 81 C34 81 30 69 63 69" />
             </g>
-            <g class="join-flow">
-              <path d="M0 13 C24 13 20 47 42 47" style="--d:0s" />
-              <path d="M0 47 H42" style="--d:-0.4s" />
-              <path d="M0 81 C24 81 20 47 42 47" style="--d:-0.8s" />
-              <path d="M42 47 H60" class="is-out" />
+            <g class="flow-comets">
+              <circle r="2.4"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite" path="M1 13 C34 13 30 25 63 25" /></circle>
+              <circle r="2.4"><animateMotion dur="2.4s" begin="-0.8s" repeatCount="indefinite" path="M1 47 H63" /></circle>
+              <circle r="2.4"><animateMotion dur="2.4s" begin="-1.6s" repeatCount="indefinite" path="M1 81 C34 81 30 69 63 69" /></circle>
             </g>
-            <circle class="join-halo" cx="42" cy="47" r="6" />
-            <circle class="join-node" cx="42" cy="47" r="3" />
+            <g class="flow-ports">
+              <circle cx="1" cy="13" r="3.2" /><circle cx="1" cy="47" r="3.2" /><circle cx="1" cy="81" r="3.2" />
+              <circle cx="63" cy="25" r="3.2" /><circle cx="63" cy="47" r="3.2" /><circle cx="63" cy="69" r="3.2" />
+            </g>
+          </svg>
+          <div class="ai-core">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2.5 13.9 10.1 21.5 12 13.9 13.9 12 21.5 10.1 13.9 2.5 12 10.1 10.1Z" />
+            </svg>
+            <span>{d.report.aiLabel}</span>
+          </div>
+          <svg class="flow flow-out" viewBox="0 0 48 94" aria-hidden="true">
+            <g class="flow-base flow-base-out">
+              <path d="M1 47 H47" />
+            </g>
+            <g class="flow-comets">
+              <circle r="2.4"><animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite" path="M1 47 H47" /></circle>
+            </g>
+            <g class="flow-ports">
+              <circle cx="1" cy="47" r="3.2" /><circle cx="47" cy="47" r="3.2" />
+            </g>
           </svg>
           <div class="rep-doc">
             <div class="rep-head">
@@ -315,9 +338,9 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     opacity: 0.7;
   }
 
-  /* Connectors: a soft track plus data pulses that always flow into a node. */
-  .join-lines {
-    width: 60px;
+  /* Flow: [files] -> [AI] -> [report], drawn as a small node graph:
+     gradient curves, ports at both ends, a light point riding each link. */
+  .flow {
     height: 94px;
     flex-shrink: 0;
     overflow: visible;
@@ -325,50 +348,90 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     stroke-linecap: round;
   }
 
-  .join-track path {
-    stroke: color-mix(in srgb, var(--accent-primary) 22%, transparent);
-    stroke-width: 2;
+  .flow-in {
+    width: 64px;
   }
 
-  .join-flow path {
+  .flow-out {
+    width: 48px;
+  }
+
+  .base-stop-start {
+    stop-color: var(--ink-muted);
+    stop-opacity: 0.45;
+  }
+
+  .base-stop-end {
+    stop-color: var(--accent-primary);
+    stop-opacity: 0.9;
+  }
+
+  .flow-base path {
+    stroke-width: 1.6;
+  }
+
+  .flow-base-out path {
     stroke: var(--accent-primary);
-    stroke-width: 2;
-    stroke-dasharray: 6 14;
-    animation: cap-flow 1.2s linear infinite;
-    animation-delay: var(--d, 0s);
+    stroke-opacity: 0.9;
   }
 
-  .join-flow path.is-out {
-    stroke-dasharray: 4 6;
-    animation-duration: 0.6s;
+  .flow-ports circle {
+    fill: var(--surface);
+    stroke: var(--accent-primary);
+    stroke-width: 1.5;
   }
 
-  @keyframes cap-flow {
-    to {
-      stroke-dashoffset: -20;
-    }
-  }
-
-  .join-node {
+  .flow-comets circle {
     fill: var(--accent-primary);
+    filter: drop-shadow(0 0 3px var(--accent-primary));
   }
 
-  .join-halo {
-    fill: var(--accent-primary);
-    opacity: 0.18;
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: join-pulse 1.8s ease-out infinite;
+  .ai-core {
+    position: relative;
+    width: 46px;
+    height: 94px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: var(--surface);
+    border: 1px solid var(--accent-primary);
+    border-radius: var(--radius-sm);
+    color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-primary-soft);
+    animation: core-think 3.6s ease-in-out infinite;
   }
 
-  @keyframes join-pulse {
-    0% {
-      transform: scale(0.6);
-      opacity: 0.35;
-    }
+  .ai-core svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  .ai-core span {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  @keyframes core-think {
+    0%,
+    28%,
+    62%,
     100% {
-      transform: scale(1.6);
-      opacity: 0;
+      box-shadow: 0 0 0 3px var(--accent-primary-soft);
+    }
+    42% {
+      box-shadow:
+        0 0 0 3px var(--accent-primary-soft),
+        0 0 18px 2px color-mix(in srgb, var(--accent-primary) 45%, transparent);
     }
   }
 
@@ -850,9 +913,15 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .cap-card:hover .rep-row,
-    .join-flow path,
-    .join-halo {
+    .cap-card:hover .rep-row {
+      animation: none;
+    }
+
+    .flow-comets {
+      display: none;
+    }
+
+    .ai-core {
       animation: none;
     }
   }
@@ -1004,8 +1073,21 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
       gap: 6px;
     }
 
-    .fig-report .join-lines {
+    .fig-report .flow {
       display: none;
+    }
+
+    /* On phones the AI core becomes a small chip between the files and the report. */
+    .ai-core {
+      width: auto;
+      height: auto;
+      flex-direction: row;
+      align-self: center;
+      padding: 4px 10px;
+    }
+
+    .ai-core span {
+      position: static;
     }
 
     .rep-doc {
