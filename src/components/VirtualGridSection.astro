@@ -1,24 +1,26 @@
 ---
 import VirtualGridDemo from './VirtualGridDemo.tsx';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang).grid;
 ---
 
 <section id="grid" class="section-shell">
   <div class="container">
     <div class="section-header">
       <div class="section-heading-group">
-        <p class="section-kicker">01 · Visible-Range Native Grid (Rust + GPUI)</p>
-        <h2 class="section-title">
-          Scrub a million rows and <em>16,384 columns</em> without stutter.
-        </h2>
-        <p class="section-lead">
-          Zenkai draws only the visible cells from a visible-range cache while load, save, and
-          IronCalc recalculations run off the UI thread. Drag the vertical or horizontal rails—or
-          scroll fast with your wheel—across the full Excel grid bounds.
-        </p>
+        <p class="section-kicker">{d.kicker}</p>
+        <h2 class="section-title" set:html={d.title} />
+        <p class="section-lead">{d.lead}</p>
       </div>
     </div>
 
-    <VirtualGridDemo client:visible />
+    <VirtualGridDemo client:visible lang={lang} />
   </div>
 </section>
 

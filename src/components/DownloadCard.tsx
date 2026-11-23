@@ -7,55 +7,20 @@ import {
   type OsKey,
   type ReleaseInfo,
 } from '../lib/release';
+import { defaultLang, t, type Lang } from '../i18n/ui';
 
-interface OsOption {
-  key: OsKey;
-  label: string;
-  badge?: string;
-  ctaLabel: string;
-  fallbackLabel: string;
-  requirement: string;
-  note: string;
-  commandLabel: string;
-  command: string;
+const OS_KEYS: OsKey[] = ['windows', 'linux', 'macos'];
+const OS_LABELS: Record<OsKey, string> = { windows: 'Windows', linux: 'Linux', macos: 'macOS' };
+const BUILD_COMMAND =
+  'git clone https://github.com/EmilioGiordano/Zenkai.git && cd Zenkai && cargo run --release';
+
+interface Props {
+  initialRelease?: ReleaseInfo;
+  lang?: Lang;
 }
 
-const OS_OPTIONS: OsOption[] = [
-  {
-    key: 'windows',
-    label: 'Windows',
-    ctaLabel: 'Download Zenkai for Windows',
-    fallbackLabel: 'Get Zenkai for Windows on GitHub',
-    requirement: 'Windows 10 and 11 (x64)',
-    note: 'Early unsigned build: if SmartScreen warns you on first launch, click More info, then Run anyway.',
-    commandLabel: 'Or build from source (Rust)',
-    command: 'git clone https://github.com/EmilioGiordano/Zenkai.git && cd Zenkai && cargo run --release',
-  },
-  {
-    key: 'linux',
-    label: 'Linux',
-    badge: 'experimental',
-    ctaLabel: 'Download Zenkai for Linux',
-    fallbackLabel: 'View Linux releases on GitHub',
-    requirement: 'Linux (x64), experimental build',
-    note: 'Windows is the main target today; Linux builds are published as experimental releases on GitHub.',
-    commandLabel: 'Build from source (Rust)',
-    command: 'git clone https://github.com/EmilioGiordano/Zenkai.git && cd Zenkai && cargo run --release',
-  },
-  {
-    key: 'macos',
-    label: 'macOS',
-    badge: 'Apple Silicon',
-    ctaLabel: 'Download Zenkai for macOS',
-    fallbackLabel: 'View macOS releases on GitHub',
-    requirement: 'macOS on Apple Silicon (arm64), experimental build',
-    note: 'Windows is the main target today; Apple Silicon builds are published as experimental previews.',
-    commandLabel: 'Build from source (Rust)',
-    command: 'git clone https://github.com/EmilioGiordano/Zenkai.git && cd Zenkai && cargo run --release',
-  },
-];
-
-export default function DownloadCard({ initialRelease = EMPTY_RELEASE }: { initialRelease?: ReleaseInfo }) {
+export default function DownloadCard({ initialRelease = EMPTY_RELEASE, lang = defaultLang }: Props) {
+  const d = t(lang).download;
   const [os, setOs] = useState<OsKey>('windows');
   const [copied, setCopied] = useState(false);
   const [release, setRelease] = useState<ReleaseInfo>(initialRelease);
@@ -67,13 +32,14 @@ export default function DownloadCard({ initialRelease = EMPTY_RELEASE }: { initi
     });
   }, []);
 
-  const current = OS_OPTIONS.find((item) => item.key === os) ?? OS_OPTIONS[0];
+  const current = d.os[os];
+  const label = OS_LABELS[os];
   const directUrl = release.assets[os];
 
   const handleCopy = async () => {
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(current.command);
+        await navigator.clipboard.writeText(BUILD_COMMAND);
         setCopied(true);
         window.setTimeout(() => setCopied(false), 1800);
       }
@@ -88,24 +54,24 @@ export default function DownloadCard({ initialRelease = EMPTY_RELEASE }: { initi
         <div class="download-version-row">
           {release.tag && <span class="version-badge">{release.tag}</span>}
           <span class="version-badge">Apache-2.0</span>
-          <span class="license-note">Free &amp; open source</span>
+          <span class="license-note">{d.license}</span>
         </div>
 
-        <div class="layout-switcher" role="tablist" aria-label="Choose operating system">
-          {OS_OPTIONS.map((item) => (
+        <div class="layout-switcher" role="tablist" aria-label={d.osAria}>
+          {OS_KEYS.map((key) => (
             <button
-              key={item.key}
+              key={key}
               type="button"
               role="tab"
-              aria-selected={os === item.key}
-              class={`seg-btn ${os === item.key ? 'is-active' : ''}`}
+              aria-selected={os === key}
+              class={`seg-btn ${os === key ? 'is-active' : ''}`}
               onClick={() => {
-                setOs(item.key);
+                setOs(key);
                 setCopied(false);
               }}
             >
-              {item.label}
-              {item.badge && <span class="os-soon-tag">{item.badge}</span>}
+              {OS_LABELS[key]}
+              {d.os[key].badge && <span class="os-soon-tag">{d.os[key].badge}</span>}
             </button>
           ))}
         </div>
@@ -114,7 +80,7 @@ export default function DownloadCard({ initialRelease = EMPTY_RELEASE }: { initi
       <div class="download-card-actions">
         {directUrl ? (
           <a href={downloadHref(release, os)} class="btn btn-primary" download>
-            {current.ctaLabel}
+            {current.cta}
           </a>
         ) : (
           <a
@@ -123,7 +89,7 @@ export default function DownloadCard({ initialRelease = EMPTY_RELEASE }: { initi
             rel="noopener noreferrer"
             class="btn btn-primary"
           >
-            {current.fallbackLabel}
+            {current.fallback}
           </a>
         )}
         <a
@@ -132,7 +98,7 @@ export default function DownloadCard({ initialRelease = EMPTY_RELEASE }: { initi
           rel="noopener noreferrer"
           class="btn btn-ghost btn-sm"
         >
-          View source on GitHub
+          {d.viewSource}
         </a>
       </div>
 
@@ -141,30 +107,28 @@ export default function DownloadCard({ initialRelease = EMPTY_RELEASE }: { initi
         <span class="download-subnote">{current.note}</span>
       </div>
 
-      <div class="download-command-wrap" role="tabpanel" aria-label={`${current.label} source command`}>
+      <div class="download-command-wrap" role="tabpanel" aria-label={d.commandAria(label)}>
         <span class="command-kicker">{current.commandLabel}</span>
         <div class="download-command-box">
           <div class="command-line">
             <span class="command-prompt" aria-hidden="true">$</span>
-            <code>{current.command}</code>
+            <code>{BUILD_COMMAND}</code>
           </div>
           <button
             type="button"
             class="btn btn-ghost btn-sm copy-btn"
             onClick={handleCopy}
-            aria-label={`Copy ${current.label} build command`}
+            aria-label={d.copyAria(label)}
           >
-            {copied ? 'Copied' : 'Copy'}
+            {copied ? d.copied : d.copy}
           </button>
           <span class="sr-only" aria-live="polite">
-            {copied ? 'Copied command to clipboard' : ''}
+            {copied ? d.copiedSr : ''}
           </span>
         </div>
       </div>
 
-      <p class="download-privacy">
-        Runs 100% locally on your machine. No account, no cloud sync, no telemetry.
-      </p>
+      <p class="download-privacy">{d.privacy}</p>
     </div>
   );
 }

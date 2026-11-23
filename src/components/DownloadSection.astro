@@ -1,7 +1,14 @@
 ---
 import DownloadCard from './DownloadCard.tsx';
 import { fetchLatestRelease } from '../lib/release';
+import { t, type Lang } from '../i18n/ui';
 
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang).download;
 const release = await fetchLatestRelease();
 ---
 
@@ -16,17 +23,14 @@ const release = await fetchLatestRelease();
   <div class="container download-content">
     <div class="section-header download-header">
       <div class="section-heading-group">
-        <p class="section-kicker">03 · Download</p>
-        <h2 class="section-title">Open your workbooks with <em>Zenkai</em>.</h2>
-        <p class="section-lead">
-          Native desktop speed without accounts, subscriptions, or cloud lock-in. Grab the Windows
-          release or build directly from source.
-        </p>
+        <p class="section-kicker">{d.kicker}</p>
+        <h2 class="section-title" set:html={d.title} />
+        <p class="section-lead">{d.lead}</p>
       </div>
     </div>
 
     <div class="download-card-wrap">
-      <DownloadCard client:visible initialRelease={release} />
+      <DownloadCard client:visible initialRelease={release} lang={lang} />
     </div>
   </div>
 </section>

@@ -1,6 +1,13 @@
 ---
 import { PROVIDERS, ProviderIconSvg } from './ProviderBadge';
+import { t, type Lang } from '../i18n/ui';
 
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang).ai;
 const bars = [38, 52, 46, 64, 58, 80, 100];
 ---
 
@@ -8,12 +15,9 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
   <div class="container">
     <div class="section-header">
       <div class="section-heading-group">
-        <p class="section-kicker">02 · AI Analysis</p>
-        <h2 class="section-title">Data analysis with the <em>AI you already use</em>.</h2>
-        <p class="section-lead">
-          Ask about your data in plain language. Every change waits for your approval, and{' '}
-          <code>Ctrl+Z</code> undoes it.
-        </p>
+        <p class="section-kicker">{d.kicker}</p>
+        <h2 class="section-title" set:html={d.title} />
+        <p class="section-lead">{d.lead}</p>
       </div>
     </div>
 
@@ -21,9 +25,7 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
       <article class="cap-card" role="listitem">
         <div class="cap-fig fig-join" aria-hidden="true">
           <div class="join-files">
-            <span class="file-chip"><i class="file-dot"></i>Sales.xlsx</span>
-            <span class="file-chip"><i class="file-dot"></i>Costs.csv</span>
-            <span class="file-chip"><i class="file-dot"></i>Budget 2026</span>
+            {d.join.files.map((file) => <span class="file-chip"><i class="file-dot"></i>{file}</span>)}
           </div>
           <svg class="join-lines" viewBox="0 0 44 88" preserveAspectRatio="none">
             <path d="M0 12 C24 12 20 44 44 44" />
@@ -31,31 +33,31 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
             <path d="M0 76 C24 76 20 44 44 44" />
           </svg>
           <div class="join-result">
-            <span>Margin by region</span>
-            <strong>31.4%</strong>
+            <span>{d.join.result}</span>
+            <strong>{d.join.value}</strong>
           </div>
         </div>
-        <h3 class="cap-title">Cross-file analysis</h3>
-        <p class="cap-text">Connect sheets, CSVs and workbooks in a single question.</p>
+        <h3 class="cap-title">{d.join.title}</h3>
+        <p class="cap-text">{d.join.text}</p>
       </article>
 
       <article class="cap-card" role="listitem">
         <div class="cap-fig fig-review" aria-hidden="true">
           <div class="mini-sheet">
-            <div class="mini-row"><span class="ref">B4</span><span>Revenue</span><span class="val">12,400</span></div>
+            <div class="mini-row"><span class="ref">B4</span><span>{d.review.revenue}</span><span class="val">{d.review.v1}</span></div>
             <div class="mini-row is-flagged">
-              <span class="ref">B5</span><span>Costs</span>
-              <span class="val"><s>8,3O0</s><b>8,300</b></span>
+              <span class="ref">B5</span><span>{d.review.costs}</span>
+              <span class="val"><s>{d.review.bad}</s><b>{d.review.good}</b></span>
             </div>
-            <div class="mini-row"><span class="ref">B6</span><span>Margin</span><span class="val">4,100</span></div>
+            <div class="mini-row"><span class="ref">B6</span><span>{d.review.margin}</span><span class="val">{d.review.v3}</span></div>
           </div>
           <div class="review-foot">
-            <span>1 fix proposed</span>
-            <span class="review-pill">Approve</span>
+            <span>{d.review.fixes}</span>
+            <span class="review-pill">{d.review.approve}</span>
           </div>
         </div>
-        <h3 class="cap-title">Summaries, reviews and fixes</h3>
-        <p class="cap-text">Catch errors and inconsistencies, then get a clear summary.</p>
+        <h3 class="cap-title">{d.review.title}</h3>
+        <p class="cap-text">{d.review.text}</p>
       </article>
 
       <article class="cap-card" role="listitem">
@@ -64,16 +66,16 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
           <svg class="fx-arrow" viewBox="0 0 16 16"><path d="M8 2v11M3.5 8.5 8 13l4.5-4.5" /></svg>
           <div class="fx-bar is-new"><span class="fx">fx</span><code>=SUM(B2:B7)</code></div>
         </div>
-        <h3 class="cap-title">AI formulas</h3>
-        <p class="cap-text">Write, explain and optimize formulas across the workbook.</p>
+        <h3 class="cap-title">{d.formula.title}</h3>
+        <p class="cap-text">{d.formula.text}</p>
       </article>
 
       <article class="cap-card" role="listitem">
         <div class="cap-fig fig-dash" aria-hidden="true">
           <div class="kpi">
-            <span>Revenue</span>
-            <strong>$1.26M</strong>
-            <em>+9.1%</em>
+            <span>{d.dash.label}</span>
+            <strong>{d.dash.value}</strong>
+            <em>{d.dash.delta}</em>
           </div>
           <div class="bars">
             {bars.map((h, i) => (
@@ -81,13 +83,13 @@ const bars = [38, 52, 46, 64, 58, 80, 100];
             ))}
           </div>
         </div>
-        <h3 class="cap-title">Metrics, charts and dashboards</h3>
-        <p class="cap-text">Turn raw tables into KPIs, charts and reports.</p>
+        <h3 class="cap-title">{d.dash.title}</h3>
+        <p class="cap-text">{d.dash.text}</p>
       </article>
     </div>
 
     <div class="providers-block">
-      <p class="providers-label">Works with the account you already have</p>
+      <p class="providers-label">{d.providersLabel}</p>
       <div class="providers-grid" role="list">
         {
           PROVIDERS.map((agent) => (

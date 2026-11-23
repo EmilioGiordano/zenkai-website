@@ -1,4 +1,12 @@
 ---
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang).footer;
 ---
 
 <footer class="site-footer">
@@ -21,53 +29,51 @@
           </svg>
           <span>Zenkai</span>
         </div>
-        <p class="footer-quote">
-          A fast, quiet native spreadsheet — built for the files that deserve fresh air.
-        </p>
+        <p class="footer-quote">{d.quote}</p>
       </div>
 
       <div class="footer-col">
-        <h4>Sections</h4>
+        <h4>{d.sections}</h4>
         <ul>
-          <li><a href="#grid">60 fps Virtual Grid</a></li>
-          <li><a href="#providers">AI Analysis</a></li>
-          <li><a href="#download">Download</a></li>
+          <li><a href="#grid">{d.linkGrid}</a></li>
+          <li><a href="#providers">{d.linkAi}</a></li>
+          <li><a href="#download">{d.linkDownload}</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Open Source</h4>
+        <h4>{d.openSource}</h4>
         <ul>
           <li>
             <a href="https://github.com/EmilioGiordano/Zenkai" target="_blank" rel="noopener noreferrer">
-              GitHub Repository
+              {d.repo}
             </a>
           </li>
           <li>
             <a href="https://github.com/EmilioGiordano/Zenkai/releases" target="_blank" rel="noopener noreferrer">
-              Releases
+              {d.releases}
             </a>
           </li>
           <li>
             <a href="https://github.com/EmilioGiordano/Zenkai/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">
-              Apache-2.0 License
+              {d.license}
             </a>
           </li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Stack</h4>
+        <h4>{d.stack}</h4>
         <ul>
           <li><span>Rust + GPUI</span></li>
-          <li><span>IronCalc Engine</span></li>
+          <li><span>{d.engine}</span></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span class="footer-facts"><span>Zenkai</span><span>Apache-2.0 Open Source</span><span>100% Local</span></span>
-      <span class="footer-facts"><span>Night photography: Dreamy Pixel (CC BY 4.0)</span><span>Eddie basler (CC BY-SA 4.0)</span></span>
+      <span class="footer-facts"><span>Zenkai</span><span>{d.factOss}</span><span>{d.factLocal}</span></span>
+      <span class="footer-facts"><span>{d.photoCredit}</span><span>Eddie basler (CC BY-SA 4.0)</span></span>
     </div>
   </div>
 </footer>

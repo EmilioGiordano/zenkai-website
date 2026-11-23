@@ -1,7 +1,14 @@
 ---
 import ZenkaiWindow from './ZenkaiWindow.tsx';
 import { downloadHref, fetchLatestRelease } from '../lib/release';
+import { t, type Lang } from '../i18n/ui';
 
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang).hero;
 const release = await fetchLatestRelease();
 ---
 
@@ -16,24 +23,19 @@ const release = await fetchLatestRelease();
     <div class="hero-copy">
       <div class="hero-kicker">
         <span class="hero-kicker-dot" aria-hidden="true"></span>
-        Rust + GPUI · IronCalc · Apache-2.0 · 100% Local
+        {d.kicker}
       </div>
-      <h1 class="hero-title">
-        A calm, native spreadsheet for files <em>too large</em> for the usual tools.
-      </h1>
-      <p class="hero-sub">
-        Open, edit and save <code>.xlsx</code>, <code>.csv</code> and <code>.tsv</code> files on
-        your own machine, with the Excel shortcuts you already know.
-      </p>
+      <h1 class="hero-title" set:html={d.title} />
+      <p class="hero-sub" set:html={d.sub} />
       <div class="hero-ctas">
         <a class="btn btn-primary" href={downloadHref(release, 'windows')} data-latest-download="windows">
-          Download for Windows
+          {d.ctaDownload}
         </a>
-        <a class="btn btn-ghost" href="#grid">Try the grid</a>
+        <a class="btn btn-ghost" href="#grid">{d.ctaTry}</a>
       </div>
     </div>
 
-    <ZenkaiWindow client:load />
+    <ZenkaiWindow client:load lang={lang} />
   </div>
 </section>
 
