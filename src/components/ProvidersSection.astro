@@ -7,8 +7,17 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const d = t(lang).ai;
-const bars = [38, 52, 46, 64, 58, 80, 100];
+const dict = t(lang);
+const d = dict.ai;
+
+// Monthly revenue in $M. Jul vs Jun is +9.1%, matching the KPI.
+const revenue = [0.62, 0.71, 0.68, 0.84, 0.92, 1.155, 1.26];
+const chartMax = 1.3;
+const ticks = [0, 0.6, 1.2].map((v) => ({
+  y: (v / chartMax) * 100,
+  label: v === 0 ? '$0' : `$${v.toLocaleString(dict.numLocale, { maximumFractionDigits: 1 })}M`,
+}));
+const bars = revenue.map((v) => (v / chartMax) * 100);
 const spark = [42, 55, 48, 62, 58, 74, 88];
 ---
 
@@ -28,10 +37,21 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
           <div class="join-files">
             {d.report.files.map((file) => <span class="file-chip"><i class="file-dot"></i>{file}</span>)}
           </div>
-          <svg class="join-lines" viewBox="0 0 44 88" preserveAspectRatio="none">
-            <path d="M0 12 C24 12 20 44 44 44" />
-            <path d="M0 44 L44 44" />
-            <path d="M0 76 C24 76 20 44 44 44" />
+          <svg class="join-lines" viewBox="0 0 60 94">
+            <g class="join-track">
+              <path d="M0 13 C24 13 20 47 42 47" />
+              <path d="M0 47 H42" />
+              <path d="M0 81 C24 81 20 47 42 47" />
+              <path d="M42 47 H60" />
+            </g>
+            <g class="join-flow">
+              <path d="M0 13 C24 13 20 47 42 47" style="--d:0s" />
+              <path d="M0 47 H42" style="--d:-0.4s" />
+              <path d="M0 81 C24 81 20 47 42 47" style="--d:-0.8s" />
+              <path d="M42 47 H60" class="is-out" />
+            </g>
+            <circle class="join-halo" cx="42" cy="47" r="6" />
+            <circle class="join-node" cx="42" cy="47" r="3" />
           </svg>
           <div class="rep-doc">
             <div class="rep-head">
@@ -57,24 +77,40 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
       </article>
 
       <article class="cap-card" role="listitem">
-        <div class="cap-fig fig-review" aria-hidden="true">
+        <div class="cap-fig fig-review" data-review>
           <div class="mini-sheet">
             {
               d.review.issues.map((issue) => (
-                <div class="mini-row is-flagged">
+                <div class="mini-row">
                   <span class="ref">{issue.ref}</span>
                   <span class="val">
-                    {issue.old && <s>{issue.old}</s>}
-                    <b class={issue.value.startsWith('#') ? 'is-error' : ''}>{issue.value}</b>
+                    <span class="v-pending">
+                      {issue.old && <s>{issue.old}</s>}
+                      <b class={issue.value.startsWith('#') ? 'is-error' : ''}>{issue.value}</b>
+                    </span>
+                    <span class="v-fixed"><b>{issue.fixed}</b></span>
                   </span>
-                  <span class="tag">{issue.tag}</span>
+                  <span class="tag">
+                    <span class="v-pending">{issue.tag}</span>
+                    <span class="v-fixed">{d.review.fixedTag}</span>
+                  </span>
                 </div>
               ))
             }
           </div>
           <div class="review-foot">
-            <span>{d.review.fixes}</span>
-            <span class="review-pill">{d.review.approve}</span>
+            <span class="v-pending">{d.review.fixes}</span>
+            <span class="v-fixed" aria-live="polite">{d.review.applied}</span>
+            <button
+              type="button"
+              class="review-pill"
+              aria-pressed="false"
+              data-review-toggle
+              data-apply={d.review.approve}
+              data-undo={d.review.undo}
+            >
+              {d.review.approve}
+            </button>
           </div>
         </div>
         <h3 class="cap-title">{d.review.title}</h3>
@@ -94,10 +130,21 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
               ))
             }
           </div>
-          <div class="bars">
-            {bars.map((h, i) => (
-              <span class={`bar${i === bars.length - 1 ? ' is-last' : ''}`} style={`--h:${h}%; --i:${i};`} />
-            ))}
+          <div class="chart">
+            <div class="chart-y">
+              {ticks.map((tick) => <span style={`--y:${tick.y}%;`}>{tick.label}</span>)}
+            </div>
+            <div class="chart-plot">
+              {ticks.slice(1).map((tick) => <i class="chart-grid" style={`--y:${tick.y}%;`} />)}
+              <div class="bars">
+                {bars.map((h, i) => (
+                  <span class={`bar${i === bars.length - 1 ? ' is-last' : ''}`} style={`--h:${h}%; --i:${i};`} />
+                ))}
+              </div>
+            </div>
+            <div class="chart-x">
+              {d.dash.months.map((m) => <span>{m}</span>)}
+            </div>
           </div>
         </div>
         <h3 class="cap-title">{d.dash.title}</h3>
@@ -116,6 +163,7 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
             <div class="fx-bar"><span class="fx">fx</span><code>{d.formula.after}</code></div>
           </div>
           <div class="fx-checks">
+            <span class="fx-check is-status">{d.formula.status}</span>
             {d.formula.checks.map((check) => <span class="fx-check">{check}</span>)}
           </div>
         </div>
@@ -150,6 +198,18 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     </div>
   </div>
 </section>
+
+<script>
+  // "Approve all" applies the proposed fixes in the mockup; pressing it again undoes them.
+  document.querySelectorAll<HTMLElement>('[data-review]').forEach((fig) => {
+    const btn = fig.querySelector<HTMLButtonElement>('[data-review-toggle]');
+    btn?.addEventListener('click', () => {
+      const applied = fig.classList.toggle('is-applied');
+      btn.textContent = (applied ? btn.dataset.undo : btn.dataset.apply) ?? '';
+      btn.setAttribute('aria-pressed', String(applied));
+    });
+  });
+</script>
 
 <style is:global>
   .providers-section {
@@ -255,27 +315,60 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     opacity: 0.7;
   }
 
+  /* Connectors: a soft track plus data pulses that always flow into a node. */
   .join-lines {
-    width: 48px;
-    height: 96px;
+    width: 60px;
+    height: 94px;
     flex-shrink: 0;
+    overflow: visible;
     fill: none;
+    stroke-linecap: round;
+  }
+
+  .join-track path {
+    stroke: color-mix(in srgb, var(--accent-primary) 22%, transparent);
+    stroke-width: 2;
+  }
+
+  .join-flow path {
     stroke: var(--accent-primary);
-    stroke-width: 1.4;
-    stroke-dasharray: 3 3;
+    stroke-width: 2;
+    stroke-dasharray: 6 14;
+    animation: cap-flow 1.2s linear infinite;
+    animation-delay: var(--d, 0s);
   }
 
-  .join-lines path {
-    vector-effect: non-scaling-stroke;
-  }
-
-  .cap-card:hover .join-lines path {
-    animation: cap-flow 0.9s linear infinite;
+  .join-flow path.is-out {
+    stroke-dasharray: 4 6;
+    animation-duration: 0.6s;
   }
 
   @keyframes cap-flow {
     to {
-      stroke-dashoffset: -12;
+      stroke-dashoffset: -20;
+    }
+  }
+
+  .join-node {
+    fill: var(--accent-primary);
+  }
+
+  .join-halo {
+    fill: var(--accent-primary);
+    opacity: 0.18;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: join-pulse 1.8s ease-out infinite;
+  }
+
+  @keyframes join-pulse {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.35;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
     }
   }
 
@@ -416,9 +509,46 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     white-space: nowrap;
   }
 
-  .mini-row.is-flagged {
+  .mini-row {
     background: color-mix(in srgb, var(--cap-warn) 7%, transparent);
     box-shadow: inset 2px 0 0 var(--cap-warn);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .fig-review .v-fixed {
+    display: none;
+  }
+
+  .fig-review .val .v-pending {
+    display: inline-flex;
+    gap: 6px;
+  }
+
+  .fig-review.is-applied .v-pending {
+    display: none;
+  }
+
+  .fig-review.is-applied .v-fixed {
+    display: inline;
+  }
+
+  .fig-review.is-applied .mini-row {
+    background: var(--accent-primary-soft);
+    box-shadow: inset 2px 0 0 var(--accent-primary);
+  }
+
+  .fig-review.is-applied .mini-row .tag,
+  .cap-card:hover .fig-review.is-applied .mini-row .tag {
+    color: var(--accent-primary);
+    border-color: color-mix(in srgb, var(--accent-primary) 45%, transparent);
+  }
+
+  .fig-review.is-applied .mini-row .tag::before {
+    content: '\2713  ';
+  }
+
+  .fig-review.is-applied .review-foot {
+    color: var(--accent-primary);
   }
 
   .mini-row s {
@@ -462,11 +592,30 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
   }
 
   .review-pill {
-    padding: 2px 8px;
+    padding: 3px 9px;
+    border: 1px solid var(--btn-bg);
     border-radius: var(--radius-xs);
     background: var(--btn-bg);
     color: var(--btn-fg);
+    font: inherit;
     font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .review-pill:hover {
+    background: var(--btn-bg-hover, var(--btn-bg));
+  }
+
+  .review-pill:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+
+  .fig-review.is-applied .review-pill {
+    background: transparent;
+    color: var(--ink-primary);
+    border-color: var(--hairline-strong);
   }
 
   /* AI formulas */
@@ -583,6 +732,11 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     content: '\2713';
   }
 
+  .fx-check.is-status {
+    background: var(--accent-primary);
+    color: var(--btn-fg);
+  }
+
   /* Metrics and dashboards */
   .fig-dash {
     gap: 12px;
@@ -616,13 +770,64 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     color: var(--accent-primary);
   }
 
-  .bars {
+  .chart {
     flex: 1;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    column-gap: 6px;
+    row-gap: 4px;
+    font-size: 0.56rem;
+    color: var(--ink-faint);
+  }
+
+  .chart-y {
+    position: relative;
+    width: 3.2em;
+  }
+
+  .chart-y span {
+    position: absolute;
+    right: 0;
+    bottom: var(--y);
+    transform: translateY(50%);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .chart-plot {
+    position: relative;
+    border-left: 1px solid var(--hairline-strong);
+    border-bottom: 1px solid var(--hairline-strong);
+  }
+
+  .chart-grid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: var(--y);
+    border-top: 1px dashed var(--hairline);
+  }
+
+  .chart-x {
+    grid-column: 2;
+    display: flex;
+    gap: 4px;
+    padding: 0 4px;
+  }
+
+  .chart-x span {
+    flex: 1;
+    text-align: center;
+  }
+
+  .bars {
+    position: absolute;
+    inset: 0 4px;
     display: flex;
     align-items: flex-end;
     gap: 4px;
-    padding-bottom: 1px;
-    border-bottom: 1px solid var(--hairline-strong);
   }
 
   .bar {
@@ -646,7 +851,8 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
 
   @media (prefers-reduced-motion: reduce) {
     .cap-card:hover .rep-row,
-    .cap-card:hover .join-lines path {
+    .join-flow path,
+    .join-halo {
       animation: none;
     }
   }
