@@ -21,7 +21,7 @@ const INITIAL_ROWS: LedgerRow[] = [
   { rowNum: 8, account: '2000', nameIdx: 3, type: 'Liability', opening: -221480, debits: 66253.92, credits: 58249.47 },
   { rowNum: 9, account: '2500', nameIdx: 4, type: 'Liability', opening: -250000, debits: 114286.22, credits: 119825.18 },
   { rowNum: 10, account: '3100', nameIdx: 5, type: 'Equity', opening: -413770, debits: 175227.28, credits: 571804.64 },
-  { rowNum: 11, account: '5000', nameIdx: 6, type: 'Expense', opening: 0, debits: 221575.40, credits: 1107.88 },
+  { rowNum: 11, account: '5000', nameIdx: 6, type: 'Expense', opening: 0, debits: 221575.40, credits: 10107.88 },
   { rowNum: 12, account: '6000', nameIdx: 7, type: 'Expense', opening: 0, debits: 183144.14, credits: 1004.04 },
 ];
 
@@ -90,10 +90,10 @@ export default function ZenkaiWindow({ lang = defaultLang }: { lang?: Lang }) {
 
   const handleApprove = () => {
     setRows((prev) =>
-      prev.map((r) => (r.account === '5000' ? { ...r, debits: 221575.4, credits: 1107.88 } : r)),
+      prev.map((r) => (r.account === '5000' ? { ...r, credits: 1107.88 } : r)),
     );
     setAgentStatus('approved');
-    setSelectedCell({ ref: 'G11', formula: '=D11+E11-F11' });
+    setSelectedCell({ ref: 'F11', formula: '1107.88' });
   };
 
   const handleUndoAgent = () => {
@@ -171,7 +171,7 @@ export default function ZenkaiWindow({ lang = defaultLang }: { lang?: Lang }) {
             <div class={`space-card ${space.cls}`} key={space.cls}>
               <div class="space-head">
                 <span>▾ {space.name}</span>
-                <span>{space.count}</span>
+                <span>{space.files.length}</span>
               </div>
               <div class="space-files">
                 {space.files.map(([file, meta]) => (
@@ -438,7 +438,8 @@ export default function ZenkaiWindow({ lang = defaultLang }: { lang?: Lang }) {
                 <span>{w.proposedEdit}</span>
                 {statusLabel && <span>{statusLabel}</span>}
               </div>
-              <div class="prop-diff">G11: =D11+E11-F11 → {fmtMoney(220467.52)}</div>
+              <div class="prop-diff">F11: {fmtMoney(10107.88)} → {fmtMoney(1107.88)}</div>
+              <div class="prop-diff">G11: {fmtMoney(211467.52)} → {fmtMoney(220467.52)}</div>
               {agentStatus === 'pending' ? (
                 <div class="prop-actions">
                   <button class="prop-btn is-approve" type="button" onClick={handleApprove}>
