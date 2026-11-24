@@ -53,7 +53,7 @@ export default function DownloadCard({ initialRelease = EMPTY_RELEASE, lang = de
       <div class="download-card-top">
         <div class="download-version-row">
           {release.tag && <span class="version-badge">{release.tag}</span>}
-          <span class="version-badge">Apache-2.0</span>
+          <span class="version-badge">AGPL-3.0</span>
           <span class="license-note">{d.license}</span>
         </div>
 

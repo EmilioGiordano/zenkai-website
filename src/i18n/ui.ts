@@ -42,7 +42,7 @@ const en = {
   },
 
   hero: {
-    kicker: 'Rust + GPUI / IronCalc / Apache-2.0 / 100% Local',
+    kicker: 'Rust + GPUI / IronCalc / AGPL-3.0 / 100% Local',
     title: 'A calm, native spreadsheet for files <em>too large</em> for the usual tools.',
     sub: 'Open, edit and save <code>.xlsx</code>, <code>.csv</code> and <code>.tsv</code> files on your own machine, with the Excel shortcuts you already know.',
     ctaDownload: 'Download for Windows',
@@ -172,11 +172,10 @@ const en = {
     openSource: 'Open Source',
     repo: 'GitHub Repository',
     releases: 'Releases',
-    license: 'Apache-2.0 License',
+    license: 'AGPL-3.0 License',
     stack: 'Stack',
     engine: 'IronCalc Engine',
-    factOss: 'Apache-2.0 Open Source',
-    factLocal: '100% Local',
+    factOss: 'AGPL-3.0',
     photoCredit: 'Night photography: Dreamy Pixel (CC BY 4.0)',
   },
 
@@ -318,7 +317,7 @@ const es: Dict = {
   },
 
   hero: {
-    kicker: 'Rust + GPUI / IronCalc / Apache-2.0 / 100% local',
+    kicker: 'Rust + GPUI / IronCalc / AGPL-3.0 / 100% local',
     title: 'Hoja de cálculo nativa y tranquila para archivos <em>demasiado grandes</em>.',
     sub: 'Abre, edita y guarda archivos <code>.xlsx</code>, <code>.csv</code> y <code>.tsv</code> en tu propio equipo, con los atajos de Excel que ya conoces.',
     ctaDownload: 'Descargar para Windows',
@@ -448,11 +447,10 @@ const es: Dict = {
     openSource: 'Código abierto',
     repo: 'Repositorio en GitHub',
     releases: 'Versiones',
-    license: 'Licencia Apache-2.0',
+    license: 'Licencia AGPL-3.0',
     stack: 'Tecnología',
     engine: 'Motor IronCalc',
-    factOss: 'Código abierto Apache-2.0',
-    factLocal: '100% local',
+    factOss: 'AGPL-3.0',
     photoCredit: 'Fotografía nocturna: Dreamy Pixel (CC BY 4.0)',
   },
 
