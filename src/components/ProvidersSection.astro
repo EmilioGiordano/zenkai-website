@@ -49,30 +49,17 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
               <path d="M1 47 H63" />
               <path d="M1 81 C38 81 28 47 63 47" />
             </g>
-            <g class="flow-comets">
-              <circle r="2.4"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite" path="M1 13 C38 13 28 47 63 47" /></circle>
-              <circle r="2.4"><animateMotion dur="2.4s" begin="-0.8s" repeatCount="indefinite" path="M1 47 H63" /></circle>
-              <circle r="2.4"><animateMotion dur="2.4s" begin="-1.6s" repeatCount="indefinite" path="M1 81 C38 81 28 47 63 47" /></circle>
-            </g>
             <g class="flow-ports">
               <circle cx="1" cy="13" r="3.2" /><circle cx="1" cy="47" r="3.2" /><circle cx="1" cy="81" r="3.2" />
               <circle cx="63" cy="47" r="3.2" />
             </g>
           </svg>
           <div class="ai-core">
-            <div class="ai-orb">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2.5 13.9 10.1 21.5 12 13.9 13.9 12 21.5 10.1 13.9 2.5 12 10.1 10.1Z" />
-              </svg>
-            </div>
             <span>{d.report.aiLabel}</span>
           </div>
           <svg class="flow flow-out" viewBox="0 0 48 94" aria-hidden="true">
             <g class="flow-base flow-base-out">
               <path d="M1 47 H47" />
-            </g>
-            <g class="flow-comets">
-              <circle r="2.4"><animateMotion dur="1.2s" begin="0.6s" repeatCount="indefinite" path="M1 47 H47" /></circle>
             </g>
             <g class="flow-ports">
               <circle cx="1" cy="47" r="3.2" /><circle cx="47" cy="47" r="3.2" />
@@ -340,8 +327,7 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     opacity: 0.7;
   }
 
-  /* Flow: [files] -> [AI] -> [report], drawn as a small node graph:
-     gradient curves, ports at both ends, a light point riding each link. */
+  /* Flow: [files] -> [AI] -> [report], drawn as static links with ports at both ends. */
   .flow {
     height: 94px;
     flex-shrink: 0;
@@ -383,89 +369,25 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     stroke-width: 1.5;
   }
 
-  .flow-comets circle {
-    fill: var(--accent-primary);
-    filter: none;
-  }
-
-  /* AI node: a round processor with a scanning arc around it; the label sits below. */
+  /* AI node: a plain labelled box between the files and the report. */
   .ai-core {
-    position: relative;
-    width: 50px;
-    height: 94px;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    align-self: center;
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid var(--hairline-strong);
+    border-radius: 3px;
+    background: var(--surface);
     color: var(--accent-gold);
   }
 
-  .ai-orb {
-    position: relative;
-    width: 44px;
-    height: 44px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--hairline-strong);
-  }
-
-  /* Scanning arc */
-  .ai-orb::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent 0 62%, var(--accent-gold) 100%);
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
-    mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
-    animation: orb-scan 2.4s linear infinite;
-  }
-
-  /* Faint static orbit */
-  .ai-orb::after {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 1px dashed color-mix(in srgb, var(--accent-gold) 35%, transparent);
-  }
-
-  .ai-orb svg {
-    width: 17px;
-    height: 17px;
-    fill: currentColor;
-    animation: orb-pulse 2.4s ease-in-out infinite;
-  }
-
   .ai-core span {
-    position: absolute;
-    top: calc(50% + 30px);
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 0.62rem;
+    font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
-  }
-
-  @keyframes orb-scan {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes orb-pulse {
-    0%,
-    100% {
-      transform: scale(0.88);
-      opacity: 0.75;
-    }
-    50% {
-      transform: scale(1.08);
-      opacity: 1;
-    }
+    letter-spacing: 0.1em;
   }
 
   .rep-doc {
@@ -948,15 +870,6 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
     .cap-card:hover .rep-row {
       animation: none;
     }
-
-    .flow-comets {
-      display: none;
-    }
-
-    .ai-orb::before,
-    .ai-orb svg {
-      animation: none;
-    }
   }
 
   /* ---------- Providers ---------- */
@@ -1108,28 +1021,6 @@ const spark = [42, 55, 48, 62, 58, 74, 88];
 
     .fig-report .flow {
       display: none;
-    }
-
-    /* On phones the AI core becomes a small chip between the files and the report. */
-    .ai-core {
-      width: auto;
-      height: auto;
-      align-self: center;
-      gap: 8px;
-    }
-
-    .ai-orb {
-      width: 28px;
-      height: 28px;
-    }
-
-    .ai-orb svg {
-      width: 12px;
-      height: 12px;
-    }
-
-    .ai-core span {
-      position: static;
     }
 
     .rep-doc {
