@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 import { defaultLang, t, type Lang } from '../i18n/ui';
 
 const ROWS_VISIBLE = 9;
@@ -35,9 +35,6 @@ export default function VirtualGridDemo({ lang = defaultLang }: { lang?: Lang })
 
   const [startRow, setStartRow] = useState(1);
   const [startCol, setStartCol] = useState(0);
-  const fmtMs = (ms: number) => ms.toLocaleString(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-  const [frameMs, setFrameMs] = useState(() => fmtMs(0.4));
-  const lastStamp = useRef<number>(0);
   const [colsVisible, setColsVisible] = useState(COLS_DESKTOP);
   const maxCol = 16_384 - colsVisible;
 
@@ -50,12 +47,8 @@ export default function VirtualGridDemo({ lang = defaultLang }: { lang?: Lang })
   }, []);
 
   const updatePos = (nextR: number, nextC: number) => {
-    const t0 = performance.now();
     setStartRow(Math.max(1, Math.min(MAX_ROW, nextR)));
     setStartCol(Math.max(0, Math.min(maxCol, nextC)));
-    const dt = lastStamp.current ? Math.min(16.6, Math.max(0.2, performance.now() - t0)) : 0.4;
-    lastStamp.current = t0;
-    setFrameMs(fmtMs(dt));
   };
 
   const handleWheel = (e: WheelEvent) => {
@@ -86,9 +79,6 @@ export default function VirtualGridDemo({ lang = defaultLang }: { lang?: Lang })
           </span>
           <span class="hud-chip">
             {d.virtual} <strong>{d.virtualSize}</strong>
-          </span>
-          <span class="hud-chip hud-secondary">
-            {d.render} <strong>{frameMs} ms / 60 fps</strong>
           </span>
         </div>
 
