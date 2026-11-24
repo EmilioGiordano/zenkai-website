@@ -430,7 +430,7 @@ export default function ZenkaiWindow({ lang = defaultLang }: { lang?: Lang }) {
           </div>
           <div class="agent-body">
             <p class="agent-intro">
-              {w.agentIntroBefore} <strong>Ctrl+Z</strong> {w.agentIntroAfter}
+              <strong>Ctrl+Z</strong> {w.agentIntroAfter}
             </p>
             <div class="agent-msg-user">{w.userMsg}</div>
             <div class="agent-proposal">

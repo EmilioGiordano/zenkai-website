@@ -24,8 +24,8 @@ const en = {
   meta: {
     title: 'Zenkai: Fast, Native Spreadsheet for Large Excel and CSV Files',
     description:
-      'Free, open-source desktop spreadsheet for large .xlsx, .csv and .tsv files. Reports, analytics and dashboards from your data with the AI you already use. Built in Rust.',
-    ogAlt: 'Zenkai: a calm, native spreadsheet for files too large for the usual tools.',
+      'Free, open-source desktop spreadsheet for large .xlsx, .csv and .tsv files. Build reports and dashboards from your data with your own AI account. Built in Rust.',
+    ogAlt: 'Zenkai: a fast, native spreadsheet for large .xlsx, .csv and .tsv files.',
     skip: 'Skip to content',
   },
 
@@ -44,15 +44,14 @@ const en = {
   hero: {
     kicker: 'Rust + GPUI / IronCalc / AGPL-3.0 / 100% Local',
     title: 'A calm, native spreadsheet for files <em>too large</em> for the usual tools.',
-    sub: 'Open, edit and save <code>.xlsx</code>, <code>.csv</code> and <code>.tsv</code> files on your own machine, with the Excel shortcuts you already know.',
+    sub: 'Open, edit and save <code>.xlsx</code>, <code>.csv</code> and <code>.tsv</code> files with the usual Excel keyboard shortcuts.',
     ctaDownload: 'Download for Windows',
     ctaTry: 'Try the grid',
   },
 
   grid: {
-    kicker: '01 / Visible-Range Native Grid (Rust + GPUI)',
-    title: 'Scrub a million rows and <em>16,384 columns</em> without stutter.',
-    lead: 'Zenkai draws only the visible cells from a visible-range cache while load, save, and IronCalc recalculations run off the UI thread. Drag the vertical or horizontal rails—or scroll fast with your wheel—across the full Excel grid bounds.',
+    title: 'Scroll a million rows and <em>16,384 columns</em> without stutter.',
+    lead: 'Zenkai only draws the cells on screen. Loading, saving and IronCalc recalculation run off the UI thread. Drag the rails or use the wheel to move across the full Excel grid.',
     viewport: 'Viewport',
     drawn: 'Drawn',
     virtual: 'Virtual',
@@ -69,9 +68,8 @@ const en = {
   },
 
   ai: {
-    kicker: '02 / AI Analysis',
-    title: 'Data analysis with the <em>AI you already use</em>.',
-    lead: 'Build reports, analytics and dashboards from your data files, from a single sheet or many at once.',
+    title: 'Data analysis with your own <em>AI</em>.',
+    lead: 'Reports and dashboards from one sheet or several files at once.',
     report: {
       files: ['Sales.xlsx', 'Costs.csv', 'Budget 2026'],
       heading: 'Q3 report',
@@ -83,7 +81,7 @@ const en = {
         { kind: 'warn', label: 'Unreconciled invoices', value: '27' },
       ],
       title: 'Cross-file reports',
-      text: 'Consolidate, cross-reference and reconcile sheets, CSVs and workbooks into one clear report.',
+      text: 'Cross-check and reconcile several sheets or CSVs into one report.',
     },
     review: {
       issues: [
@@ -96,8 +94,8 @@ const en = {
       fixedTag: 'fixed',
       approve: 'Approve all',
       undo: 'Undo',
-      title: 'Summaries, reviews and fixes',
-      text: 'Find outliers, broken references and duplicates, then get a clear summary.',
+      title: 'Review and fix',
+      text: 'Flags outliers, broken references and duplicate rows, and proposes the fix.',
     },
     formula: {
       before: '=IF(ISERROR(VLOOKUP(A2,Prices!A:C,3,FALSE)),0,VLOOKUP(A2,Prices!A:C,3,FALSE))*B2*(1-IF(ISERROR(VLOOKUP(A2,Disc!A:B,2,FALSE)),0,VLOOKUP(A2,Disc!A:B,2,FALSE)))',
@@ -107,7 +105,7 @@ const en = {
       status: 'Formula optimized',
       checks: ['Same result on 48,000 rows', '4 lookups → 2', '157 → 75 characters'],
       title: 'AI formulas',
-      text: 'Write, explain and optimize formulas across the workbook, even the ones nobody dares to touch.',
+      text: 'Write, explain and simplify formulas across the workbook.',
     },
     dash: {
       kpis: [
@@ -115,16 +113,15 @@ const en = {
         { label: 'Margin', value: '31.4%', delta: '+1.2 pts' },
       ],
       months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-      title: 'Metrics, charts and dashboards',
-      text: 'Turn raw tables into KPIs, charts and reports.',
+      title: 'Charts and KPIs',
+      text: 'Build KPIs and charts from plain tables.',
     },
-    providersLabel: 'Works with the account you already have',
+    providersLabel: 'Works with your existing account',
   },
 
   download: {
-    kicker: '03 / Download',
-    title: 'Open your workbooks with <em>Zenkai</em>.',
-    lead: 'Native desktop speed without accounts, subscriptions, or cloud lock-in. Grab the Windows release or build directly from source.',
+    title: 'Download <em>Zenkai</em>',
+    lead: 'Get the Windows installer or build it from source.',
     license: 'Free & open source',
     osAria: 'Choose operating system',
     viewSource: 'View source on GitHub',
@@ -133,7 +130,7 @@ const en = {
     copiedSr: 'Copied command to clipboard',
     commandAria: (os: string) => `${os} source command`,
     copyAria: (os: string) => `Copy ${os} build command`,
-    privacy: 'Runs 100% locally on your machine. No account, no cloud sync, no telemetry.',
+    privacy: 'No account, no cloud sync, no telemetry.',
     signNote: 'Releases are not code-signed yet, so Windows SmartScreen may display a warning the first time the installer runs.',
     os: {
       windows: {
@@ -149,7 +146,7 @@ const en = {
         cta: 'Download Zenkai for Linux',
         fallback: 'View Linux releases on GitHub',
         requirement: 'Linux (x64), experimental build',
-        note: 'Windows is the main target today; Linux builds are published as experimental releases on GitHub.',
+        note: '',
         commandLabel: 'Build from source (Rust)',
       },
       macos: {
@@ -157,16 +154,16 @@ const en = {
         cta: 'Download Zenkai for macOS',
         fallback: 'View macOS releases on GitHub',
         requirement: 'macOS on Apple Silicon (arm64), experimental build',
-        note: 'Windows is the main target today; Apple Silicon builds are published as experimental previews.',
+        note: '',
         commandLabel: 'Build from source (Rust)',
       },
     },
   },
 
   footer: {
-    quote: 'A fast, quiet native spreadsheet — built for the files that deserve fresh air.',
+    quote: 'Native spreadsheet for large files, built in Rust.',
     sections: 'Sections',
-    linkGrid: '60 fps Virtual Grid',
+    linkGrid: 'Grid demo',
     linkAi: 'AI Analysis',
     linkDownload: 'Download',
     openSource: 'Open Source',
@@ -211,7 +208,7 @@ const en = {
     trial: {
       captionShort: 'Closing balances. Edit Debits or Credits to recalculate.',
       captionLong:
-        'Closing balances from the general ledger. Debits and credits must agree (edit E or F cells to test live IronCalc recalc).',
+        'Closing balances from the general ledger. Debits and credits must agree.',
       account: 'Account',
       accountName: 'Account name',
       type: 'Type',
@@ -262,8 +259,7 @@ const en = {
     tabIncome: 'Income statement',
     agentAria: 'Agent panel',
     newConversation: 'New conversation',
-    agentIntroBefore: 'Ask about the open workbook, or let the agent edit it for you.',
-    agentIntroAfter: 'undoes any change.',
+    agentIntroAfter: 'undoes any agent edit.',
     userMsg: 'Verify COGS closing balance in G11 and confirm the trial balance nets to zero.',
     proposedEdit: 'PROPOSED EDIT IN F11',
     approved: 'approved',
@@ -283,7 +279,7 @@ const en = {
     title: 'Page not found | Zenkai',
     formula: '=LOOKUP("this page")',
     error: '#N/A',
-    heading: 'This cell is <em>empty</em>.',
+    heading: 'This cell is empty.',
     sub: 'The page you are looking for does not exist or has moved.',
     back: 'Back to Zenkai',
   },
@@ -299,8 +295,8 @@ const es: Dict = {
   meta: {
     title: 'Zenkai: hoja de cálculo nativa y rápida para archivos Excel y CSV grandes',
     description:
-      'Hoja de cálculo de escritorio gratuita y de código abierto para archivos .xlsx, .csv y .tsv grandes. Informes, análisis y dashboards a partir de tus datos con la IA que ya usas. Hecha en Rust.',
-    ogAlt: 'Zenkai: una hoja de cálculo nativa y tranquila para archivos demasiado grandes para las herramientas de siempre.',
+      'Hoja de cálculo de escritorio gratuita y de código abierto para archivos .xlsx, .csv y .tsv grandes. Informes y dashboards a partir de tus datos con tu propia cuenta de IA. Hecha en Rust.',
+    ogAlt: 'Zenkai: hoja de cálculo nativa y rápida para archivos .xlsx, .csv y .tsv grandes.',
     skip: 'Saltar al contenido',
   },
 
@@ -319,15 +315,14 @@ const es: Dict = {
   hero: {
     kicker: 'Rust + GPUI / IronCalc / AGPL-3.0 / 100% local',
     title: 'Hoja de cálculo nativa y tranquila para archivos <em>demasiado grandes</em>.',
-    sub: 'Abre, edita y guarda archivos <code>.xlsx</code>, <code>.csv</code> y <code>.tsv</code> en tu propio equipo, con los atajos de Excel que ya conoces.',
+    sub: 'Abre, edita y guarda archivos <code>.xlsx</code>, <code>.csv</code> y <code>.tsv</code> con los atajos de teclado de Excel de siempre.',
     ctaDownload: 'Descargar para Windows',
     ctaTry: 'Prueba la cuadrícula',
   },
 
   grid: {
-    kicker: '01 / Cuadrícula nativa por rango visible (Rust + GPUI)',
     title: 'Recorre un millón de filas y <em>16.384 columnas</em> sin tirones.',
-    lead: 'Zenkai dibuja solo las celdas visibles desde una caché del rango visible, mientras la carga, el guardado y los recálculos de IronCalc se ejecutan fuera del hilo de la interfaz. Arrastra las barras vertical u horizontal, o desplázate rápido con la rueda, por todo el rango de Excel.',
+    lead: 'Zenkai solo dibuja las celdas que ves. La carga, el guardado y los cálculos de IronCalc corren en segundo plano. Arrastra las barras o usa la rueda para recorrer toda la hoja de Excel.',
     viewport: 'Vista',
     drawn: 'Dibujadas',
     virtual: 'Virtual',
@@ -340,13 +335,12 @@ const es: Dict = {
     vRailTitle: 'Recorre en vertical 1.048.576 filas',
     vRailAria: 'Desplazador vertical de filas (1 a 1.048.576)',
     hRailAria: 'Desplazador horizontal de columnas (A a XFD)',
-    accounts: ['Caja', 'Clientes', 'Inventario', 'Proveedores', 'Costo ventas', 'Nóminas', 'Alquiler', 'Software', 'Fletes'],
+    accounts: ['Caja', 'Clientes', 'Inventario', 'Proveedores', 'Costo ventas', 'Sueldos', 'Alquiler', 'Software', 'Fletes'],
   },
 
   ai: {
-    kicker: '02 / Análisis con IA',
-    title: 'Análisis de datos con la <em>IA que ya usas</em>.',
-    lead: 'Crea informes, análisis y dashboards a partir de tus archivos de datos, desde una sola hoja o desde varias a la vez.',
+    title: 'Análisis de datos con tu propia <em>IA</em>.',
+    lead: 'Informes y dashboards a partir de una hoja o de varios archivos a la vez.',
     report: {
       files: ['Ventas.xlsx', 'Costos.csv', 'Presupuesto 2026'],
       heading: 'Informe T3',
@@ -358,7 +352,7 @@ const es: Dict = {
         { kind: 'warn', label: 'Facturas sin conciliar', value: '27' },
       ],
       title: 'Informes entre archivos',
-      text: 'Consolida, cruza y concilia hojas, CSV y libros en un único informe claro.',
+      text: 'Cruza y concilia varias hojas o CSV en un solo informe.',
     },
     review: {
       issues: [
@@ -371,8 +365,8 @@ const es: Dict = {
       fixedTag: 'corregido',
       approve: 'Aprobar todo',
       undo: 'Deshacer',
-      title: 'Resúmenes, revisiones y correcciones',
-      text: 'Detecta valores atípicos, referencias rotas y duplicados, y te da un resumen claro.',
+      title: 'Revisar y corregir',
+      text: 'Marca valores atípicos, referencias rotas y filas duplicadas, y propone la corrección.',
     },
     formula: {
       before: '=IF(ISERROR(VLOOKUP(A2,Precios!A:C,3,FALSE)),0,VLOOKUP(A2,Precios!A:C,3,FALSE))*B2*(1-IF(ISERROR(VLOOKUP(A2,Dto!A:B,2,FALSE)),0,VLOOKUP(A2,Dto!A:B,2,FALSE)))',
@@ -382,7 +376,7 @@ const es: Dict = {
       status: 'Fórmula optimizada',
       checks: ['Mismo resultado en 48.000 filas', '4 búsquedas → 2', '157 → 75 caracteres'],
       title: 'Fórmulas con IA',
-      text: 'Escribe, explica y optimiza fórmulas en todo el libro, incluso las que nadie se atreve a tocar.',
+      text: 'Escribe, explica y simplifica fórmulas en todo el libro.',
     },
     dash: {
       kpis: [
@@ -390,16 +384,15 @@ const es: Dict = {
         { label: 'Margen', value: '31,4%', delta: '+1,2 pts' },
       ],
       months: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul'],
-      title: 'Métricas, gráficos y dashboards',
-      text: 'Convierte tablas en bruto en KPI, gráficos e informes.',
+      title: 'Gráficos y KPI',
+      text: 'Arma KPI y gráficos a partir de tus tablas.',
     },
-    providersLabel: 'Funciona con la cuenta que ya tienes',
+    providersLabel: 'Funciona con tu cuenta actual',
   },
 
   download: {
-    kicker: '03 / Descarga',
-    title: 'Abre tus libros con <em>Zenkai</em>.',
-    lead: 'Velocidad nativa de escritorio sin cuentas, suscripciones ni dependencia de la nube. Descarga la versión para Windows o compílala desde el código fuente.',
+    title: 'Descarga <em>Zenkai</em>',
+    lead: 'Descarga el instalador para Windows o compílalo desde el código fuente.',
     license: 'Libre y de código abierto',
     osAria: 'Elige el sistema operativo',
     viewSource: 'Ver el código en GitHub',
@@ -408,8 +401,8 @@ const es: Dict = {
     copiedSr: 'Comando copiado al portapapeles',
     commandAria: (os: string) => `Comando de compilación para ${os}`,
     copyAria: (os: string) => `Copiar el comando de compilación para ${os}`,
-    privacy: 'Funciona 100% en local, en tu equipo. Sin cuenta, sin sincronización en la nube, sin telemetría.',
-    signNote: 'Las versiones aún no cuentan con firma digital, por lo que Windows SmartScreen puede mostrar una advertencia la primera vez que se ejecute el instalador.',
+    privacy: 'Sin cuenta, sin sincronización en la nube, sin telemetría.',
+    signNote: 'Las versiones todavía no están firmadas, así que Windows SmartScreen puede mostrar un aviso la primera vez que abras el instalador.',
     os: {
       windows: {
         badge: '',
@@ -424,7 +417,7 @@ const es: Dict = {
         cta: 'Descargar Zenkai para Linux',
         fallback: 'Ver versiones para Linux en GitHub',
         requirement: 'Linux (x64), versión experimental',
-        note: 'Windows es la plataforma principal por ahora; las versiones para Linux se publican en GitHub como experimentales.',
+        note: '',
         commandLabel: 'Compilar desde el código fuente (Rust)',
       },
       macos: {
@@ -432,16 +425,16 @@ const es: Dict = {
         cta: 'Descargar Zenkai para macOS',
         fallback: 'Ver versiones para macOS en GitHub',
         requirement: 'macOS en Apple Silicon (arm64), versión experimental',
-        note: 'Windows es la plataforma principal por ahora; las versiones para Apple Silicon se publican como avances experimentales.',
+        note: '',
         commandLabel: 'Compilar desde el código fuente (Rust)',
       },
     },
   },
 
   footer: {
-    quote: 'Una hoja de cálculo nativa, rápida y silenciosa, hecha para los archivos que necesitan aire fresco.',
+    quote: 'Hoja de cálculo nativa para archivos grandes, hecha en Rust.',
     sections: 'Secciones',
-    linkGrid: 'Cuadrícula virtual a 60 fps',
+    linkGrid: 'Demo de la cuadrícula',
     linkAi: 'Análisis con IA',
     linkDownload: 'Descarga',
     openSource: 'Código abierto',
@@ -455,7 +448,7 @@ const es: Dict = {
   },
 
   window: {
-    aria: 'Hoja de cálculo de escritorio de Zenkai, interactiva',
+    aria: 'Hoja de cálculo interactiva de Zenkai',
     fileName: 'Balance_Sumas_Sep_2026.xlsx',
     fileShort: 'Balance_Sumas_Sep…',
     sidebarAria: 'Barra lateral de espacios',
@@ -486,7 +479,7 @@ const es: Dict = {
     trial: {
       captionShort: 'Saldos finales. Edita Debe o Haber para recalcular.',
       captionLong:
-        'Saldos finales del libro mayor. El debe y el haber deben cuadrar (edita las celdas E o F para probar el recálculo de IronCalc en vivo).',
+        'Saldos finales del libro mayor. El debe y el haber tienen que cuadrar.',
       account: 'Cuenta',
       accountName: 'Nombre de la cuenta',
       type: 'Tipo',
@@ -513,7 +506,7 @@ const es: Dict = {
     },
     income: {
       captionShort: 'Resumen trimestral de resultados.',
-      captionLong: 'Resumen trimestral de la cuenta de resultados (vinculado al libro mayor).',
+      captionLong: 'Resumen trimestral del estado de resultados (vinculado al libro mayor).',
       code: 'Código',
       lineItem: 'Concepto',
       group: 'Grupo',
@@ -534,11 +527,10 @@ const es: Dict = {
     },
     tabsAria: 'Hojas del libro',
     tabTrial: 'Balance de sumas',
-    tabIncome: 'Cuenta de resultados',
+    tabIncome: 'Estado de resultados',
     agentAria: 'Panel del agente',
     newConversation: 'Nueva conversación',
-    agentIntroBefore: 'Pregunta por el libro abierto o deja que el agente lo edite por ti.',
-    agentIntroAfter: 'deshace cualquier cambio.',
+    agentIntroAfter: 'deshace cualquier cambio del agente.',
     userMsg: 'Revisa el saldo final del costo de ventas en G11 y confirma que el balance de sumas da cero.',
     proposedEdit: 'EDICIÓN PROPUESTA EN F11',
     approved: 'aprobada',
@@ -558,8 +550,8 @@ const es: Dict = {
     title: 'Página no encontrada | Zenkai',
     formula: '=BUSCAR("esta página")',
     error: '#N/D',
-    heading: 'Esta celda está <em>vacía</em>.',
-    sub: 'La página que buscas no existe o se ha movido.',
+    heading: 'Esta celda está vacía.',
+    sub: 'La página que buscas no existe o cambió de dirección.',
     back: 'Volver a Zenkai',
   },
 };
