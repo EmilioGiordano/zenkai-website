@@ -43,10 +43,24 @@ const release = await fetchLatestRelease();
   import { downloadHref, fetchLatestRelease } from '../lib/release';
 
   // Keep the hero CTA pointing at the newest installer, even before the next deploy.
-  fetchLatestRelease().then((release) => {
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-latest-download="windows"]');
+  const latest = fetchLatestRelease();
+
+  latest.then((release) => {
     if (!release.tag) return;
-    document.querySelectorAll<HTMLAnchorElement>('[data-latest-download="windows"]').forEach((link) => {
+    links.forEach((link) => {
       link.href = downloadHref(release, 'windows');
+    });
+  });
+
+  // If the build-time lookup failed and the visitor clicks before the browser lookup
+  // resolves, the href still points at the releases page: wait for the lookup instead.
+  links.forEach((link) => {
+    link.addEventListener('click', async (event) => {
+      if (link.href.includes('/releases/download/')) return;
+      event.preventDefault();
+      const release = await latest;
+      window.location.href = downloadHref(release, 'windows');
     });
   });
 </script>

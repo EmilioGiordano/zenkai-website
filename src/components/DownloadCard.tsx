@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import {
   EMPTY_RELEASE,
+  RELEASES_URL,
   REPO_URL,
   downloadHref,
   fetchLatestRelease,
@@ -99,6 +100,14 @@ export default function DownloadCard({ initialRelease = EMPTY_RELEASE, lang = de
           class="btn btn-ghost btn-sm"
         >
           {d.viewSource}
+        </a>
+        <a
+          href={RELEASES_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-ghost btn-sm"
+        >
+          {d.allReleases}
         </a>
       </div>
 
